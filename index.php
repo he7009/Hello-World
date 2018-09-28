@@ -1,5 +1,5 @@
 <?php
 
-	echo 'cenjiangcanghainanweishui';die;
+	echo '1222222222222';die;
 
 ?>
