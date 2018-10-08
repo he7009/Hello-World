@@ -1,0 +1,1 @@
+rewrite ^/(\w+).html$ /dyd/$1.php last;
