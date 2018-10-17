@@ -1,0 +1,14 @@
+{
+    "name": "he7009/composer",
+    "description": "用于学习composer,联系\b\b\b\b\b",
+    "type": "project",
+    "authors": [
+        {
+            "name": "he7009",
+            "email": "935005231@qq.com"
+        }
+    ],
+    "require": {
+        "gregwar/captcha": "1.*"
+    }
+}
