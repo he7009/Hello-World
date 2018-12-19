@@ -519,7 +519,7 @@ class Module extends ServiceLocator
      */
     public function runAction($route, $params = [])
     {
-        $parts = $this->createController($route);
+        $parts = $this->createController($route);  //创造控制器对象
         if (is_array($parts)) {
             /* @var $controller Controller */
             list($controller, $actionID) = $parts;
@@ -626,6 +626,7 @@ class Module extends ServiceLocator
             $className = substr($id, $pos + 1);
         }
 
+        //检测是否满足命名规则
         if ($this->isIncorrectClassNameOrPrefix($className, $prefix)) {
             return null;
         }
@@ -638,7 +639,7 @@ class Module extends ServiceLocator
             return null;
         }
 
-        if (is_subclass_of($className, 'yii\base\Controller')) {
+        if (is_subclass_of($className, 'yii\base\Controller')) {  //检测是否继承 yii\base\Controller
             $controller = Yii::createObject($className, [$id, $this]);
             return get_class($controller) === $className ? $controller : null;
         } elseif (YII_DEBUG) {

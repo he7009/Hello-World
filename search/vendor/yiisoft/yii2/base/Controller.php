@@ -151,7 +151,6 @@ class Controller extends Component implements ViewContextInterface
         }
 
         $result = null;
-
         if ($runAction && $this->beforeAction($action)) {
             // run the action
             $result = $action->runWithParams($params);

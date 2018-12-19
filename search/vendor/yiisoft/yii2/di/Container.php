@@ -174,6 +174,9 @@ class Container extends Component
                 $object = $this->get($concrete, $params, $config);
             }
         } elseif (is_object($definition)) {
+            if($class == 'app\controllers\SiteController'){
+                echo 33;die;
+            }
             return $this->_singletons[$class] = $definition;
         } else {
             throw new InvalidConfigException('Unexpected object definition type: ' . gettype($definition));
@@ -428,6 +431,7 @@ class Container extends Component
         $reflection = new ReflectionClass($class);
 
         $constructor = $reflection->getConstructor();
+
         if ($constructor !== null) {
             foreach ($constructor->getParameters() as $param) {
                 if (version_compare(PHP_VERSION, '5.6.0', '>=') && $param->isVariadic()) {

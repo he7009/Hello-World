@@ -269,6 +269,7 @@ class Request extends \yii\base\Request
      */
     public function resolve()
     {
+        //urlmanager对象解析url规则，经过request对象通过url规则获取参数并返回
         $result = Yii::$app->getUrlManager()->parseRequest($this);
         if ($result !== false) {
             list($route, $params) = $result;
@@ -278,7 +279,7 @@ class Request extends \yii\base\Request
                 $this->_queryParams = $params + $this->_queryParams;
             }
 
-            return [$route, $this->getQueryParams()];
+            return [$route, $this->getQueryParams()];  //返回解析的数组,和超全局变量$_GET
         }
 
         throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
