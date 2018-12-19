@@ -19,7 +19,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        Yii::$app->db->createCommand('SELECT * FROM search_test')->queryOne();
+        $data = Yii::$app->db->createCommand('SELECT * FROM search_test')->queryOne();
+        var_export($data);
 
     }
 }
