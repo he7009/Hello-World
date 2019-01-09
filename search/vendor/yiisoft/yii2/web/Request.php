@@ -269,7 +269,7 @@ class Request extends \yii\base\Request
      */
     public function resolve()
     {
-        //urlmanager¶ÔÏó½âÎöurl¹æÔò£¬¾­¹ırequest¶ÔÏóÍ¨¹ıurl¹æÔò»ñÈ¡²ÎÊı²¢·µ»Ø
+        //urlmanagerå¯¹è±¡è§£æurlè§„åˆ™ï¼Œç»è¿‡requestå¯¹è±¡é€šè¿‡urlè§„åˆ™è·å–å‚æ•°å¹¶è¿”å›
         $result = Yii::$app->getUrlManager()->parseRequest($this);
         if ($result !== false) {
             list($route, $params) = $result;
@@ -279,7 +279,7 @@ class Request extends \yii\base\Request
                 $this->_queryParams = $params + $this->_queryParams;
             }
 
-            return [$route, $this->getQueryParams()];  //·µ»Ø½âÎöµÄÊı×é,ºÍ³¬È«¾Ö±äÁ¿$_GET
+            return [$route, $this->getQueryParams()];  //è¿”å›è§£æçš„æ•°ç»„,å’Œè¶…å…¨å±€å˜é‡$_GET
         }
 
         throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));

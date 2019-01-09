@@ -225,6 +225,12 @@ class Controller extends Component implements ViewContextInterface
         if (isset($actionMap[$id])) {
             return Yii::createObject($actionMap[$id], [$id, $this]);
         } elseif (preg_match('/^[a-z0-9\\-_]+$/', $id) && strpos($id, '--') === false && trim($id, '-') === $id) {
+            /**
+             * 方法名，多个单词组成切首字母大写的访问链接方法需要使用中划线(-)连接
+             * 例如：
+             * 方法名: actionDoubleWord
+             * 访问:double-word
+             */
             $methodName = 'action' . str_replace(' ', '', ucwords(implode(' ', explode('-', $id))));
             if (method_exists($this, $methodName)) {
                 $method = new \ReflectionMethod($this, $methodName);
