@@ -123,6 +123,7 @@ class Controller extends Component implements ViewContextInterface
      */
     public function runAction($id, $params = [])
     {
+        //创建方法Action对象
         $action = $this->createAction($id);
         if ($action === null) {
             throw new InvalidRouteException('Unable to resolve the request: ' . $this->getUniqueId() . '/' . $id);
@@ -195,7 +196,7 @@ class Controller extends Component implements ViewContextInterface
 
     /**
      * Binds the parameters to the action.
-     * This method is invoked by [[Action]] when it begins to run with the given parameters.
+     * This method is invoked by [[Action]]d when it begins to run with the given parameters.
      * @param Action $action the action to be bound with parameters.
      * @param array $params the parameters to be bound to the action.
      * @return array the valid parameters that the action can run with.
@@ -226,6 +227,7 @@ class Controller extends Component implements ViewContextInterface
             return Yii::createObject($actionMap[$id], [$id, $this]);
         } elseif (preg_match('/^[a-z0-9\\-_]+$/', $id) && strpos($id, '--') === false && trim($id, '-') === $id) {
             /**
+             * 解析方法名称
              * 方法名，多个单词组成切首字母大写的访问链接方法需要使用中划线(-)连接
              * 例如：
              * 方法名: actionDoubleWord
@@ -503,7 +505,6 @@ class Controller extends Component implements ViewContextInterface
                 $layout = $module->layout;
             }
         }
-
         if (!isset($layout)) {
             return false;
         }

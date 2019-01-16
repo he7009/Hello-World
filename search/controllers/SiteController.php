@@ -20,7 +20,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $param['info'] = Yii::$app->db->createCommand('SELECT * FROM search_test')->queryAll();
-        $this->render('index',$param);
+        return $this->render('index',$param);
     }
 
     /**

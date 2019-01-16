@@ -571,6 +571,12 @@ class Module extends ServiceLocator
             return false;
         }
 
+        /**
+         * @根据传参解析控制器，方法
+         * @例如 site/index
+         * @$id: site 控制器
+         * @$route : index 执行的方法
+         */
         if (strpos($route, '/') !== false) {
             list($id, $route) = explode('/', $route, 2);
         } else {
@@ -588,6 +594,7 @@ class Module extends ServiceLocator
             return $module->createController($route);
         }
 
+        //再次分隔参数
         if (($pos = strrpos($route, '/')) !== false) {
             $id .= '/' . substr($route, 0, $pos);
             $route = substr($route, $pos + 1);
@@ -634,6 +641,11 @@ class Module extends ServiceLocator
         $className = preg_replace_callback('%-([a-z0-9_])%i', function ($matches) {
                 return ucfirst($matches[1]);
             }, ucfirst($className)) . 'Controller';
+
+        /**
+         * @拼接控制器路径
+         * @控制器命名空间 $this->controllerNamespace = 'app\\controllers';
+         */
         $className = ltrim($this->controllerNamespace . '\\' . str_replace('/', '\\', $prefix) . $className, '\\');
         if (strpos($className, '-') !== false || !class_exists($className)) {
             return null;

@@ -257,7 +257,6 @@ class View extends Component implements DynamicContentAwareInterface
 
         array_pop($this->_viewFiles);
         $this->context = $oldContext;
-
         return $output;
     }
 

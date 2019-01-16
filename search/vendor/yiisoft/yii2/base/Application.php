@@ -115,6 +115,7 @@ abstract class Application extends Module
      */
     public $sourceLanguage = 'en-US';
     /**
+     * @请求控制器
      * @var Controller the currently active controller instance
      */
     public $controller;
@@ -128,6 +129,7 @@ abstract class Application extends Module
      */
     public $requestedRoute;
     /**
+     * @请求方法
      * @var Action the requested Action. If null, it means the request cannot be resolved into an action.
      */
     public $requestedAction;
