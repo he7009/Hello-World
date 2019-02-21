@@ -79,7 +79,7 @@ class Application extends \yii\base\Application
     {
         if (empty($this->catchAll)) {
             try {
-                list($route, $params) = $request->resolve();  //解析url获取参数和超全局变量$_GET
+                list($route, $params) = $request->resolve();  //瑙ｆ瀽url鑾峰彇鍙傛暟鍜岃秴鍏ㄥ眬鍙橀噺$_GET
             } catch (UrlNormalizerRedirectException $e) {
                 $url = $e->url;
                 if (is_array($url)) {

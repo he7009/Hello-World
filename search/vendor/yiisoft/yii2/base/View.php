@@ -189,7 +189,6 @@ class View extends Component implements DynamicContentAwareInterface
         } else {
             throw new InvalidCallException("Unable to resolve view file for view '$view': no active view context.");
         }
-
         if (pathinfo($file, PATHINFO_EXTENSION) !== '') {
             return $file;
         }
@@ -258,7 +257,6 @@ class View extends Component implements DynamicContentAwareInterface
 
         array_pop($this->_viewFiles);
         $this->context = $oldContext;
-
         return $output;
     }
 

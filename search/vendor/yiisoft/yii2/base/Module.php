@@ -519,10 +519,10 @@ class Module extends ServiceLocator
      */
     public function runAction($route, $params = [])
     {
-        $parts = $this->createController($route);  //´´Ôì¿ØÖÆÆ÷¶ÔÏó
+        $parts = $this->createController($route);  //åˆ›é€ æ§åˆ¶å™¨å¯¹è±¡
         if (is_array($parts)) {
             /* @var $controller Controller */
-            list($controller, $actionID) = $parts;
+            list($controller, $actionID) = $parts; //$actionID æ–¹æ³•
             $oldController = Yii::$app->controller;
             Yii::$app->controller = $controller;
             $result = $controller->runAction($actionID, $params);
@@ -571,6 +571,12 @@ class Module extends ServiceLocator
             return false;
         }
 
+        /**
+         * @æ ¹æ®ä¼ å‚è§£ææ§åˆ¶å™¨ï¼Œæ–¹æ³•
+         * @ä¾‹å¦‚ site/index
+         * @$id: site æ§åˆ¶å™¨
+         * @$route : index æ‰§è¡Œçš„æ–¹æ³•
+         */
         if (strpos($route, '/') !== false) {
             list($id, $route) = explode('/', $route, 2);
         } else {
@@ -588,6 +594,7 @@ class Module extends ServiceLocator
             return $module->createController($route);
         }
 
+        //å†æ¬¡åˆ†éš”å‚æ•°
         if (($pos = strrpos($route, '/')) !== false) {
             $id .= '/' . substr($route, 0, $pos);
             $route = substr($route, $pos + 1);
@@ -626,7 +633,7 @@ class Module extends ServiceLocator
             $className = substr($id, $pos + 1);
         }
 
-        //¼ì²âÊÇ·ñÂú×ãÃüÃû¹æÔò
+        //æ£€æµ‹æ˜¯å¦æ»¡è¶³å‘½åè§„åˆ™
         if ($this->isIncorrectClassNameOrPrefix($className, $prefix)) {
             return null;
         }
@@ -634,12 +641,17 @@ class Module extends ServiceLocator
         $className = preg_replace_callback('%-([a-z0-9_])%i', function ($matches) {
                 return ucfirst($matches[1]);
             }, ucfirst($className)) . 'Controller';
+
+        /**
+         * @æ‹¼æ¥æ§åˆ¶å™¨è·¯å¾„
+         * @æ§åˆ¶å™¨å‘½åç©ºé—´ $this->controllerNamespace = 'app\\controllers';
+         */
         $className = ltrim($this->controllerNamespace . '\\' . str_replace('/', '\\', $prefix) . $className, '\\');
         if (strpos($className, '-') !== false || !class_exists($className)) {
             return null;
         }
 
-        if (is_subclass_of($className, 'yii\base\Controller')) {  //¼ì²âÊÇ·ñ¼Ì³Ğ yii\base\Controller
+        if (is_subclass_of($className, 'yii\base\Controller')) {  //æ£€æµ‹æ˜¯å¦ç»§æ‰¿ yii\base\Controller
             $controller = Yii::createObject($className, [$id, $this]);
             return get_class($controller) === $className ? $controller : null;
         } elseif (YII_DEBUG) {
