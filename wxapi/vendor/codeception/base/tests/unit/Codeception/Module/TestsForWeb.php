@@ -406,12 +406,12 @@ abstract class TestsForWeb extends \Codeception\TestCase\Test
     public function testTextFieldByName()
     {
         $this->module->amOnPage('/form/example1');
-        $this->module->fillField('LoginForm[username]', 'davert');
-        $this->module->fillField('LoginForm[password]', '123456');
+        $this->module->fillField('LoginModel[username]', 'davert');
+        $this->module->fillField('LoginModel[password]', '123456');
         $this->module->click('Login');
         $login = data::get('form');
-        $this->assertEquals('davert', $login['LoginForm']['username']);
-        $this->assertEquals('123456', $login['LoginForm']['password']);
+        $this->assertEquals('davert', $login['LoginModel']['username']);
+        $this->assertEquals('123456', $login['LoginModel']['password']);
     }
 
     public function testTextFieldByLabel()
@@ -943,9 +943,9 @@ abstract class TestsForWeb extends \Codeception\TestCase\Test
         $this->module->checkOption('#LoginForm_rememberMe');
         $this->module->click('Login');
         $login = data::get('form');
-        $this->assertEquals('davert', $login['LoginForm']['username']);
-        $this->assertEquals('123456', $login['LoginForm']['password']);
-        $this->assertNotEmpty($login['LoginForm']['rememberMe']);
+        $this->assertEquals('davert', $login['LoginModel']['username']);
+        $this->assertEquals('123456', $login['LoginModel']['password']);
+        $this->assertNotEmpty($login['LoginModel']['rememberMe']);
     }
 
     public function testExample2()
