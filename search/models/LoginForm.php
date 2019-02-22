@@ -6,7 +6,7 @@ use Yii;
 use yii\base\Model;
 
 /**
- * LoginForm is the model behind the login form.
+ * LoginModel is the model behind the login form.
  *
  * @property User|null $user This property is read-only.
  *
