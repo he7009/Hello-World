@@ -29,15 +29,7 @@ class LoginController extends Controller
         $encryptedData = $request->get('encryptedData');
         $iv = $request->get('iv');
 
-        Yii::info('$code---->'.$code);
-        Yii::info('$rawData---->'.$rawData);
-        Yii::info('$signature---->'.$signature);
-        Yii::info('$encryptedData---->'.$encryptedData);
-        Yii::info('$iv---->'.$iv);
-
         //发送请求获取数据
-//        GET https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
-
         $loginmodel = new LoginModel();
         $loginmodel->setCode($code);
         $loginmodel->setRawData($rawData);
