@@ -2,19 +2,17 @@
 namespace app\controllers;
 /**
  * Created by PhpStorm.
- * User: HP-PC
+ * UserModel: HP-PC
  * Date: 2019/2/21
  * Time: 22:21
  */
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginModel;
-use app\models\ContactForm;
 
-class LoginController extends Controller
+class LoginController extends BaseController
 {
 
     /**
@@ -33,8 +31,19 @@ class LoginController extends Controller
         $loginmodel = new LoginModel();
         $loginmodel->setCode($code);
         $loginmodel->setRawData($rawData);
-        $loginmodel->toTogin();
-        exit();
+        $result = $loginmodel->toTogin();
 
+        //设置用户信息
+        $this->setUserinfo($result['userinfo']);
+
+        //返回信息
+        $response=Yii::$app->response;
+        $response->format=Response::FORMAT_JSON;
+        $response->data = ['code' => 0 ,'userInfo' => $result['userinfo'],'skey' => $result['skey']];
+    }
+
+    public function actionUpdateinfo()
+    {
+        echo 1111;die;
     }
 }
