@@ -561,4 +561,18 @@ class BaseYii
     {
         return get_object_vars($object);
     }
+
+    /**
+     * @return json����
+     * @param int $code
+     * @param $data
+     * @param $msg
+     */
+    public static function jsonReturn($code,$data,$msg = '')
+    {
+        $response = self::$app->response;
+        $response->format = Response::FORMAT_JSON;
+        $response->data = ['code' => $code ,'data' => $data,'msg' => $msg];
+    }
+
 }

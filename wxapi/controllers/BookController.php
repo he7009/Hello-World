@@ -14,7 +14,7 @@ class BookController extends BaseController
 
 
     /**
-     * 获取书籍列表
+     * 鑾峰彇涔︾睄鍒楄〃
      */
     public function actionBooklist()
     {
@@ -24,5 +24,18 @@ class BookController extends BaseController
         $response=Yii::$app->response;
         $response->format=Response::FORMAT_JSON;
         $response->data=['code' => 0 ,'booklist' => $booklist];
+    }
+
+    /**
+     * 涔︾睄璇︽儏
+     */
+    public function actionBookdetail()
+    {
+        $bookid = Yii::$app->request->get('bookid',0);
+        $bookmodel = new BookModel();
+        $bookmodel->setBookid($bookid);
+        $bookdetail = $bookmodel->getBooklDetail();
+
+        Yii::jsonReturn(0,$bookdetail,'');
     }
 }

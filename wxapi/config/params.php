@@ -9,4 +9,5 @@ return [
         'grant_type' => 'authorization_code'
     ],
     //µÇÂ¼ºÚÃûµ¥
+    'bookimgurlhost' => 'https://wximg.helilan.cn',
 ];

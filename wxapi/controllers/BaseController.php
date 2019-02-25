@@ -32,7 +32,7 @@ class BaseController extends Controller
 
 
     /**
-     * @¼ì²éÅäÖÃµÇÂ¼ĞÅÏ¢
+     * @æ£€æŸ¥é…ç½®ç™»å½•ä¿¡æ¯
      * @param $action
      * @return bool|void
      * @throws \yii\web\BadRequestHttpException
@@ -53,7 +53,7 @@ class BaseController extends Controller
     }
 
     /**
-     * ÉèÖÃÓÃ»§ĞÅÏ¢
+     * è®¾ç½®ç”¨æˆ·ä¿¡æ¯
      */
     public function setUserinfo($userinfo = [])
     {
