@@ -22,14 +22,20 @@ class BookModel extends BaseModel
         return Yii::$app->db->createCommand($sql)->queryAll();
     }
 
+    /**
+     * @获取书籍详情信息
+     * @return array|false
+     * @throws \yii\db\Exception
+     */
     public function getBooklDetail()
     {
         if(empty($this->bookid)) return [];
         $sql = " select * from wx_book where id = {$this->bookid}";
         $bookdetail = Yii::$app->db->createCommand($sql)->queryOne();
         foreach ($bookdetail as &$val){
-            $val['coverurl_host'] = '';
+            $val['coverurl_host'] = Yii::$app->params['bookimgurlhost'].$val['coverurl'];
         }
+        return $bookdetail;
     }
 
     /**

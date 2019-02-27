@@ -571,8 +571,9 @@ class BaseYii
     public static function jsonReturn($code,$data,$msg = '')
     {
         $response = self::$app->response;
-        $response->format = Response::FORMAT_JSON;
+        $response->format = \yii\web\Response::FORMAT_JSON;
         $response->data = ['code' => $code ,'data' => $data,'msg' => $msg];
+        exit();
     }
 
 }

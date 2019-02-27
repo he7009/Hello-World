@@ -27,7 +27,7 @@ class LoginController extends BaseController
         $encryptedData = $request->get('encryptedData');
         $iv = $request->get('iv');
 
-        //发送请求获取数据
+        //发送请求获取数据Response
         $loginmodel = new LoginModel();
         $loginmodel->setCode($code);
         $loginmodel->setRawData($rawData);
@@ -40,10 +40,5 @@ class LoginController extends BaseController
         $response=Yii::$app->response;
         $response->format=Response::FORMAT_JSON;
         $response->data = ['code' => 0 ,'userInfo' => $result['userinfo'],'skey' => $result['skey']];
-    }
-
-    public function actionUpdateinfo()
-    {
-        echo 1111;die;
     }
 }

@@ -46,6 +46,9 @@ class LoginModel extends Model
         $usermodel = new \app\models\UserModel();
         $usermodel->setOpenid($this->openid);
         $userinfo = $usermodel->getUserInfoByOpenid();
+        if(empty($this->openid) || empty($this->session_key)){
+            Yii::jsonReturn('1000',[],'opneid,session_key 为空');
+        }
         if(empty($userinfo)){
             $insertdata = [];
             $insertdata['wxopenid'] = $openid;
@@ -56,7 +59,6 @@ class LoginModel extends Model
             $insertdata['sessionkey'] = $session_key;
             $insertdata['createtime'] = date('Y-m-d H:i:s');
             $insertdata['updatetime'] = date('Y-m-d H:i:s');
-            Yii::info($insertdata);
             Yii::$app->db->createCommand()->insert('wx_user',$insertdata)->execute();
             $userid = Yii::$app->db->getLastInsertID();
             $userinfo['id'] = $userid;
