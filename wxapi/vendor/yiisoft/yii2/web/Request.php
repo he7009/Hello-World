@@ -664,6 +664,23 @@ class Request extends \yii\base\Request
     }
 
     /**
+     * @获取get post 请求
+     * @param null $name
+     * @param null $defaultValue
+     * @return array|mixed
+     */
+    public function getPost($name = null,$defaultValue = null)
+    {
+        if($this->isGet){
+            return $this->get($name,$defaultValue);
+        }
+
+        if($this->isPost){
+            return $this->get($name,$defaultValue);
+        }
+    }
+
+    /**
      * Returns the named GET parameter value.
      * If the GET parameter does not exist, the second parameter passed to this method will be returned.
      * @param string $name the GET parameter name.

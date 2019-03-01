@@ -13,33 +13,12 @@ use app\models\ContactForm;
 class SiteController extends Controller
 {
     /**
-     * Displays homepage.
-     *
-     * @return string
+     * 设置
      */
     public function actionIndex()
     {
-        $param['info'] = Yii::$app->db->createCommand('SELECT * FROM search_test')->queryAll();
-        return $this->render('index',$param);
-    }
-
-    /**
-     * test
-     */
-    public function actionDoubleWord()
-    {
-        echo 22;
-        $data = Yii::$app->db->createCommand('SELECT * FROM search_test')->queryOne();
-        var_export($data);
+        echo Yii::$app->request->getPost('aaaa');
 
     }
 
-    /**
-     * 展示数据
-     */
-    public function actionTwo()
-    {
-        $param['info'] = Yii::$app->db->createCommand('SELECT * FROM search_test')->queryAll();
-        $this->render('index',$param);
-    }
 }
