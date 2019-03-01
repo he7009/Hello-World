@@ -35,7 +35,9 @@ class UserModel extends BaseModel
     {
         if(empty($this->skey)) return [];
         $sql = " select * from wx_user where skey = '{$this->skey}'";
+        Yii::info(Yii::$app->db->createCommand()->getSql());
         $userinfo = Yii::$app->db->createCommand($sql)->queryOne();
+        Yii::info($userinfo);
         return $userinfo;
     }
 
@@ -59,6 +61,15 @@ class UserModel extends BaseModel
         $sql = " select a.uid,a.price,a.createtime,b.name,b.author,b.publisher,b.coverurl from wx_order as a left join wx_book as b on a.bookid = b.id where uid = {$this->userid}";
         $booklist = Yii::$app->db->createCommand($sql)->queryAll();
         return $booklist;
+    }
+
+    /**
+     * 组合拼接用户头像
+     */
+    public static function combineUserAvatar($url)
+    {
+        $host = Yii::$app->params['bookimgurlhost'];
+        return $host.$url;
     }
 
     /**

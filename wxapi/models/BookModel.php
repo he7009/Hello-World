@@ -32,10 +32,21 @@ class BookModel extends BaseModel
         if(empty($this->bookid)) return [];
         $sql = " select * from wx_book where id = {$this->bookid}";
         $bookdetail = Yii::$app->db->createCommand($sql)->queryOne();
-        foreach ($bookdetail as &$val){
-            $val['coverurl_host'] = Yii::$app->params['bookimgurlhost'].$val['coverurl'];
-        }
+        $bookdetail['coverurl_host'] = Yii::$app->params['bookimgurlhost'].$bookdetail['coverurl'];
         return $bookdetail;
+    }
+
+    /**
+     * @获取评论列表
+     * @return array
+     * @throws \yii\db\Exception
+     */
+    public function getBookCommentlist()
+    {
+        if(empty($this->bookid)) return [];
+        $sql = "SELECT a.bookid,a.content,a.createtime,a.uid,a.id,b.wxname,b.avatar FROM wx_comment as a LEFT JOIN wx_user as b ON a.uid = b.id WHERE a.bookid = {$this->bookid}";
+        $commentlist = Yii::$app->db->createCommand($sql)->queryAll();
+        return $commentlist;
     }
 
     /**

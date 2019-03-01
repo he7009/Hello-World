@@ -8,6 +8,6 @@ return [
         'loginurl' => 'https://api.weixin.qq.com/sns/jscode2session',
         'grant_type' => 'authorization_code'
     ],
-    //登录黑名单
+    //书籍封面域名
     'bookimgurlhost' => 'https://wximg.helilan.cn',
 ];

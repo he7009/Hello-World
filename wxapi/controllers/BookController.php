@@ -34,8 +34,11 @@ class BookController extends BaseController
         $bookid = Yii::$app->request->get('bookid',0);
         $bookmodel = new BookModel();
         $bookmodel->setBookid($bookid);
+        //书籍详情
         $bookdetail = $bookmodel->getBooklDetail();
+        //commentlist
+        $commentlist = $bookmodel->getBookCommentlist();
 
-        Yii::jsonReturn(0,$bookdetail,'');
+        Yii::jsonReturn(0,['bookinfo'=>$bookdetail,'commentlist'=>$commentlist,'is_buy' => 0],'');
     }
 }
