@@ -672,8 +672,10 @@ class Request extends \yii\base\Request
         }
 
         if($this->isPost){
-            return $this->get($name,$defaultValue);
+            return $this->post($name,$defaultValue);
         }
+
+        return $this->get($name,$defaultValue);
     }
 
     /**
