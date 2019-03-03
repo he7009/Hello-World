@@ -39,14 +39,12 @@ class BaseController extends Controller
      */
     public function beforeAction($action)
     {
-        $skey = Yii::$app->request->get('skey','');
-        $skey_post = Yii::$app->request->post('skey','');
-        
-        Yii::info($skey);
+        $skey = Yii::$app->request->getPost('skey','');
         if(!empty($skey)){
             $usermodel = new \app\models\UserModel();
             $usermodel->setSkey($skey);
             $userinfo = $usermodel->getUserInfoBySkey();
+            Yii::info($userinfo);
             $this->setUserinfo($userinfo);
         }else{
             $this->setUserinfo();

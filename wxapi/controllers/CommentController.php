@@ -22,20 +22,23 @@ class CommentController extends BaseController
      */
     public function actionAddcomment()
     {
-        Yii::info('1111111111111111111111');
+        Yii::info(33333333);
         Yii::info($this->userid);
         if(empty($this->userid)) Yii::jsonReturn('1001',[],'ÇëµÇÂ¼');
-        $bookid = Yii::$app->request->get('bookid',0);
-        $comment = Yii::$app->request->get('comment','');
-
+        $bookid = Yii::$app->request->getPost('bookid',0);
+        $comment = Yii::$app->request->getPost('content','');
+        Yii::info($bookid);
+        Yii::info($comment);
         if(empty($bookid)) Yii::jsonReturn('1002',[],'Ìí¼Ó´íÎó£¬ÇëÖØÊÔ');
         if(empty($comment)) Yii::jsonReturn('1003',[],'ÆÀÂÛÄÚÈÝÎª¿Õ');
-        Yii::info('0000000000000000');
+        Yii::info($bookid);
+        Yii::info($comment);
         $comment_model = new CommentModel();
         $comment_model->setBookid($bookid);
         $comment_model->setComment($comment);
         $comment_model->setUserid($this->userid);
         $insertid = $comment_model->addComment();
+        Yii::info($insertid);
 
         if($insertid){
             Yii::jsonReturn(0,[],'SUCCESS');
