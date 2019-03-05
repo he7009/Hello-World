@@ -17,7 +17,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        echo Yii::$app->request->getPost('aaaa');
+
 
     }
 

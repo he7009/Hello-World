@@ -197,8 +197,9 @@ abstract class Application extends Module
     public function __construct($config = [])
     {
         Yii::$app = $this;
+        //对象放到属性 loadedModules 中
         static::setInstance($this);
-
+        //设置代码运行的阶段(start)
         $this->state = self::STATE_BEGIN;
 
         $this->preInit($config);
@@ -361,6 +362,7 @@ abstract class Application extends Module
     }
 
     /**
+     * 设置项目根目录，同时设置根目录对应的根命名空间
      * Sets the root directory of the application and the @app alias.
      * This method can only be invoked at the beginning of the constructor.
      * @param string $path the root directory of the application.
