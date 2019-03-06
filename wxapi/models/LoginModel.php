@@ -49,6 +49,7 @@ class LoginModel extends Model
         if(empty($this->openid) || empty($this->session_key)){
             Yii::jsonReturn('1000',[],'opneid,session_key 为空');
         }
+        $returninfo = [];
         if(empty($userinfo)){
             $insertdata = [];
             $insertdata['wxopenid'] = $openid;
@@ -61,8 +62,7 @@ class LoginModel extends Model
             $insertdata['updatetime'] = date('Y-m-d H:i:s');
             Yii::$app->db->createCommand()->insert('wx_user',$insertdata)->execute();
             $userid = Yii::$app->db->getLastInsertID();
-            $userinfo['id'] = $userid;
-            $userinfo['wxname'] = $this->rawData['nickName'];
+            $returninfo['id'] = $userid;
         }else{
             $updatedata = [];
             $updatedata['wxname'] = $this->rawData['nickName'];
@@ -72,8 +72,12 @@ class LoginModel extends Model
             $updatedata['sessionkey'] = $session_key;
             $updatedata['updatetime'] = date('Y-m-d H:i:s');
             Yii::$app->db->createCommand()->update('wx_user',$updatedata,"wxopenid='{$openid}'")->execute();
+            $returninfo['id'] = $userinfo['id'];
         }
-        return ['userinfo' => $userinfo,'skey' => $skey];
+        $returninfo['wxname'] = $this->rawData['nickName'];
+        $returninfo['avatar'] = $this->rawData['avatarUrl'];
+        $returninfo['skey'] = $skey;
+        return ['userinfo' => $returninfo,'skey' => $skey];
     }
 
     /**
