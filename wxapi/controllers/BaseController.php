@@ -44,7 +44,6 @@ class BaseController extends Controller
             $usermodel = new \app\models\UserModel();
             $usermodel->setSkey($skey);
             $userinfo = $usermodel->getUserInfoBySkey();
-            Yii::info($userinfo);
             $this->setUserinfo($userinfo);
         }else{
             $this->setUserinfo();

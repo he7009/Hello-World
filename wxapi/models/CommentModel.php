@@ -36,9 +36,7 @@ class CommentModel extends BaseModel
         $insertdata['bookid'] = $this->bookid;
         $insertdata['content'] = $this->comment;
         $insertdata['createtime'] = date('Y-m-d H:i:s');
-        Yii::info($insertdata);
         Yii::$app->db->createCommand()->insert('wx_comment',$insertdata)->execute();
-        Yii::info(Yii::$app->db->createCommand()->getSql());
         return Yii::$app->db->getLastInsertID();
     }
 

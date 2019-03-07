@@ -571,7 +571,6 @@ class BaseYii
     public static function jsonReturn($code,$data,$msg = '')
     {
         $data = ['code' => $code ,'data' => $data,'msg' => $msg];
-        self::info(json_encode($data));
         echo json_encode($data);
         exit();
     }

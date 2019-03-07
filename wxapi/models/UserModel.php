@@ -35,9 +35,7 @@ class UserModel extends BaseModel
     {
         if(empty($this->skey)) return [];
         $sql = " select * from wx_user where skey = '{$this->skey}'";
-        Yii::info(Yii::$app->db->createCommand()->getSql());
         $userinfo = Yii::$app->db->createCommand($sql)->queryOne();
-        Yii::info($userinfo);
         return $userinfo;
     }
 
