@@ -18,19 +18,20 @@ use app\models\CommentModel;
 class CommentController extends BaseController
 {
     /**
-     * Ìí¼ÓÊé¼®ÆÀÂÛÄÚÈİ
+     * æ·»åŠ ä¹¦ç±è¯„è®ºå†…å®¹
      */
     public function actionAddcomment()
     {
+        echo 222;die;
         Yii::info(33333333);
         Yii::info($this->userid);
-        if(empty($this->userid)) Yii::jsonReturn('1001',[],'ÇëµÇÂ¼');
+        if(empty($this->userid)) Yii::jsonReturn('1001',[],'è¯·ç™»å½•');
         $bookid = Yii::$app->request->getPost('bookid',0);
         $comment = Yii::$app->request->getPost('content','');
         Yii::info($bookid);
         Yii::info($comment);
-        if(empty($bookid)) Yii::jsonReturn('1002',[],'Ìí¼Ó´íÎó£¬ÇëÖØÊÔ');
-        if(empty($comment)) Yii::jsonReturn('1003',[],'ÆÀÂÛÄÚÈİÎª¿Õ');
+        if(empty($bookid)) Yii::jsonReturn('1002',[],'æ·»åŠ é”™è¯¯ï¼Œè¯·é‡è¯•');
+        if(empty($comment)) Yii::jsonReturn('1003',[],'è¯„è®ºå†…å®¹ä¸ºç©º');
         Yii::info($bookid);
         Yii::info($comment);
         $comment_model = new CommentModel();
@@ -43,7 +44,7 @@ class CommentController extends BaseController
         if($insertid){
             Yii::jsonReturn(0,[],'SUCCESS');
         }else{
-            Yii::jsonReturn(1004,[],'Ìí¼ÓÊ§°Ü');
+            Yii::jsonReturn(1004,[],'æ·»åŠ å¤±è´¥');
         }
 
 
