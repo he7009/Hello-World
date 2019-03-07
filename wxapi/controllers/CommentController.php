@@ -22,7 +22,6 @@ class CommentController extends BaseController
      */
     public function actionAddcomment()
     {
-        echo 222;die;
         Yii::info(33333333);
         Yii::info($this->userid);
         if(empty($this->userid)) Yii::jsonReturn('1001',[],'请登录');
