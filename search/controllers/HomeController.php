@@ -14,17 +14,12 @@ class HomeController extends Controller
 {
     const EVENT_HOME = 'event_home';
 
-    public function __construct()
-    {
-        $this->on(self::EVENT_HOME,['app\controllers\SiteController','index']);
-    }
-
     /**
      * ¿ªÊ¼Ö´ÐÐ
      */
     public function actionIndex()
     {
-        echo 3344;
+        $this->on(self::EVENT_HOME,['app\controllers\SiteController','actionIndex']);
         $this->trigger(self::EVENT_HOME);
     }
 }

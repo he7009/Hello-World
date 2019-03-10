@@ -612,7 +612,6 @@ class Component extends BaseObject
         if (!empty($this->_events[$name])) {
             $eventHandlers = array_merge($eventHandlers, $this->_events[$name]);
         }
-
         if (!empty($eventHandlers)) {
             if ($event === null) {
                 $event = new Event();
