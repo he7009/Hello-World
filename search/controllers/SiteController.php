@@ -15,10 +15,9 @@ class SiteController extends Controller
     /**
      * 设置
      */
-    public function actionIndex()
+    public static function actionIndex()
     {
-
-
+        echo 1112222333445;
     }
 
 }
