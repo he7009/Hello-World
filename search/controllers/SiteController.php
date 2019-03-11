@@ -15,9 +15,15 @@ class SiteController extends Controller
     /**
      * 设置
      */
-    public static function actionIndex()
+    public static function actionIndex($event)
     {
-        echo 1112222333445;
+        echo '1112222333445'.PHP_EOL;
+        echo $event->data;
+    }
+
+    public function actionTar()
+    {
+        $this->trigger('event_home');
     }
 
 }

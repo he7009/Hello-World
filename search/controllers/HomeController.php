@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginModel;
 use app\models\ContactForm;
+use app\study\event\loginEvent;
 
 class HomeController extends Controller
 {
@@ -19,7 +20,10 @@ class HomeController extends Controller
      */
     public function actionIndex()
     {
-        $this->on(self::EVENT_HOME,['app\controllers\SiteController','actionIndex']);
-        $this->trigger(self::EVENT_HOME);
+        $this->on(self::EVENT_HOME,['app\controllers\SiteController','actionIndex'],999);
+        yii\base\Event::on('app\controllers\HomeController',self::EVENT_HOME,['app\models\TargetEvent','start'],['¶ÎÓýµÂ','helilan']);
+        $event = new loginEvent();
+        $event->data = ['jjjjjjj'];
+        $this->trigger(self::EVENT_HOME,$event);
     }
 }

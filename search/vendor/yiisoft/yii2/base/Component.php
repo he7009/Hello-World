@@ -494,7 +494,7 @@ class Component extends BaseObject
      *
      * where `$event` is an [[Event]] object which includes parameters associated with the event.
      *
-     * Since 2.0.14 you can specify event name as a wildcard pattern:
+     * Since 2.0.14 you can specify event name as a wildcard(Í¨Åä·û) pattern:
      *
      * ```php
      * $component->on('event.group.*', function ($event) {
