@@ -19,7 +19,7 @@ function adoptValue( value, resolve, reject, noValue ) {
 
 	try {
 
-		// Check for promise aspect first to privilege synchronous behavior
+		// Check for promise aspect first to privilege synchronous loginBehavior
 		if ( value && isFunction( ( method = value.promise ) ) ) {
 			method.call( value ).done( resolve ).fail( reject );
 
@@ -172,7 +172,7 @@ jQuery.extend( {
 									} else {
 
 										// Only substitute handlers pass on context
-										// and multiple values (non-spec behavior)
+										// and multiple values (non-spec loginBehavior)
 										if ( handler !== Identity ) {
 											that = undefined;
 											args = [ returned ];
@@ -203,7 +203,7 @@ jQuery.extend( {
 											if ( depth + 1 >= maxDepth ) {
 
 												// Only substitute handlers pass on context
-												// and multiple values (non-spec behavior)
+												// and multiple values (non-spec loginBehavior)
 												if ( handler !== Thrower ) {
 													that = undefined;
 													args = [ e ];

@@ -55,7 +55,7 @@ class DateValidator extends Validator
 
     /**
      * @var string the type of the validator. Indicates, whether a date, time or datetime value should be validated.
-     * This property influences the default value of [[format]] and also sets the correct behavior when [[format]] is one of the intl
+     * This property influences the default value of [[format]] and also sets the correct loginBehavior when [[format]] is one of the intl
      * short formats, `short`, `medium`, `long`, or `full`.
      *
      * This is only effective when the [PHP intl extension](http://php.net/manual/en/book.intl.php) is installed.

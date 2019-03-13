@@ -48,7 +48,7 @@ class Yaml
      *     print_r($array);
      *
      * @param string $filename The path to the YAML file to be parsed
-     * @param int    $flags    A bit field of PARSE_* constants to customize the YAML parser behavior
+     * @param int    $flags    A bit field of PARSE_* constants to customize the YAML parser loginBehavior
      *
      * @return mixed The YAML converted to a PHP value
      *
@@ -71,7 +71,7 @@ class Yaml
      *  </code>
      *
      * @param string $input A string containing YAML
-     * @param int    $flags A bit field of PARSE_* constants to customize the YAML parser behavior
+     * @param int    $flags A bit field of PARSE_* constants to customize the YAML parser loginBehavior
      *
      * @return mixed The YAML converted to a PHP value
      *

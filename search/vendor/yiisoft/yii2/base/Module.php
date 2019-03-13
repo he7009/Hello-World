@@ -525,6 +525,7 @@ class Module extends ServiceLocator
             list($controller, $actionID) = $parts; //$actionID 方法
             $oldController = Yii::$app->controller;
             Yii::$app->controller = $controller;
+            //控制器对象创建成功，开始执行控制器方法
             $result = $controller->runAction($actionID, $params);
             if ($oldController !== null) {
                 Yii::$app->controller = $oldController;

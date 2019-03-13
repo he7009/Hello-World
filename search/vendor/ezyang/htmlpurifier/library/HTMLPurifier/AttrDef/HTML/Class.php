@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Implements special behavior for class attribute (normally NMTOKENS)
+ * Implements special loginBehavior for class attribute (normally NMTOKENS)
  */
 class HTMLPurifier_AttrDef_HTML_Class extends HTMLPurifier_AttrDef_HTML_Nmtokens
 {

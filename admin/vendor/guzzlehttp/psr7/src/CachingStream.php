@@ -83,7 +83,7 @@ class CachingStream implements StreamInterface
             // If data was written to the buffer in a position that would have
             // been filled from the remote stream, then we must skip bytes on
             // the remote stream to emulate overwriting bytes from that
-            // position. This mimics the behavior of other PHP stream wrappers.
+            // position. This mimics the loginBehavior of other PHP stream wrappers.
             $remoteData = $this->remoteStream->read(
                 $remaining + $this->skipReadBytes
             );

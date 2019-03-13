@@ -23,7 +23,7 @@ class HTMLPurifier_HTMLModule_Proprietary extends HTMLPurifier_HTMLModule
             'Common',
             array(
                 'direction' => 'Enum#left,right,up,down',
-                'behavior' => 'Enum#alternate',
+                'loginBehavior' => 'Enum#alternate',
                 'width' => 'Length',
                 'height' => 'Length',
                 'scrolldelay' => 'Number',

@@ -487,7 +487,7 @@ describe('Typeahead', function() {
         expect(this.view.autocomplete).toHaveBeenCalledWith($el);
       });
 
-      it('should prevent default behavior of DOM event if autocompletion succeeds', function() {
+      it('should prevent default loginBehavior of DOM event if autocompletion succeeds', function() {
         var $el;
 
         $el = $('<foo>');
@@ -499,7 +499,7 @@ describe('Typeahead', function() {
         expect(payload.preventDefault).toHaveBeenCalled();
       });
 
-      it('should not prevent default behavior of DOM event if autocompletion fails', function() {
+      it('should not prevent default loginBehavior of DOM event if autocompletion fails', function() {
         var $el;
 
         $el = $('<foo>');

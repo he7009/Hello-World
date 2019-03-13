@@ -140,7 +140,7 @@ class ExitCode
         self::CANTCREAT => 'Cannot create output file',
         self::IOERR => 'I/O error',
         self::TEMPFAIL => 'Temporary failure',
-        self::PROTOCOL => 'Unexpected remote service behavior',
+        self::PROTOCOL => 'Unexpected remote service loginBehavior',
         self::NOPERM => 'Insufficient permissions',
         self::CONFIG => 'Configuration error',
     ];

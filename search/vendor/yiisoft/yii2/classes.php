@@ -19,7 +19,7 @@ return [
   'yii\base\Arrayable' => YII2_PATH . '/base/Arrayable.php',
   'yii\base\ArrayableTrait' => YII2_PATH . '/base/ArrayableTrait.php',
   'yii\base\BaseObject' => YII2_PATH . '/base/BaseObject.php',
-  'yii\base\Behavior' => YII2_PATH . '/base/Behavior.php',
+  'yii\base\Behavior' => YII2_PATH . '/base/BehaviorController.phproller.php',
   'yii\base\BootstrapInterface' => YII2_PATH . '/base/BootstrapInterface.php',
   'yii\base\Component' => YII2_PATH . '/base/Component.php',
   'yii\base\Configurable' => YII2_PATH . '/base/Configurable.php',

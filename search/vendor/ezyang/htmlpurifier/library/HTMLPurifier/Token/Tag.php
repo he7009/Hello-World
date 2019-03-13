@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Abstract class of a tag token (start, end or empty), and its behavior.
+ * Abstract class of a tag token (start, end or empty), and its loginBehavior.
  */
 abstract class HTMLPurifier_Token_Tag extends HTMLPurifier_Token
 {

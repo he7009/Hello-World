@@ -201,7 +201,7 @@ function getWidthOrHeight( elem, dimension, extra ) {
 jQuery.extend( {
 
 	// Add in style property hooks for overriding the default
-	// behavior of getting and setting a style property
+	// loginBehavior of getting and setting a style property
 	cssHooks: {
 		opacity: {
 			get: function( elem, computed ) {

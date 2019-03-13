@@ -1232,7 +1232,7 @@ abstract class BaseActiveRecord extends Model implements ActiveRecordInterface
     {
         $getter = 'get' . $name;
         try {
-            // the relation could be defined in a behavior
+            // the relation could be defined in a loginBehavior
             $relation = $this->$getter();
         } catch (UnknownMethodException $e) {
             if ($throwException) {

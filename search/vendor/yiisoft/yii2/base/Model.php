@@ -261,7 +261,7 @@ class Model extends Component implements StaticInstanceInterface, IteratorAggreg
     /**
      * Returns the list of attribute names.
      * By default, this method returns all public non-static properties of the class.
-     * You may override this method to change the default behavior.
+     * You may override this method to change the default loginBehavior.
      * @return array list of attribute names.
      */
     public function attributes()

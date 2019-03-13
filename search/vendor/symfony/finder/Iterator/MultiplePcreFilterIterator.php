@@ -44,7 +44,7 @@ abstract class MultiplePcreFilterIterator extends \FilterIterator
      *
      * If there is no regexps defined in the class, this method will accept the string.
      * Such case can be handled by child classes before calling the method if they want to
-     * apply a different behavior.
+     * apply a different loginBehavior.
      *
      * @param string $string The string to be matched against filters
      *

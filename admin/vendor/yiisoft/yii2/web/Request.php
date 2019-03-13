@@ -784,7 +784,7 @@ class Request extends \yii\base\Request
     /**
      * Sets the relative URL for the application.
      * By default the URL is determined based on the entry script URL.
-     * This setter is provided in case you want to change this behavior.
+     * This setter is provided in case you want to change this loginBehavior.
      * @param string $value the relative URL for the application
      */
     public function setBaseUrl($value)

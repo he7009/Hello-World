@@ -532,7 +532,7 @@ extend( QUnit, {
 	only: only,
 
 	// DEPRECATED: The functionality of QUnit.start() will be altered in QUnit 2.0.
-	// In QUnit 2.0, invoking it will ONLY affect the `QUnit.config.autostart` blocking behavior.
+	// In QUnit 2.0, invoking it will ONLY affect the `QUnit.config.autostart` blocking loginBehavior.
 	start: function( count ) {
 		var globalStartAlreadyCalled = globalStartCalled;
 

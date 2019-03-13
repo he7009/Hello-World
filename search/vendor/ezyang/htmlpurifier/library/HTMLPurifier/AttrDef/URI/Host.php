@@ -71,7 +71,7 @@ class HTMLPurifier_AttrDef_URI_Host extends HTMLPurifier_AttrDef
         // we are NOT checking!).  So we (arbitrarily) decide this:
         // let's allow underscores wherever we would have allowed
         // hyphens, if they are enabled.  This is a pretty good match
-        // for browser behavior, for example, a large number of browsers
+        // for browser loginBehavior, for example, a large number of browsers
         // cannot handle foo_.example.com, but foo_bar.example.com is
         // fairly well supported.
         $underscore = $config->get('Core.AllowHostnameUnderscore') ? '_' : '';

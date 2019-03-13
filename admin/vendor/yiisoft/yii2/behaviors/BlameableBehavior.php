@@ -30,7 +30,7 @@ use yii\db\BaseActiveRecord;
  * when the associated AR object is being inserted; it will fill the `updated_by` attribute
  * with the current user ID when the AR object is being updated.
  *
- * Because attribute values will be set automatically by this behavior, they are usually not user input and should therefore
+ * Because attribute values will be set automatically by this loginBehavior, they are usually not user input and should therefore
  * not be validated, i.e. `created_by` and `updated_by` should not appear in the [[\yii\base\Model::rules()|rules()]] method of the model.
  *
  * If your attribute names are different, you may configure the [[createdByAttribute]] and [[updatedByAttribute]]

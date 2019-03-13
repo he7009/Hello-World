@@ -40,7 +40,7 @@ class Parser
      * Parses a YAML file into a PHP value.
      *
      * @param string $filename The path to the YAML file to be parsed
-     * @param int    $flags    A bit field of PARSE_* constants to customize the YAML parser behavior
+     * @param int    $flags    A bit field of PARSE_* constants to customize the YAML parser loginBehavior
      *
      * @return mixed The YAML converted to a PHP value
      *
@@ -69,7 +69,7 @@ class Parser
      * Parses a YAML string to a PHP value.
      *
      * @param string $value A YAML string
-     * @param int    $flags A bit field of PARSE_* constants to customize the YAML parser behavior
+     * @param int    $flags A bit field of PARSE_* constants to customize the YAML parser loginBehavior
      *
      * @return mixed A PHP value
      *
@@ -622,7 +622,7 @@ class Parser
      * Parses a YAML value.
      *
      * @param string $value   A YAML value
-     * @param int    $flags   A bit field of PARSE_* constants to customize the YAML parser behavior
+     * @param int    $flags   A bit field of PARSE_* constants to customize the YAML parser loginBehavior
      * @param string $context The parser context (either sequence or mapping)
      *
      * @return mixed A PHP value

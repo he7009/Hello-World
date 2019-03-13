@@ -108,7 +108,7 @@ jQuery.fn.extend( {
 	},
 
 	// position() relates an element's margin box to its offset parent's padding box
-	// This corresponds to the behavior of CSS absolute positioning
+	// This corresponds to the loginBehavior of CSS absolute positioning
 	position: function() {
 		if ( !this[ 0 ] ) {
 			return;

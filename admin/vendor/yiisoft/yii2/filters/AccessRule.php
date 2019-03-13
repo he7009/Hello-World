@@ -140,7 +140,7 @@ class AccessRule extends Component
      * the current action should be denied. This is the case when this rule matches
      * and [[$allow]] is set to `false`.
      *
-     * If not set, the behavior will be determined by [[AccessControl]],
+     * If not set, the loginBehavior will be determined by [[AccessControl]],
      * either using [[AccessControl::denyAccess()]]
      * or [[AccessControl::$denyCallback]], if configured.
      *

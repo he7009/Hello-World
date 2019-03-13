@@ -37,7 +37,7 @@ use yii\validators\UniqueValidator;
  * By default, SluggableBehavior will fill the `slug` attribute with a value that can be used a slug in a URL
  * when the associated AR object is being validated.
  *
- * Because attribute values will be set automatically by this behavior, they are usually not user input and should therefore
+ * Because attribute values will be set automatically by this loginBehavior, they are usually not user input and should therefore
  * not be validated, i.e. the `slug` attribute should not appear in the [[\yii\base\Model::rules()|rules()]] method of the model.
  *
  * If your attribute name is different, you may configure the [[slugAttribute]] property like the following:
@@ -85,13 +85,13 @@ class SluggableBehavior extends AttributeBehavior
     public $value;
     /**
      * @var bool whether to generate a new slug if it has already been generated before.
-     * If true, the behavior will not generate a new slug even if [[attribute]] is changed.
+     * If true, the loginBehavior will not generate a new slug even if [[attribute]] is changed.
      * @since 2.0.2
      */
     public $immutable = false;
     /**
      * @var bool whether to ensure generated slug value to be unique among owner class records.
-     * If enabled behavior will validate slug uniqueness automatically. If validation fails it will attempt
+     * If enabled loginBehavior will validate slug uniqueness automatically. If validation fails it will attempt
      * generating unique slug value from based one until success.
      */
     public $ensureUnique = false;

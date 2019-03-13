@@ -508,7 +508,7 @@ class Yii2 extends Framework implements ActiveRecord, PartedModule
     }
 
     /**
-     * To support to use the behavior of urlManager component
+     * To support to use the loginBehavior of urlManager component
      * for the methods like this: amOnPage(), sendAjaxRequest() and etc.
      * @param $method
      * @param $uri

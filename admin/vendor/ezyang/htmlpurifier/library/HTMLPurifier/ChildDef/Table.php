@@ -122,7 +122,7 @@ class HTMLPurifier_ChildDef_Table extends HTMLPurifier_ChildDef
                     $ws_accum =& $after_thead_ws;
                 } else {
                     // Oops, there's a second one! What
-                    // should we do?  Current behavior is to
+                    // should we do?  Current loginBehavior is to
                     // transmutate the first and last entries into
                     // tbody tags, and then put into content.
                     // Maybe a better idea is to *attach

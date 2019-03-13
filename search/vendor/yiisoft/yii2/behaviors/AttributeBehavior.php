@@ -41,7 +41,7 @@ use yii\db\ActiveRecord;
  * }
  * ```
  *
- * Because attribute values will be set automatically by this behavior, they are usually not user input and should therefore
+ * Because attribute values will be set automatically by this loginBehavior, they are usually not user input and should therefore
  * not be validated, i.e. they should not appear in the [[\yii\base\Model::rules()|rules()]] method of the model.
  *
  * @author Luciano Baraglia <luciano.baraglia@gmail.com>
@@ -80,7 +80,7 @@ class AttributeBehavior extends Behavior
      */
     public $value;
     /**
-     * @var bool whether to skip this behavior when the `$owner` has not been
+     * @var bool whether to skip this loginBehavior when the `$owner` has not been
      * modified
      * @since 2.0.8
      */

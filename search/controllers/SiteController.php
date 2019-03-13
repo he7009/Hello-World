@@ -9,21 +9,21 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginModel;
 use app\models\ContactForm;
+use app\behaviors\CtrlBehavior;
 
 class SiteController extends Controller
 {
-    /**
-     * 设置
-     */
-    public static function actionIndex($event)
-    {
-        echo '1112222333445'.PHP_EOL;
-        echo $event->data;
-    }
 
-    public function actionTar()
+
+    public function actionIndex()
     {
-        $this->trigger('event_home');
+        $controller = new BehaviorController();
+        $behavior = new CtrlBehavior();
+
+        $controller->attachBehavior('behavior',$behavior);
+        echo $controller->param_1;
+        echo $controller->extendMethodForCtrl();
+
     }
 
 }

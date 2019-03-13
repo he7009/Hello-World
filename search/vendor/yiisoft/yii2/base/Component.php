@@ -11,9 +11,9 @@ use Yii;
 use yii\helpers\StringHelper;
 
 /**
- * Component is the base class that implements the *property*, *event* and *behavior* features.
+ * Component is the base class that implements the *property*, *event* and *loginBehavior* features.
  *
- * Component provides the *event* and *behavior* features, in addition to the *property* feature which is implemented in
+ * Component provides the *event* and *loginBehavior* features, in addition to the *property* feature which is implemented in
  * its parent class [[\yii\base\BaseObject|BaseObject]].
  *
  * Event is a way to "inject" custom code into existing code at certain places. For example, a comment object can trigger
@@ -70,14 +70,14 @@ use yii\helpers\StringHelper;
  * }, $data);
  * ```
  *
- * A behavior is an instance of [[Behavior]] or its child class. A component can be attached with one or multiple
- * behaviors. When a behavior is attached to a component, its public properties and methods can be accessed via the
+ * A loginBehavior is an instance of [[BehaviorController]] or its child class. A component can be attached with one or multiple
+ * behaviors. When a loginBehavior is attached to a component, its public properties and methods can be accessed via the
  * component directly, as if the component owns those properties and methods.
  *
- * To attach a behavior to a component, declare it in [[behaviors()]], or explicitly call [[attachBehavior]]. Behaviors
+ * To attach a loginBehavior to a component, declare it in [[behaviors()]], or explicitly call [[attachBehavior]]. Behaviors
  * declared in [[behaviors()]] are automatically attached to the corresponding component.
  *
- * One can also attach a behavior to a component when configuring it with a configuration array. The syntax is like the
+ * One can also attach a loginBehavior to a component when configuring it with a configuration array. The syntax is like the
  * following:
  *
  * ```php
@@ -88,8 +88,8 @@ use yii\helpers\StringHelper;
  * ]
  * ```
  *
- * where `as tree` stands for attaching a behavior named `tree`, and the array will be passed to [[\Yii::createObject()]]
- * to create the behavior object.
+ * where `as tree` stands for attaching a loginBehavior named `tree`, and the array will be passed to [[\Yii::createObject()]]
+ * to create the loginBehavior object.
  *
  * For more details and usage information on Component, see the [guide article on components](guide:concept-components).
  *
@@ -110,7 +110,7 @@ class Component extends BaseObject
      */
     private $_eventWildcards = [];
     /**
-     * @var Behavior[]|null the attached behaviors (behavior name => behavior). This is `null` when not initialized.
+     * @var Behavior[]|null the attached behaviors (loginBehavior name => loginBehavior). This is `null` when not initialized.
      */
     private $_behaviors;
 
@@ -121,12 +121,12 @@ class Component extends BaseObject
      * This method will check in the following order and act accordingly:
      *
      *  - a property defined by a getter: return the getter result
-     *  - a property of a behavior: return the behavior property value
+     *  - a property of a loginBehavior: return the loginBehavior property value
      *
      * Do not call this method directly as it is a PHP magic method that
      * will be implicitly called when executing `$value = $component->property;`.
      * @param string $name the property name
-     * @return mixed the property value or the value of a behavior's property
+     * @return mixed the property value or the value of a loginBehavior's property
      * @throws UnknownPropertyException if the property is not defined
      * @throws InvalidCallException if the property is write-only.
      * @see __set()
@@ -139,7 +139,10 @@ class Component extends BaseObject
             return $this->$getter();
         }
 
-        // behavior property
+        if($name == 'param_1'){
+            echo 11;die;
+        }
+        // loginBehavior property
         $this->ensureBehaviors();
         foreach ($this->_behaviors as $behavior) {
             if ($behavior->canGetProperty($name)) {
@@ -161,8 +164,8 @@ class Component extends BaseObject
      *
      *  - a property defined by a setter: set the property value
      *  - an event in the format of "on xyz": attach the handler to the event "xyz"
-     *  - a behavior in the format of "as xyz": attach the behavior named as "xyz"
-     *  - a property of a behavior: set the behavior property value
+     *  - a loginBehavior in the format of "as xyz": attach the loginBehavior named as "xyz"
+     *  - a property of a loginBehavior: set the loginBehavior property value
      *
      * Do not call this method directly as it is a PHP magic method that
      * will be implicitly called when executing `$component->property = $value;`.
@@ -186,14 +189,14 @@ class Component extends BaseObject
 
             return;
         } elseif (strncmp($name, 'as ', 3) === 0) {
-            // as behavior: attach behavior
+            // as loginBehavior: attach loginBehavior
             $name = trim(substr($name, 3));
             $this->attachBehavior($name, $value instanceof Behavior ? $value : Yii::createObject($value));
 
             return;
         }
 
-        // behavior property
+        // loginBehavior property
         $this->ensureBehaviors();
         foreach ($this->_behaviors as $behavior) {
             if ($behavior->canSetProperty($name)) {
@@ -215,7 +218,7 @@ class Component extends BaseObject
      * This method will check in the following order and act accordingly:
      *
      *  - a property defined by a setter: return whether the property is set
-     *  - a property of a behavior: return whether the property is set
+     *  - a property of a loginBehavior: return whether the property is set
      *  - return `false` for non existing properties
      *
      * Do not call this method directly as it is a PHP magic method that
@@ -231,7 +234,7 @@ class Component extends BaseObject
             return $this->$getter() !== null;
         }
 
-        // behavior property
+        // loginBehavior property
         $this->ensureBehaviors();
         foreach ($this->_behaviors as $behavior) {
             if ($behavior->canGetProperty($name)) {
@@ -248,7 +251,7 @@ class Component extends BaseObject
      * This method will check in the following order and act accordingly:
      *
      *  - a property defined by a setter: set the property value to be null
-     *  - a property of a behavior: set the property value to be null
+     *  - a property of a loginBehavior: set the property value to be null
      *
      * Do not call this method directly as it is a PHP magic method that
      * will be implicitly called when executing `unset($component->property)`.
@@ -264,7 +267,7 @@ class Component extends BaseObject
             return;
         }
 
-        // behavior property
+        // loginBehavior property
         $this->ensureBehaviors();
         foreach ($this->_behaviors as $behavior) {
             if ($behavior->canSetProperty($name)) {
@@ -279,7 +282,7 @@ class Component extends BaseObject
     /**
      * Calls the named method which is not a class method.
      *
-     * This method will check if any attached behavior has
+     * This method will check if any attached loginBehavior has
      * the named method and will execute it if available.
      *
      * Do not call this method directly as it is a PHP magic method that
@@ -319,7 +322,7 @@ class Component extends BaseObject
      * - the class has a getter or setter method associated with the specified name
      *   (in this case, property name is case-insensitive);
      * - the class has a member variable with the specified name (when `$checkVars` is true);
-     * - an attached behavior has a property of the given name (when `$checkBehaviors` is true).
+     * - an attached loginBehavior has a property of the given name (when `$checkBehaviors` is true).
      *
      * @param string $name the property name
      * @param bool $checkVars whether to treat member variables as properties
@@ -341,7 +344,7 @@ class Component extends BaseObject
      * - the class has a getter method associated with the specified name
      *   (in this case, property name is case-insensitive);
      * - the class has a member variable with the specified name (when `$checkVars` is true);
-     * - an attached behavior has a readable property of the given name (when `$checkBehaviors` is true).
+     * - an attached loginBehavior has a readable property of the given name (when `$checkBehaviors` is true).
      *
      * @param string $name the property name
      * @param bool $checkVars whether to treat member variables as properties
@@ -373,7 +376,7 @@ class Component extends BaseObject
      * - the class has a setter method associated with the specified name
      *   (in this case, property name is case-insensitive);
      * - the class has a member variable with the specified name (when `$checkVars` is true);
-     * - an attached behavior has a writable property of the given name (when `$checkBehaviors` is true).
+     * - an attached loginBehavior has a writable property of the given name (when `$checkBehaviors` is true).
      *
      * @param string $name the property name
      * @param bool $checkVars whether to treat member variables as properties
@@ -403,7 +406,7 @@ class Component extends BaseObject
      * A method is defined if:
      *
      * - the class has a method with the specified name
-     * - an attached behavior has a method with the given name (when `$checkBehaviors` is true).
+     * - an attached loginBehavior has a method with the given name (when `$checkBehaviors` is true).
      *
      * @param string $name the property name
      * @param bool $checkBehaviors whether to treat behaviors' methods as methods of this component
@@ -430,9 +433,9 @@ class Component extends BaseObject
      *
      * Child classes may override this method to specify the behaviors they want to behave as.
      *
-     * The return value of this method should be an array of behavior objects or configurations
-     * indexed by behavior names. A behavior configuration can be either a string specifying
-     * the behavior class or an array of the following structure:
+     * The return value of this method should be an array of loginBehavior objects or configurations
+     * indexed by loginBehavior names. A loginBehavior configuration can be either a string specifying
+     * the loginBehavior class or an array of the following structure:
      *
      * ```php
      * 'behaviorName' => [
@@ -442,13 +445,13 @@ class Component extends BaseObject
      * ]
      * ```
      *
-     * Note that a behavior class must extend from [[Behavior]]. Behaviors can be attached using a name or anonymously.
-     * When a name is used as the array key, using this name, the behavior can later be retrieved using [[getBehavior()]]
+     * Note that a loginBehavior class must extend from [[BehaviorController]]. Behaviors can be attached using a name or anonymously.
+     * When a name is used as the array key, using this name, the loginBehavior can later be retrieved using [[getBehavior()]]
      * or be detached using [[detachBehavior()]]. Anonymous behaviors can not be retrieved or detached.
      *
      * Behaviors declared in this method will be attached to the component automatically (on demand).
      *
-     * @return array the behavior configurations.
+     * @return array the loginBehavior configurations.
      */
     public function behaviors()
     {
@@ -636,9 +639,9 @@ class Component extends BaseObject
     }
 
     /**
-     * Returns the named behavior object.
-     * @param string $name the behavior name
-     * @return null|Behavior the behavior object, or null if the behavior does not exist
+     * Returns the named loginBehavior object.
+     * @param string $name the loginBehavior name
+     * @return null|Behavior the loginBehavior object, or null if the loginBehavior does not exist
      */
     public function getBehavior($name)
     {
@@ -657,18 +660,18 @@ class Component extends BaseObject
     }
 
     /**
-     * Attaches a behavior to this component.
-     * This method will create the behavior object based on the given
-     * configuration. After that, the behavior object will be attached to
-     * this component by calling the [[Behavior::attach()]] method.
-     * @param string $name the name of the behavior.
-     * @param string|array|Behavior $behavior the behavior configuration. This can be one of the following:
+     * Attaches a loginBehavior to this component.
+     * This method will create the loginBehavior object based on the given
+     * configuration. After that, the loginBehavior object will be attached to
+     * this component by calling the [[BehaviorController::attach()]] method.
+     * @param string $name the name of the loginBehavior.
+     * @param string|array|Behavior $behavior the loginBehavior configuration. This can be one of the following:
      *
-     *  - a [[Behavior]] object
-     *  - a string specifying the behavior class
-     *  - an object configuration array that will be passed to [[Yii::createObject()]] to create the behavior object.
+     *  - a [[BehaviorController]] object
+     *  - a string specifying the loginBehavior class
+     *  - an object configuration array that will be passed to [[Yii::createObject()]] to create the loginBehavior object.
      *
-     * @return Behavior the behavior object
+     * @return Behavior the loginBehavior object
      * @see detachBehavior()
      */
     public function attachBehavior($name, $behavior)
@@ -679,8 +682,8 @@ class Component extends BaseObject
 
     /**
      * Attaches a list of behaviors to the component.
-     * Each behavior is indexed by its name and should be a [[Behavior]] object,
-     * a string specifying the behavior class, or an configuration array for creating the behavior.
+     * Each loginBehavior is indexed by its name and should be a [[BehaviorController]] object,
+     * a string specifying the loginBehavior class, or an configuration array for creating the loginBehavior.
      * @param array $behaviors list of behaviors to be attached to the component
      * @see attachBehavior()
      */
@@ -693,10 +696,10 @@ class Component extends BaseObject
     }
 
     /**
-     * Detaches a behavior from the component.
-     * The behavior's [[Behavior::detach()]] method will be invoked.
-     * @param string $name the behavior's name.
-     * @return null|Behavior the detached behavior. Null if the behavior does not exist.
+     * Detaches a loginBehavior from the component.
+     * The loginBehavior's [[BehaviorController::detach()]] method will be invoked.
+     * @param string $name the loginBehavior's name.
+     * @return null|Behavior the detached loginBehavior. Null if the loginBehavior does not exist.
      */
     public function detachBehavior($name)
     {
@@ -736,12 +739,12 @@ class Component extends BaseObject
     }
 
     /**
-     * Attaches a behavior to this component.
-     * @param string|int $name the name of the behavior. If this is an integer, it means the behavior
-     * is an anonymous one. Otherwise, the behavior is a named one and any existing behavior with the same name
+     * Attaches a loginBehavior to this component.
+     * @param string|int $name the name of the loginBehavior. If this is an integer, it means the loginBehavior
+     * is an anonymous one. Otherwise, the loginBehavior is a named one and any existing loginBehavior with the same name
      * will be detached first.
-     * @param string|array|Behavior $behavior the behavior to be attached
-     * @return Behavior the attached behavior.
+     * @param string|array|Behavior $behavior the loginBehavior to be attached
+     * @return Behavior the attached loginBehavior.
      */
     private function attachBehaviorInternal($name, $behavior)
     {

@@ -25,7 +25,7 @@ class MarkdownExtra extends Markdown
 
 	/**
 	 * @var bool whether special attributes on code blocks should be applied on the `<pre>` element.
-	 * The default behavior is to put them on the `<code>` element.
+	 * The default loginBehavior is to put them on the `<code>` element.
 	 */
 	public $codeAttributesOnPre = false;
 

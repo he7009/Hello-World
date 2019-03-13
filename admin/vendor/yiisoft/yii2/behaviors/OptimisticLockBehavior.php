@@ -22,7 +22,7 @@ use yii\helpers\ArrayHelper;
  * (because another user has modified the data), a [[StaleObjectException]] exception will be thrown,
  * and the update or deletion is skipped.
  *
- * To use this behavior, first enable optimistic lock by following the steps listed in
+ * To use this loginBehavior, first enable optimistic lock by following the steps listed in
  * [[\yii\db\BaseActiveRecord::optimisticLock()|optimisticLock()]], remove the column name
  * holding the lock version from the [[\yii\base\Model::rules()|rules()]] method of your
  * ActiveRecord class, then add the following code to it:
@@ -46,8 +46,8 @@ use yii\helpers\ArrayHelper;
  * Once attached, internal use of the model class should also fail to save the record if the version number
  * isn't held by [[\yii\web\Request::getBodyParam()|getBodyParam()]]. It may be useful to extend your model class,
  * enable optimistic lock in parent class by overriding [[\yii\db\BaseActiveRecord::optimisticLock()|optimisticLock()]],
- * then attach the behavior to the child class so you can tie the parent model to internal use while linking the child model
- * holding this behavior to the controllers responsible of receiving end user inputs.
+ * then attach the loginBehavior to the child class so you can tie the parent model to internal use while linking the child model
+ * holding this loginBehavior to the controllers responsible of receiving end user inputs.
  * Alternatively, you can also configure the [[value]] property with a PHP callable to implement a different logic.
  *
  * OptimisticLockBehavior also provides a method named [[upgrade()]] that increases a model's

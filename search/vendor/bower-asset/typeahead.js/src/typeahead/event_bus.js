@@ -14,7 +14,7 @@ var EventBus = (function() {
   // DEPRECATED: will be remove in v1
   //
   // NOTE: there is no deprecation plan for the opened and closed event
-  // as their behavior has changed enough that it wouldn't make sense
+  // as their loginBehavior has changed enough that it wouldn't make sense
   deprecationMap = {
     render: 'rendered',
     cursorchange: 'cursorchanged',

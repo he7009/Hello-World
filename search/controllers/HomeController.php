@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginModel;
 use app\models\ContactForm;
+use app\models\Behavior;
 use app\study\event\loginEvent;
 
 class HomeController extends Controller
@@ -25,5 +26,16 @@ class HomeController extends Controller
         $event = new loginEvent();
         $event->data = ['jjjjjjj'];
         $this->trigger(self::EVENT_HOME,$event);
+    }
+
+    /**
+     *
+     */
+    public function actionSecond()
+    {
+        $behaviormodels = new Behavior();
+        $behavior = new \app\study\behavior\loginBehavior();
+
+
     }
 }

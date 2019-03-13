@@ -53,7 +53,7 @@ class Controller extends Component implements ViewContextInterface
     public $defaultAction = 'index';
     /**
      * @var null|string|false the name of the layout to be applied to this controller's views.
-     * This property mainly affects the behavior of [[render()]].
+     * This property mainly affects the loginBehavior of [[render()]].
      * Defaults to null, meaning the actual layout value should inherit that from [[module]]'s layout value.
      * If false, no layout will be applied.
      */
@@ -81,6 +81,7 @@ class Controller extends Component implements ViewContextInterface
      */
     public function __construct($id, $module, $config = [])
     {
+        echo 'controller____controller';
         $this->id = $id;
         $this->module = $module;
         parent::__construct($config);
@@ -228,7 +229,7 @@ class Controller extends Component implements ViewContextInterface
         } elseif (preg_match('/^[a-z0-9\\-_]+$/', $id) && strpos($id, '--') === false && trim($id, '-') === $id) {
             /**
              * 解析方法名称
-             * 方法名，多个单词组成切首字母大写的访问链接方法需要使用中划线(-)连接
+             * 方法名，多个单词组成并且首字母大写的访问链接方法需要使用中划线(-)连接
              * 例如：
              * 方法名: actionDoubleWord
              * 访问:double-word

@@ -194,7 +194,7 @@ class Form extends Link implements \ArrayAccess
      *
      * The returned URI is not the same as the form "action" attribute.
      * This method merges the value if the method is GET to mimics
-     * browser behavior.
+     * browser loginBehavior.
      *
      * @return string The URI
      */

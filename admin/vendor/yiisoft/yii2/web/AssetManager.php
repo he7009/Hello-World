@@ -414,7 +414,7 @@ class AssetManager extends Component
      * directory to avoid repetitive copying (which is very expensive).
      *
      * By default, when publishing a directory, subdirectories and files whose name starts with a dot "."
-     * will NOT be published. If you want to change this behavior, you may specify the "beforeCopy" option
+     * will NOT be published. If you want to change this loginBehavior, you may specify the "beforeCopy" option
      * as explained in the `$options` parameter.
      *
      * Note: On rare scenario, a race condition can develop that will lead to a

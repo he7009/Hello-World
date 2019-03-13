@@ -4052,7 +4052,7 @@ jQuery.fn.extend( {
 			attrs = elem && elem.attributes;
 
 		// Special expections of .data basically thwart jQuery.access,
-		// so implement the relevant behavior ourselves
+		// so implement the relevant loginBehavior ourselves
 
 		// Gets all values
 		if ( key === undefined ) {
@@ -7037,7 +7037,7 @@ function getWidthOrHeight( elem, name, extra ) {
 jQuery.extend( {
 
 	// Add in style property hooks for overriding the default
-	// behavior of getting and setting a style property
+	// loginBehavior of getting and setting a style property
 	cssHooks: {
 		opacity: {
 			get: function( elem, computed ) {
@@ -10074,7 +10074,7 @@ jQuery.param = function( a, traditional ) {
 			s[ s.length ] = encodeURIComponent( key ) + "=" + encodeURIComponent( value );
 		};
 
-	// Set traditional to true for jQuery <= 1.3.2 behavior.
+	// Set traditional to true for jQuery <= 1.3.2 loginBehavior.
 	if ( traditional === undefined ) {
 		traditional = jQuery.ajaxSettings && jQuery.ajaxSettings.traditional;
 	}

@@ -5,7 +5,7 @@
  *
  * The del and ins tags are notable because they allow different types of
  * elements depending on whether or not they're in a block or inline context.
- * Chameleon allows this behavior to happen by using two different
+ * Chameleon allows this loginBehavior to happen by using two different
  * definitions depending on context.  While this somewhat generalized,
  * it is specifically intended for those two tags.
  */

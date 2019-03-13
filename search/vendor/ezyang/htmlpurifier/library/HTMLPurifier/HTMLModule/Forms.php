@@ -94,7 +94,7 @@ class HTMLPurifier_HTMLModule_Forms extends HTMLPurifier_HTMLModule
             )
         );
         // It's illegal for there to be more than one selected, but not
-        // be multiple. Also, no selected means undefined behavior. This might
+        // be multiple. Also, no selected means undefined loginBehavior. This might
         // be difficult to implement; perhaps an injector, or a context variable.
 
         $textarea = $this->addElement(

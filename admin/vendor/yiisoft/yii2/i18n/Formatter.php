@@ -26,7 +26,7 @@ use yii\helpers\HtmlPurifier;
  * Formatter provides a set of commonly used data formatting methods.
  *
  * The formatting methods provided by Formatter are all named in the form of `asXyz()`.
- * The behavior of some of them may be configured via the properties of Formatter. For example,
+ * The loginBehavior of some of them may be configured via the properties of Formatter. For example,
  * by configuring [[dateFormat]], one may control how [[asDate()]] formats the value into a date string.
  *
  * Formatter is configured as an application component in [[\yii\base\Application]] by default.
@@ -1102,7 +1102,7 @@ class Formatter extends Component
      * `NumberFormatter::MIN_FRACTION_DIGITS` and `NumberFormatter::MAX_FRACTION_DIGITS`, which can be configured
      * using [[$numberFormatterOptions]].
      * If the PHP intl extension is not available, the default value is `2`.
-     * If you want consistent behavior between environments where intl is available and not, you should explicitly
+     * If you want consistent loginBehavior between environments where intl is available and not, you should explicitly
      * specify a value here.
      * @param array $options optional configuration for the number formatter. This parameter will be merged with [[numberFormatterOptions]].
      * @param array $textOptions optional configuration for the number formatter. This parameter will be merged with [[numberFormatterTextOptions]].
@@ -1152,7 +1152,7 @@ class Formatter extends Component
      * `NumberFormatter::MIN_FRACTION_DIGITS` and `NumberFormatter::MAX_FRACTION_DIGITS`, which can be configured
      * using [[$numberFormatterOptions]].
      * If the PHP intl extension is not available, the default value is `0`.
-     * If you want consistent behavior between environments where intl is available and not, you should explicitly
+     * If you want consistent loginBehavior between environments where intl is available and not, you should explicitly
      * specify a value here.
      * @param array $options optional configuration for the number formatter. This parameter will be merged with [[numberFormatterOptions]].
      * @param array $textOptions optional configuration for the number formatter. This parameter will be merged with [[numberFormatterTextOptions]].
@@ -1197,7 +1197,7 @@ class Formatter extends Component
      * `NumberFormatter::MIN_FRACTION_DIGITS` and `NumberFormatter::MAX_FRACTION_DIGITS`, which can be configured
      * using [[$numberFormatterOptions]].
      * If the [PHP intl extension](http://php.net/manual/en/book.intl.php) is not available, the default value depends on your PHP configuration.
-     * If you want consistent behavior between environments where intl is available and not, you should explicitly
+     * If you want consistent loginBehavior between environments where intl is available and not, you should explicitly
      * specify a value here.
      * @param array $options optional configuration for the number formatter. This parameter will be merged with [[numberFormatterOptions]].
      * @param array $textOptions optional configuration for the number formatter. This parameter will be merged with [[numberFormatterTextOptions]].

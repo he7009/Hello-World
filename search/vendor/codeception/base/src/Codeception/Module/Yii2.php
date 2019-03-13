@@ -37,7 +37,7 @@ use yii\db\Transaction;
  * * `entryScript` - front script title (like: index-test.php). If not set - taken from entryUrl.
  * * `transaction` - (default: true) wrap all database connection inside a transaction and roll it back after the test. Should be disabled for acceptance testing..
  * * `cleanup` - (default: true) cleanup fixtures after the test
- * * `ignoreCollidingDSN` - (default: false) When 2 database connections use the same DSN but different settings an exception will be thrown, set this to true to disable this behavior.
+ * * `ignoreCollidingDSN` - (default: false) When 2 database connections use the same DSN but different settings an exception will be thrown, set this to true to disable this loginBehavior.
  * * `fixturesMethod` - (default: _fixtures) Name of the method used for creating fixtures.
  * * `responseCleanMethod` - (default: clear) Method for cleaning the response object. Note that this is only for multiple requests inside a single test case.
  * Between test casesthe whole application is always recreated
@@ -640,7 +640,7 @@ class Yii2 extends Framework implements ActiveRecord, PartedModule
     }
 
     /**
-     * To support to use the behavior of urlManager component
+     * To support to use the loginBehavior of urlManager component
      * for the methods like this: amOnPage(), sendAjaxRequest() and etc.
      * @param $method
      * @param $uri

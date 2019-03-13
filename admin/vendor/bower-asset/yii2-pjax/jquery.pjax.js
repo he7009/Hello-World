@@ -351,7 +351,7 @@ function pjax(options) {
     context.html(container.contents)
 
     // FF bug: Won't autofocus fields that are inserted via JS.
-    // This behavior is incorrect. So if theres no current focus, autofocus
+    // This loginBehavior is incorrect. So if theres no current focus, autofocus
     // the last field.
     //
     // http://www.w3.org/html/wg/drafts/html/master/forms.html
@@ -394,7 +394,7 @@ function pjax(options) {
   // Initialize pjax.state for the initial page load. Assume we're
   // using the container and options of the link we're loading for the
   // back button to the initial page. This ensures good back button
-  // behavior.
+  // loginBehavior.
   if (!pjax.state) {
     pjax.state = {
       id: uniqueId(),
@@ -934,7 +934,7 @@ function findVersion() {
   }).attr('content')
 }
 
-// Install pjax functions on $.pjax to enable pushState behavior.
+// Install pjax functions on $.pjax to enable pushState loginBehavior.
 //
 // Does nothing if already enabled.
 //
@@ -971,7 +971,7 @@ function enable() {
   $(window).on('popstate.pjax', onPjaxPopstate)
 }
 
-// Disable pushState behavior.
+// Disable pushState loginBehavior.
 //
 // This is the case when a browser doesn't support pushState. It is
 // sometimes useful to disable pushState for debugging on a modern

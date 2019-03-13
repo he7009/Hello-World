@@ -57,10 +57,10 @@ class HTMLPurifier_Lexer
      * a few exceptions involving special features that only DirectLex
      * implements.
      *
-     * @note The behavior of this class has changed, rather than accepting
+     * @note The loginBehavior of this class has changed, rather than accepting
      *       a prototype object, it now accepts a configuration object.
      *       To specify your own prototype, set %Core.LexerImpl to it.
-     *       This change in behavior de-singletonizes the lexer object.
+     *       This change in loginBehavior de-singletonizes the lexer object.
      *
      * @param HTMLPurifier_Config $config
      * @return HTMLPurifier_Lexer

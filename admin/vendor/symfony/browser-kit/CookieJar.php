@@ -30,7 +30,7 @@ class CookieJar
      *
      * You should never use an empty domain, but if you do so,
      * this method returns the first cookie for the given name/path
-     * (this behavior ensures a BC behavior with previous versions of
+     * (this loginBehavior ensures a BC loginBehavior with previous versions of
      * Symfony).
      *
      * @param string $name   The cookie name
@@ -66,8 +66,8 @@ class CookieJar
      * Removes a cookie by name.
      *
      * You should never use an empty domain, but if you do so,
-     * all cookies for the given name/path expire (this behavior
-     * ensures a BC behavior with previous versions of Symfony).
+     * all cookies for the given name/path expire (this loginBehavior
+     * ensures a BC loginBehavior with previous versions of Symfony).
      *
      * @param string $name   The cookie name
      * @param string $path   The cookie path

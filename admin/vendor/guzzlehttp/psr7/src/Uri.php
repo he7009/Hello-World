@@ -333,7 +333,7 @@ class Uri implements UriInterface
     /**
      * Creates a new URI with multiple specific query string values.
      *
-     * It has the same behavior as withQueryValue() but for an associative array of key => value.
+     * It has the same loginBehavior as withQueryValue() but for an associative array of key => value.
      *
      * @param UriInterface $uri           URI to use as a base.
      * @param array        $keyValueArray Associative array of key and values

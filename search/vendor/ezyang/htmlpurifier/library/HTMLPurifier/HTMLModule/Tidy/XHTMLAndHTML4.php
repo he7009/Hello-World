@@ -26,7 +26,7 @@ class HTMLPurifier_HTMLModule_Tidy_XHTMLAndHTML4 extends HTMLPurifier_HTMLModule
             new HTMLPurifier_AttrTransform_EnumToCSS(
                 'align',
                 array(
-                    // we're following IE's behavior, not Firefox's, due
+                    // we're following IE's loginBehavior, not Firefox's, due
                     // to the fact that no one supports caption-side:right,
                     // W3C included (with CSS 2.1). This is a slightly
                     // unreasonable attribute!

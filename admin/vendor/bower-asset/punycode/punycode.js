@@ -200,7 +200,7 @@
 	 * @returns {Number} The basic code point whose value (when used for
 	 * representing integers) is `digit`, which needs to be in the range
 	 * `0` to `base - 1`. If `flag` is non-zero, the uppercase form is
-	 * used; else, the lowercase form is used. The behavior is undefined
+	 * used; else, the lowercase form is used. The loginBehavior is undefined
 	 * if `flag` is non-zero and `digit` has no uppercase form.
 	 */
 	function digitToBasic(digit, flag) {
