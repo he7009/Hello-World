@@ -81,7 +81,6 @@ class Controller extends Component implements ViewContextInterface
      */
     public function __construct($id, $module, $config = [])
     {
-        echo 'controller____controller';
         $this->id = $id;
         $this->module = $module;
         parent::__construct($config);

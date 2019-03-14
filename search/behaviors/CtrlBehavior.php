@@ -10,7 +10,6 @@ namespace app\behaviors;
 
 use yii\base\Behavior;
 use yii\base\Event;
-use yii\rest\Controller;
 
 class CtrlBehavior extends Behavior
 {

@@ -17,12 +17,11 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $controller = new BehaviorController();
         $behavior = new CtrlBehavior();
+        echo 222;
 
-        $controller->attachBehavior('behavior',$behavior);
-        echo $controller->param_1;
-        echo $controller->extendMethodForCtrl();
+        $this->attachBehavior('CtrlBehavior',$behavior);
+        echo $this->param_1;
 
     }
 
