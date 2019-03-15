@@ -19,16 +19,16 @@ class CtrlBehavior extends Behavior
     public $param_2 = 2222;
 
     /**
-     * ÐÐÎªÊÇÎª Controller ×öµÄÀ©Õ¹ ¹Ê¿ÉÒÔ×¢²á Controller µÄÊÂ¼þ
+     * è¡Œä¸ºæ˜¯ä¸º Controller åšçš„æ‰©å±• æ•…å¯ä»¥æ³¨å†Œ Controller çš„äº‹ä»¶
      * @return array events for component owner
      */
-//    public function events()
-//    {
-//        return [
-//            Controller::EVENT_BEFORE_ACTION => "handlerBeforeAction",
-//            Controller::EVENT_AFTER_ACTION => "handlerAfterAction"
-//        ];
-//    }
+    public function events()
+    {
+        return [
+            'event_test_before' => "handlerBeforeAction",
+            'event_test_after' => "handlerAfterAction"
+        ];
+    }
 
     /**
      * event handler
@@ -37,8 +37,8 @@ class CtrlBehavior extends Behavior
     public function handlerBeforeAction(Event $event)
     {
         echo __METHOD__ . self::PHP_WEB_EOL;
-        echo 'ÓÉÐÐÎª×¢²áµÄ×é¼þÊÂ¼þ£¬´«µÝµÄ$event->senderÊôÐÔÎª´Ë×é¼þ¶ÔÏó' . self::PHP_WEB_EOL;
-        echo "×é¼þµÄ¿ØÖÆÆ÷ºÍ¶¯×÷£º" . $event->sender->uniqueId . '/' . $event->sender->action->id . self::PHP_WEB_EOL;
+        echo 'ç”±è¡Œä¸ºæ³¨å†Œçš„ç»„ä»¶äº‹ä»¶ï¼Œä¼ é€’çš„$event->senderå±žæ€§ä¸ºæ­¤ç»„ä»¶å¯¹è±¡' . self::PHP_WEB_EOL;
+        echo "ç»„ä»¶çš„æŽ§åˆ¶å™¨å’ŒåŠ¨ä½œï¼š" . $event->sender->uniqueId . '/' . $event->sender->action->id . self::PHP_WEB_EOL;
         echo self::PHP_WEB_EOL;
     }
 
@@ -50,16 +50,16 @@ class CtrlBehavior extends Behavior
     {
         echo self::PHP_WEB_EOL;
         echo __METHOD__ . self::PHP_WEB_EOL;
-        echo 'ÓÉÐÐÎª×¢²áµÄ×é¼þÊÂ¼þ£¬´«µÝµÄ$event->senderÊôÐÔÎª´Ë×é¼þ¶ÔÏó' . self::PHP_WEB_EOL;
-        echo "×é¼þµÄ¿ØÖÆÆ÷ºÍ¶¯×÷£º" . $event->sender->uniqueId . '/' . $event->sender->action->id . self::PHP_WEB_EOL;
+        echo 'ç”±è¡Œä¸ºæ³¨å†Œçš„ç»„ä»¶äº‹ä»¶ï¼Œä¼ é€’çš„$event->senderå±žæ€§ä¸ºæ­¤ç»„ä»¶å¯¹è±¡' . self::PHP_WEB_EOL;
+        echo "ç»„ä»¶çš„æŽ§åˆ¶å™¨å’ŒåŠ¨ä½œï¼š" . $event->sender->uniqueId . '/' . $event->sender->action->id . self::PHP_WEB_EOL;
     }
 
     /**
-     * À©Õ¹·½·¨ Í¨¹ý __METHOD__ ÎÒÃ´¿ÉÒÔ¿´³öÕâ»õ±»×é¼þµ÷ÓÃÊ±µ½µ×ÊÇ²»ÊÇ×é¼þµÄÒ»¸ö·½·¨
+     * æ‰©å±•æ–¹æ³• é€šè¿‡ __METHOD__ æˆ‘ä¹ˆå¯ä»¥çœ‹å‡ºè¿™è´§è¢«ç»„ä»¶è°ƒç”¨æ—¶åˆ°åº•æ˜¯ä¸æ˜¯ç»„ä»¶çš„ä¸€ä¸ªæ–¹æ³•
      */
     public function extendMethodForCtrl()
     {
-        echo "ÔÚÐÐÎªÖÐ¶¨ÒåµÄ·½·¨£º";
+        echo "åœ¨è¡Œä¸ºä¸­å®šä¹‰çš„æ–¹æ³•ï¼š";
         echo __METHOD__ . self::PHP_WEB_EOL;
     }
 }
