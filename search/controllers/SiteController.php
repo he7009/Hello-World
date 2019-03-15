@@ -27,6 +27,9 @@ class SiteController extends Controller
     {
         echo $this->param_1;
 
+        $this->trigger('event_test_before');
+        $this->extendMethodForCtrl();
+
     }
 
 }
