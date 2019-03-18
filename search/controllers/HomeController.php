@@ -17,12 +17,12 @@ class HomeController extends Controller
     const EVENT_HOME = 'event_home';
 
     /**
-     * ¿ªÊ¼Ö´ÐÐ
+     * å¼€å§‹æ‰§è¡Œ
      */
     public function actionIndex()
     {
         $this->on(self::EVENT_HOME,['app\controllers\SiteController','actionIndex'],999);
-        yii\base\Event::on('app\controllers\HomeController',self::EVENT_HOME,['app\models\TargetEvent','start'],['¶ÎÓýµÂ','helilan']);
+        yii\base\Event::on('app\controllers\HomeController',self::EVENT_HOME,['app\models\TargetEvent','start'],['æ®µè‚²å¾·','helilan']);
         $event = new loginEvent();
         $event->data = ['jjjjjjj'];
         $this->trigger(self::EVENT_HOME,$event);

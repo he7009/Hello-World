@@ -138,10 +138,6 @@ class Component extends BaseObject
             // read property, e.g. getName()
             return $this->$getter();
         }
-
-        if($name == 'param_1'){
-            echo 11;die;
-        }
         // loginBehavior property
         $this->ensureBehaviors();
         foreach ($this->_behaviors as $behavior) {
@@ -497,7 +493,7 @@ class Component extends BaseObject
      *
      * where `$event` is an [[Event]] object which includes parameters associated with the event.
      *
-     * Since 2.0.14 you can specify event name as a wildcard(Í¨Åä·û) pattern:
+     * Since 2.0.14 you can specify event name as a wildcard(Í¨ï¿½ï¿½ï¿½) pattern:
      *
      * ```php
      * $component->on('event.group.*', function ($event) {

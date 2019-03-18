@@ -12,7 +12,7 @@ namespace app\study\event;
 class requestBeforeEvent
 {
     /**
-     * ÇëÇóÇ°ÊÂ¼ş
+     * è¯·æ±‚å‰äº‹ä»¶
      */
     public function requestBefore()
     {

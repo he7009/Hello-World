@@ -26,17 +26,20 @@ $reflection = new ReflectionClass('Reflections');
 $contructor = $reflection->getConstructor();
 
 $paramsters = $contructor->getParameters();
-var_dump($paramsters);
-
-foreach ($paramsters as $param)
-{
-    if($param->isDefaultValueAvailable()){
-        echo 11111;
-        var_dump($param->getDefaultValue());
-    }else{
-        echo 222222;
+$dependencies = [];
+foreach ($paramsters as $param) {
+    if (version_compare(PHP_VERSION, '5.6.0', '>=') && $param->isVariadic()) {
+        echo "11111111".PHP_EOL;
+        break;
+    } elseif ($param->isDefaultValueAvailable()) {
+        echo "22222222".PHP_EOL;
+        $dependencies[] = $param->getDefaultValue();
+    } else {
+        echo "3333333".PHP_EOL;
         $c = $param->getClass();
-        var_dump($c);
+        $dependencies[] = $c;
     }
 }
+
+var_dump($dependencies);
 

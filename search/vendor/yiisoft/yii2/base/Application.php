@@ -202,8 +202,16 @@ abstract class Application extends Module
         //设置代码运行的阶段(start)
         $this->state = self::STATE_BEGIN;
 
+        /**
+         * 设置部分跟别名
+         * 设置时区
+         * 整合核心组件到配置文件
+         */
         $this->preInit($config);
 
+        /**
+         * 注册错误处理程序
+         */
         $this->registerErrorHandler($config);
 
         Component::__construct($config);

@@ -163,20 +163,22 @@ class Container extends Component
             $object = call_user_func($definition, $this, $params, $config);
         } elseif (is_array($definition)) {
             $concrete = $definition['class'];
+            //删除class,为后面合并$definition直接携带的参数扫除障碍
             unset($definition['class']);
 
+            //合并$definition直接携带的参数
+            //处理类实例化需要的param config
             $config = array_merge($definition, $config);
             $params = $this->mergeParams($class, $params);
 
             if ($concrete === $class) {
+                //相同则直接构建，不存在循环_definitions
                 $object = $this->build($class, $params, $config);
             } else {
+                //查看是否存在循环_definitions
                 $object = $this->get($concrete, $params, $config);
             }
         } elseif (is_object($definition)) {
-            if($class == 'app\controllers\SiteController'){
-                echo 33;die;
-            }
             return $this->_singletons[$class] = $definition;
         } else {
             throw new InvalidConfigException('Unexpected object definition type: ' . gettype($definition));
@@ -184,6 +186,7 @@ class Container extends Component
 
         if (array_key_exists($class, $this->_singletons)) {
             // singleton
+            //如果设置单例则进行单例缓存
             $this->_singletons[$class] = $object;
         }
 
@@ -382,12 +385,13 @@ class Container extends Component
 
         $config = $this->resolveDependencies($config);
 
+        //实现接口Configurable 放入参数实例化自动配置
         if (!empty($dependencies) && $reflection->implementsInterface('yii\base\Configurable')) {
             // set $config as the last parameter (existing one will be overwritten)
             $dependencies[count($dependencies) - 1] = $config;
             return $reflection->newInstanceArgs($dependencies);
         }
-
+        //没有实现接口，或者以来为空实现config配置
         $object = $reflection->newInstanceArgs($dependencies);
         foreach ($config as $name => $value) {
             $object->$name = $value;

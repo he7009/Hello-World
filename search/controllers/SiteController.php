@@ -15,13 +15,20 @@ class SiteController extends Controller
 {
 
 
+    public function behaviors()
+    {
+        return [
+            'app\behaviors\CtrlBehavior'
+        ];
+    }
+
+
     public function actionIndex()
     {
-        $behavior = new CtrlBehavior();
-        echo 222;
-
-        $this->attachBehavior('CtrlBehavior',$behavior);
         echo $this->param_1;
+
+        $this->trigger('event_test_before');
+        $this->extendMethodForCtrl();
 
     }
 
