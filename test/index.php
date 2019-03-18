@@ -60,5 +60,7 @@ class Ioc {
     }
 }
 
+echo 222;exit;
+
 
 ?>

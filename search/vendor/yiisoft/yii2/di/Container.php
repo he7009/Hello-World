@@ -364,13 +364,15 @@ class Container extends Component
     protected function build($class, $params, $config)
     {
         /* @var $reflection ReflectionClass */
+        //获取反射类、依赖关系（类构造函数参数相关信息）
         list($reflection, $dependencies) = $this->getDependencies($class);
-
+        //传参覆盖默认值
         foreach ($params as $index => $param) {
             $dependencies[$index] = $param;
         }
-
+        //解析依赖，实例化其中的依赖类，可能会触发递归
         $dependencies = $this->resolveDependencies($dependencies, $reflection);
+        //检查类是否可以实例化
         if (!$reflection->isInstantiable()) {
             throw new NotInstantiableException($reflection->name);
         }
