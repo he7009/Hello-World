@@ -149,6 +149,9 @@ class View extends Component implements DynamicContentAwareInterface
      * @throws ViewNotFoundException if the view file does not exist.
      * @throws InvalidCallException if the view cannot be resolved.
      * @see renderFile()
+     *
+     * @findViewFile     寻找目标视图文件
+     * @renderFile       解析目标视图文件
      */
     public function render($view, $params = [], $context = null)
     {
@@ -242,6 +245,7 @@ class View extends Component implements DynamicContentAwareInterface
         if ($this->beforeRender($viewFile, $params)) {
             Yii::debug("Rendering view file: $viewFile", __METHOD__);
             $ext = pathinfo($viewFile, PATHINFO_EXTENSION);
+            //根据后缀决定使用的模板引擎
             if (isset($this->renderers[$ext])) {
                 if (is_array($this->renderers[$ext]) || is_string($this->renderers[$ext])) {
                     $this->renderers[$ext] = Yii::createObject($this->renderers[$ext]);
