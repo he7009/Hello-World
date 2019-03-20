@@ -14,22 +14,10 @@ use app\behaviors\CtrlBehavior;
 class SiteController extends Controller
 {
 
-
-    public function behaviors()
-    {
-        return [
-            'app\behaviors\CtrlBehavior'
-        ];
-    }
-
-
     public function actionIndex()
     {
-        echo $this->param_1;
-
-        $this->trigger('event_test_before');
-        $this->extendMethodForCtrl();
-
+        Yii::$app->response->format = 'json';
+        return [1,2,3,4,'duanyude'];
     }
 
 }

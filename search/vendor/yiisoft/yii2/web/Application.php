@@ -109,9 +109,6 @@ class Application extends \yii\base\Application
             $this->requestedRoute = $route;
             //请求参数解析完成，开始执行控制器阶段
 
-
-
-
             $result = $this->runAction($route, $params);
             if ($result instanceof Response) {
                 return $result;

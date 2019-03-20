@@ -303,7 +303,7 @@ class Controller extends Component implements ViewContextInterface
      * @param mixed $result the action return result.
      * @return mixed the processed action result.
      */
-    public function afterAction($action, $result)
+    public function  afterAction($action, $result)
     {
         $event = new ActionEvent($action);
         $event->result = $result;
