@@ -83,6 +83,7 @@ class Controller extends Component implements ViewContextInterface
     {
         $this->id = $id;
         $this->module = $module;
+//        $this->on(self::EVENT_BEFORE_ACTION,['app\study\event\cbeforeActionEvent','requestBefore']);
         parent::__construct($config);
     }
 
@@ -321,7 +322,9 @@ class Controller extends Component implements ViewContextInterface
     {
         $modules = [$this->module];
         $module = $this->module;
+        //循环遍历module.找到所有module层
         while ($module->module !== null) {
+            //在前面插入，高层次的module在前面执行
             array_unshift($modules, $module->module);
             $module = $module->module;
         }
