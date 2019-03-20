@@ -16,8 +16,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        Yii::$app->response->format = 'json';
-        return [1,2,3,4,'duanyude'];
+        return 11111;
     }
 
 }

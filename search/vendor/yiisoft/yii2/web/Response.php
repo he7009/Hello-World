@@ -1028,6 +1028,9 @@ class Response extends \yii\base\Response
      * Prepares for sending the response.
      * The default implementation will convert [[data]] into [[content]] and set headers accordingly.
      * @throws InvalidConfigException if the formatter for the specified format is invalid or [[format]] is not supported
+     *
+     * 调用 yii\web\Response::prepare() 来格式化 response data 为 response content。
+     * 目的：格式化response data 为 content
      */
     protected function prepare()
     {
@@ -1036,6 +1039,7 @@ class Response extends \yii\base\Response
         }
 
         if (isset($this->formatters[$this->format])) {
+            //存在对应格式的处理程序
             $formatter = $this->formatters[$this->format];
             if (!is_object($formatter)) {
                 $this->formatters[$this->format] = $formatter = Yii::createObject($formatter);
@@ -1046,10 +1050,12 @@ class Response extends \yii\base\Response
                 throw new InvalidConfigException("The '{$this->format}' response formatter is invalid. It must implement the ResponseFormatterInterface.");
             }
         } elseif ($this->format === self::FORMAT_RAW) {
+            //raw 格式处理 不需要处理直接返回
             if ($this->data !== null) {
                 $this->content = $this->data;
             }
         } else {
+            //不存在对应格式的处理程序，抛出异常
             throw new InvalidConfigException("Unsupported response format: {$this->format}");
         }
 
