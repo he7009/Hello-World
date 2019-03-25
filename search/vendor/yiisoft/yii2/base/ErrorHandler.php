@@ -57,8 +57,11 @@ abstract class ErrorHandler extends Component
      */
     public function register()
     {
+        //关闭PHP默认错误处理
         ini_set('display_errors', false);
+        //设置异常处理程序，当抛出异常且没有被catch的时候调用
         set_exception_handler([$this, 'handleException']);
+        //设置错误处理程序 部分错误无法被set_error_handle 处理
         if (defined('HHVM_VERSION')) {
             set_error_handler([$this, 'handleHhvmError']);
         } else {
@@ -67,6 +70,9 @@ abstract class ErrorHandler extends Component
         if ($this->memoryReserveSize > 0) {
             $this->_memoryReserve = str_repeat('x', $this->memoryReserveSize);
         }
+        //设置脚本结束执行的程序
+        //为了是处理部分无法被 set_error_handle 处理的错误 例如FatalError
+        //使用 error_get_last() 函数
         register_shutdown_function([$this, 'handleFatalError']);
     }
 
@@ -105,7 +111,9 @@ abstract class ErrorHandler extends Component
 
         try {
             $this->logException($exception);
+            //属性是否清除退出前的输出缓冲区，默认为true
             if ($this->discardExistingOutput) {
+                //清除之前缓冲区内容
                 $this->clearOutput();
             }
             $this->renderException($exception);
