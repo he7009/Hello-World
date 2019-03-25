@@ -85,6 +85,8 @@ class ErrorHandler extends \yii\base\ErrorHandler
     /**
      * Renders the exception.
      * @param \Exception|\Error $exception the exception to be rendered.
+     *
+     * @ 渲染异常
      */
     protected function renderException($exception)
     {
@@ -139,21 +141,29 @@ class ErrorHandler extends \yii\base\ErrorHandler
      * Converts an exception into an array.
      * @param \Exception|\Error $exception the exception being converted
      * @return array the array representation of the exception.
+     *
+     *
+     *
+     * @转换异常错误信息到数组中，并且根据不同的错误类型，不同的模式数组中放置不同的内容
      */
     protected function convertExceptionToArray($exception)
     {
+        //如果 非DEBUG模式 并不是用户终端错误 并不是Http错误 则默认此错误为http 500
         if (!YII_DEBUG && !$exception instanceof UserException && !$exception instanceof HttpException) {
             $exception = new HttpException(500, Yii::t('yii', 'An internal server error occurred.'));
         }
 
+        //可以返回的基本信息
         $array = [
             'name' => ($exception instanceof Exception || $exception instanceof ErrorException) ? $exception->getName() : 'Exception',
             'message' => $exception->getMessage(),
             'code' => $exception->getCode(),
         ];
+        //http 错误返回状态码
         if ($exception instanceof HttpException) {
             $array['status'] = $exception->statusCode;
         }
+        //打开debug模式追加详细的错误信息
         if (YII_DEBUG) {
             $array['type'] = get_class($exception);
             if (!$exception instanceof UserException) {
@@ -165,6 +175,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
                 }
             }
         }
+        //递归获取之前的错误
         if (($prev = $exception->getPrevious()) !== null) {
             $array['previous'] = $this->convertExceptionToArray($prev);
         }
