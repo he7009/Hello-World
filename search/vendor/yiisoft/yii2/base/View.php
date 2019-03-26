@@ -560,7 +560,7 @@ class View extends Component implements DynamicContentAwareInterface
     public function beginPage()
     {
         ob_start();
-        ob_implicit_flush(false);
+        ob_implicit_flush(false);  //关不绝对刷送，绝对刷送：绝对（隐式）刷送将导致在每次输出调用后有一次刷送操作，以便不再需要对 flush() 的显式调用。
 
         $this->trigger(self::EVENT_BEGIN_PAGE);
     }

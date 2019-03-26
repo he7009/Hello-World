@@ -90,6 +90,9 @@ class ErrorHandler extends \yii\base\ErrorHandler
      */
     protected function renderException($exception)
     {
+        //异常出现之前是否加载了相应组件
+        //  已经加载使用服务定位器获取响应对象，并且重置部分相应参数
+        //  没有加载则直接实例化响应对象
         if (Yii::$app->has('response')) {
             $response = Yii::$app->getResponse();
             // reset parameters of response to avoid interference with partially created response data
@@ -106,6 +109,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
 
         $useErrorView = $response->format === Response::FORMAT_HTML && (!YII_DEBUG || $exception instanceof UserException);
 
+        //如果响应用户错误 并且设置了errorAction(即自定义的错误响应controller),则加载用户自定义的controller;
         if ($useErrorView && $this->errorAction !== null) {
             $result = Yii::$app->runAction($this->errorAction);
             if ($result instanceof Response) {
@@ -113,13 +117,14 @@ class ErrorHandler extends \yii\base\ErrorHandler
             } else {
                 $response->data = $result;
             }
-        } elseif ($response->format === Response::FORMAT_HTML) {
-            if ($this->shouldRenderSimpleHtml()) {
+        } elseif ($response->format === Response::FORMAT_HTML) {  //相应为HTML,但不是用户错误
+            if ($this->shouldRenderSimpleHtml()) {  //展示简单显示
                 // AJAX request
                 $response->data = '<pre>' . $this->htmlEncode(static::convertExceptionToString($exception)) . '</pre>';
             } else {
                 // if there is an error during error rendering it's useful to
                 // display PHP error in debug mode instead of a blank screen
+                // debug 模式时，打开默认错误展示。为了是展示出在处理错误的过程中出现的错误
                 if (YII_DEBUG) {
                     ini_set('display_errors', 1);
                 }
@@ -261,6 +266,9 @@ class ErrorHandler extends \yii\base\ErrorHandler
      * @param string $_file_ the view file.
      * @param array $_params_ the parameters (name-value pairs) that will be extracted and made available in the view file.
      * @return string the rendering result
+     *
+     * 如果是ErrorException异常，或者并没有加载视图组件 直接开启ob,引入模板
+     * 否则 调用视图对象处理
      */
     public function renderFile($_file_, $_params_)
     {
@@ -507,6 +515,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
      */
     protected function shouldRenderSimpleHtml()
     {
+        //测试环境 或者 AJAX 访问时，返回简单响应模板
         return YII_ENV_TEST || Yii::$app->request->getIsAjax();
     }
 }

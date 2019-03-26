@@ -105,11 +105,13 @@ abstract class ErrorHandler extends Component
 
         // set preventive HTTP status code to 500 in case error handling somehow fails and headers are sent
         // HTTP exceptions will override this value in renderException()
+        // 不是命令行模式
         if (PHP_SAPI !== 'cli') {
             http_response_code(500);
         }
 
         try {
+            //记录异常日志
             $this->logException($exception);
             //属性是否清除退出前的输出缓冲区，默认为true
             if ($this->discardExistingOutput) {
@@ -332,14 +334,17 @@ abstract class ErrorHandler extends Component
      */
     public static function convertExceptionToString($exception)
     {
+        //用户错误
         if ($exception instanceof UserException) {
             return "{$exception->getName()}: {$exception->getMessage()}";
         }
 
+        //如果不是用户错误，并且是DEBUG模式，转换为详细的错误字符消息
         if (YII_DEBUG) {
             return static::convertExceptionToVerboseString($exception);
         }
 
+        //
         return 'An internal server error occurred.';
     }
 
