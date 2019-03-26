@@ -7,6 +7,7 @@ class erroraction
     public function run()
     {
         echo '222'.PHP_EOL;
+        trigger_error('hahahah,wocuow le');
         var_dump(error_reporting());
 
     }

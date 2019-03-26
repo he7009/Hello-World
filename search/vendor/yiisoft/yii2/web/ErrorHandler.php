@@ -86,13 +86,13 @@ class ErrorHandler extends \yii\base\ErrorHandler
      * Renders the exception.
      * @param \Exception|\Error $exception the exception to be rendered.
      *
-     * @ äÖÈ¾Òì³£
+     * @ æ¸²æŸ“å¼‚å¸¸
      */
     protected function renderException($exception)
     {
-        //Òì³£³öÏÖÖ®Ç°ÊÇ·ñ¼ÓÔØÁËÏàÓ¦×é¼þ
-        //  ÒÑ¾­¼ÓÔØÊ¹ÓÃ·þÎñ¶¨Î»Æ÷»ñÈ¡ÏìÓ¦¶ÔÏó£¬²¢ÇÒÖØÖÃ²¿·ÖÏàÓ¦²ÎÊý
-        //  Ã»ÓÐ¼ÓÔØÔòÖ±½ÓÊµÀý»¯ÏìÓ¦¶ÔÏó
+        //å¼‚å¸¸å‡ºçŽ°ä¹‹å‰æ˜¯å¦åŠ è½½äº†ç›¸åº”ç»„ä»¶
+        //  å·²ç»åŠ è½½ä½¿ç”¨æœåŠ¡å®šä½å™¨èŽ·å–å“åº”å¯¹è±¡ï¼Œå¹¶ä¸”é‡ç½®éƒ¨åˆ†ç›¸åº”å‚æ•°
+        //  æ²¡æœ‰åŠ è½½åˆ™ç›´æŽ¥å®žä¾‹åŒ–å“åº”å¯¹è±¡
         if (Yii::$app->has('response')) {
             $response = Yii::$app->getResponse();
             // reset parameters of response to avoid interference with partially created response data
@@ -109,7 +109,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
 
         $useErrorView = $response->format === Response::FORMAT_HTML && (!YII_DEBUG || $exception instanceof UserException);
 
-        //Èç¹ûÏìÓ¦ÓÃ»§´íÎó ²¢ÇÒÉèÖÃÁËerrorAction(¼´×Ô¶¨ÒåµÄ´íÎóÏìÓ¦controller),Ôò¼ÓÔØÓÃ»§×Ô¶¨ÒåµÄcontroller;
+        //å¦‚æžœå“åº”ç”¨æˆ·é”™è¯¯ å¹¶ä¸”è®¾ç½®äº†errorAction(å³è‡ªå®šä¹‰çš„é”™è¯¯å“åº”controller),åˆ™åŠ è½½ç”¨æˆ·è‡ªå®šä¹‰çš„controller;
         if ($useErrorView && $this->errorAction !== null) {
             $result = Yii::$app->runAction($this->errorAction);
             if ($result instanceof Response) {
@@ -117,14 +117,14 @@ class ErrorHandler extends \yii\base\ErrorHandler
             } else {
                 $response->data = $result;
             }
-        } elseif ($response->format === Response::FORMAT_HTML) {  //ÏàÓ¦ÎªHTML,µ«²»ÊÇÓÃ»§´íÎó
-            if ($this->shouldRenderSimpleHtml()) {  //Õ¹Ê¾¼òµ¥ÏÔÊ¾
+        } elseif ($response->format === Response::FORMAT_HTML) {  //ç›¸åº”ä¸ºHTML,ä½†ä¸æ˜¯ç”¨æˆ·é”™è¯¯
+            if ($this->shouldRenderSimpleHtml()) {  //å±•ç¤ºç®€å•æ˜¾ç¤º
                 // AJAX request
                 $response->data = '<pre>' . $this->htmlEncode(static::convertExceptionToString($exception)) . '</pre>';
             } else {
                 // if there is an error during error rendering it's useful to
                 // display PHP error in debug mode instead of a blank screen
-                // debug Ä£Ê½Ê±£¬´ò¿ªÄ¬ÈÏ´íÎóÕ¹Ê¾¡£ÎªÁËÊÇÕ¹Ê¾³öÔÚ´¦Àí´íÎóµÄ¹ý³ÌÖÐ³öÏÖµÄ´íÎó
+                // debug æ¨¡å¼æ—¶ï¼Œæ‰“å¼€é»˜è®¤é”™è¯¯å±•ç¤ºã€‚ä¸ºäº†æ˜¯å±•ç¤ºå‡ºåœ¨å¤„ç†é”™è¯¯çš„è¿‡ç¨‹ä¸­å‡ºçŽ°çš„é”™è¯¯
                 if (YII_DEBUG) {
                     ini_set('display_errors', 1);
                 }
@@ -149,26 +149,26 @@ class ErrorHandler extends \yii\base\ErrorHandler
      *
      *
      *
-     * @×ª»»Òì³£´íÎóÐÅÏ¢µ½Êý×éÖÐ£¬²¢ÇÒ¸ù¾Ý²»Í¬µÄ´íÎóÀàÐÍ£¬²»Í¬µÄÄ£Ê½Êý×éÖÐ·ÅÖÃ²»Í¬µÄÄÚÈÝ
+     * @è½¬æ¢å¼‚å¸¸é”™è¯¯ä¿¡æ¯åˆ°æ•°ç»„ä¸­ï¼Œå¹¶ä¸”æ ¹æ®ä¸åŒçš„é”™è¯¯ç±»åž‹ï¼Œä¸åŒçš„æ¨¡å¼æ•°ç»„ä¸­æ”¾ç½®ä¸åŒçš„å†…å®¹
      */
     protected function convertExceptionToArray($exception)
     {
-        //Èç¹û ·ÇDEBUGÄ£Ê½ ²¢²»ÊÇÓÃ»§ÖÕ¶Ë´íÎó ²¢²»ÊÇHttp´íÎó ÔòÄ¬ÈÏ´Ë´íÎóÎªhttp 500
+        //å¦‚æžœ éžDEBUGæ¨¡å¼ å¹¶ä¸æ˜¯ç”¨æˆ·ç»ˆç«¯é”™è¯¯ å¹¶ä¸æ˜¯Httpé”™è¯¯ åˆ™é»˜è®¤æ­¤é”™è¯¯ä¸ºhttp 500
         if (!YII_DEBUG && !$exception instanceof UserException && !$exception instanceof HttpException) {
             $exception = new HttpException(500, Yii::t('yii', 'An internal server error occurred.'));
         }
 
-        //¿ÉÒÔ·µ»ØµÄ»ù±¾ÐÅÏ¢
+        //å¯ä»¥è¿”å›žçš„åŸºæœ¬ä¿¡æ¯
         $array = [
             'name' => ($exception instanceof Exception || $exception instanceof ErrorException) ? $exception->getName() : 'Exception',
             'message' => $exception->getMessage(),
             'code' => $exception->getCode(),
         ];
-        //http ´íÎó·µ»Ø×´Ì¬Âë
+        //http é”™è¯¯è¿”å›žçŠ¶æ€ç 
         if ($exception instanceof HttpException) {
             $array['status'] = $exception->statusCode;
         }
-        //´ò¿ªdebugÄ£Ê½×·¼ÓÏêÏ¸µÄ´íÎóÐÅÏ¢
+        //æ‰“å¼€debugæ¨¡å¼è¿½åŠ è¯¦ç»†çš„é”™è¯¯ä¿¡æ¯
         if (YII_DEBUG) {
             $array['type'] = get_class($exception);
             if (!$exception instanceof UserException) {
@@ -180,7 +180,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
                 }
             }
         }
-        //µÝ¹é»ñÈ¡Ö®Ç°µÄ´íÎó
+        //é€’å½’èŽ·å–ä¹‹å‰çš„é”™è¯¯
         if (($prev = $exception->getPrevious()) !== null) {
             $array['previous'] = $this->convertExceptionToArray($prev);
         }
@@ -267,8 +267,8 @@ class ErrorHandler extends \yii\base\ErrorHandler
      * @param array $_params_ the parameters (name-value pairs) that will be extracted and made available in the view file.
      * @return string the rendering result
      *
-     * Èç¹ûÊÇErrorExceptionÒì³££¬»òÕß²¢Ã»ÓÐ¼ÓÔØÊÓÍ¼×é¼þ Ö±½Ó¿ªÆôob,ÒýÈëÄ£°å
-     * ·ñÔò µ÷ÓÃÊÓÍ¼¶ÔÏó´¦Àí
+     * å¦‚æžœæ˜¯ErrorExceptionå¼‚å¸¸ï¼Œæˆ–è€…å¹¶æ²¡æœ‰åŠ è½½è§†å›¾ç»„ä»¶ ç›´æŽ¥å¼€å¯ob,å¼•å…¥æ¨¡æ¿
+     * å¦åˆ™ è°ƒç”¨è§†å›¾å¯¹è±¡å¤„ç†
      */
     public function renderFile($_file_, $_params_)
     {
@@ -515,7 +515,7 @@ class ErrorHandler extends \yii\base\ErrorHandler
      */
     protected function shouldRenderSimpleHtml()
     {
-        //²âÊÔ»·¾³ »òÕß AJAX ·ÃÎÊÊ±£¬·µ»Ø¼òµ¥ÏìÓ¦Ä£°å
+        //æµ‹è¯•çŽ¯å¢ƒ æˆ–è€… AJAX è®¿é—®æ—¶ï¼Œè¿”å›žç®€å•å“åº”æ¨¡æ¿
         return YII_ENV_TEST || Yii::$app->request->getIsAjax();
     }
 }
