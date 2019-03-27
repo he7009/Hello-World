@@ -11,7 +11,7 @@ class errorStudy
     public function index()
     {
         echo 'index'.PHP_EOL;
-        throw new Exception('wo cuo le',400);
+        throw new Exception('wo cuo le');
     }
 
     /**
@@ -19,16 +19,20 @@ class errorStudy
      * 自定义错误处理程序 处理warning,notice 级别错误
      * 覆盖系统错误处理程序
      */
-    public static function customErrorHandle()
+    public static function customErrorHandle($code,$msg)
     {
+        echo $code.PHP_EOL;
+        echo $msg.PHP_EOL;
         echo 11111;
     }
 
 
-    public static  function handle_Exception(Throwable $e)
+    public static function handle_Exception($e)
     {
-        echo 2222;
-        echo $e->getMessage();
+        if($e instanceof Exception || $e instanceof Throwable){
+            echo '2222'.PHP_EOL;
+            echo $e->getMessage();
+        }
     }
 
 

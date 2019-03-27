@@ -1,5 +1,4 @@
 <?php
-error_reporting(0);
 
 class erroraction
 {
@@ -13,8 +12,6 @@ class erroraction
 
     public function index()
     {
-
-        var_dump(error_reporting());
         echo 'index_public'.PHP_EOL;
         try{
             Throw new Exception('我错了！哈哈哈哈哈');
