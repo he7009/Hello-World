@@ -57,11 +57,11 @@ abstract class ErrorHandler extends Component
      */
     public function register()
     {
-        //¹Ø±ÕPHPÄ¬ÈÏ´íÎó´¦Àí
+        //å…³é—­PHPé»˜è®¤é”™è¯¯å¤„ç†
         ini_set('display_errors', false);
-        //ÉèÖÃÒì³£´¦Àí³ÌĞò£¬µ±Å×³öÒì³£ÇÒÃ»ÓĞ±»catchµÄÊ±ºòµ÷ÓÃ
+        //è®¾ç½®å¼‚å¸¸å¤„ç†ç¨‹åºï¼Œå½“æŠ›å‡ºå¼‚å¸¸ä¸”æ²¡æœ‰è¢«catchçš„æ—¶å€™è°ƒç”¨
         set_exception_handler([$this, 'handleException']);
-        //ÉèÖÃ´íÎó´¦Àí³ÌĞò ²¿·Ö´íÎóÎŞ·¨±»set_error_handle ´¦Àí
+        //è®¾ç½®é”™è¯¯å¤„ç†ç¨‹åº éƒ¨åˆ†é”™è¯¯æ— æ³•è¢«set_error_handle å¤„ç†
         if (defined('HHVM_VERSION')) {
             set_error_handler([$this, 'handleHhvmError']);
         } else {
@@ -70,9 +70,9 @@ abstract class ErrorHandler extends Component
         if ($this->memoryReserveSize > 0) {
             $this->_memoryReserve = str_repeat('x', $this->memoryReserveSize);
         }
-        //ÉèÖÃ½Å±¾½áÊøÖ´ĞĞµÄ³ÌĞò
-        //ÎªÁËÊÇ´¦Àí²¿·ÖÎŞ·¨±» set_error_handle ´¦ÀíµÄ´íÎó ÀıÈçFatalError
-        //Ê¹ÓÃ error_get_last() º¯Êı
+        //è®¾ç½®è„šæœ¬ç»“æŸæ‰§è¡Œçš„ç¨‹åº
+        //ä¸ºäº†æ˜¯å¤„ç†éƒ¨åˆ†æ— æ³•è¢« set_error_handle å¤„ç†çš„é”™è¯¯ ä¾‹å¦‚FatalError
+        //ä½¿ç”¨ error_get_last() å‡½æ•°
         register_shutdown_function([$this, 'handleFatalError']);
     }
 
@@ -105,15 +105,17 @@ abstract class ErrorHandler extends Component
 
         // set preventive HTTP status code to 500 in case error handling somehow fails and headers are sent
         // HTTP exceptions will override this value in renderException()
+        // ä¸æ˜¯å‘½ä»¤è¡Œæ¨¡å¼
         if (PHP_SAPI !== 'cli') {
             http_response_code(500);
         }
 
         try {
+            //è®°å½•å¼‚å¸¸æ—¥å¿—
             $this->logException($exception);
-            //ÊôĞÔÊÇ·ñÇå³ıÍË³öÇ°µÄÊä³ö»º³åÇø£¬Ä¬ÈÏÎªtrue
+            //å±æ€§æ˜¯å¦æ¸…é™¤é€€å‡ºå‰çš„è¾“å‡ºç¼“å†²åŒºï¼Œé»˜è®¤ä¸ºtrue
             if ($this->discardExistingOutput) {
-                //Çå³ıÖ®Ç°»º³åÇøÄÚÈİ
+                //æ¸…é™¤ä¹‹å‰ç¼“å†²åŒºå†…å®¹
                 $this->clearOutput();
             }
             $this->renderException($exception);
@@ -332,14 +334,17 @@ abstract class ErrorHandler extends Component
      */
     public static function convertExceptionToString($exception)
     {
+        //ç”¨æˆ·é”™è¯¯
         if ($exception instanceof UserException) {
             return "{$exception->getName()}: {$exception->getMessage()}";
         }
 
+        //å¦‚æœä¸æ˜¯ç”¨æˆ·é”™è¯¯ï¼Œå¹¶ä¸”æ˜¯DEBUGæ¨¡å¼ï¼Œè½¬æ¢ä¸ºè¯¦ç»†çš„é”™è¯¯å­—ç¬¦æ¶ˆæ¯
         if (YII_DEBUG) {
             return static::convertExceptionToVerboseString($exception);
         }
 
+        //
         return 'An internal server error occurred.';
     }
 

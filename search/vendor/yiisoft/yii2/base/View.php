@@ -150,8 +150,8 @@ class View extends Component implements DynamicContentAwareInterface
      * @throws InvalidCallException if the view cannot be resolved.
      * @see renderFile()
      *
-     * @findViewFile     Ѱ��Ŀ����ͼ�ļ�
-     * @renderFile       ����Ŀ����ͼ�ļ�
+     * @findViewFile     寻找目标视图文件
+     * @renderFile       解析目标视图文件
      */
     public function render($view, $params = [], $context = null)
     {
@@ -245,7 +245,7 @@ class View extends Component implements DynamicContentAwareInterface
         if ($this->beforeRender($viewFile, $params)) {
             Yii::debug("Rendering view file: $viewFile", __METHOD__);
             $ext = pathinfo($viewFile, PATHINFO_EXTENSION);
-            //���ݺ�׺����ʹ�õ�ģ������
+            //根据后缀决定使用的模板引擎
             if (isset($this->renderers[$ext])) {
                 if (is_array($this->renderers[$ext]) || is_string($this->renderers[$ext])) {
                     $this->renderers[$ext] = Yii::createObject($this->renderers[$ext]);
@@ -560,7 +560,7 @@ class View extends Component implements DynamicContentAwareInterface
     public function beginPage()
     {
         ob_start();
-        ob_implicit_flush(false);
+        ob_implicit_flush(false);  //关不绝对刷送，绝对刷送：绝对（隐式）刷送将导致在每次输出调用后有一次刷送操作，以便不再需要对 flush() 的显式调用。
 
         $this->trigger(self::EVENT_BEGIN_PAGE);
     }
