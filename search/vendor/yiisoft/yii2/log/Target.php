@@ -101,7 +101,10 @@ abstract class Target extends Component
      */
     public $microtime = false;
 
+    //记录日志的级别
     private $_levels = 0;
+
+    //检测是否已经启动
     private $_enabled = true;
 
 
@@ -224,7 +227,7 @@ abstract class Target extends Component
     public static function filterMessages($messages, $levels = 0, $categories = [], $except = [])
     {
         foreach ($messages as $i => $message) {
-            if ($levels && !($levels & $message[1])) {
+            if ($levels && !($levels & $message[1])) {   //存在levels,并且不想当
                 unset($messages[$i]);
                 continue;
             }
