@@ -311,7 +311,6 @@ abstract class Application extends Module
                 }
             }
         }
-
         foreach ($this->bootstrap as $mixed) {
             $component = null;
             if ($mixed instanceof \Closure) {

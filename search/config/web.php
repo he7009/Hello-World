@@ -39,7 +39,7 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning'],  //日志处理器处理日志的级别
                 ],
             ],
         ],

@@ -121,8 +121,12 @@ abstract class Target extends Component
      */
     public function collect($messages, $final)
     {
+        //获取需要处理的日志信息
+        //static::filterMessages过滤部分不需要处理的日志信息
         $this->messages = array_merge($this->messages, static::filterMessages($messages, $this->getLevels(), $this->categories, $this->except));
         $count = count($this->messages);
+        //处理日志的条件
+        //日志信息不为空、并且 （脚本结束之后、或者 信息条数大于等于 $this->exportInterval）
         if ($count > 0 && ($final || $this->exportInterval > 0 && $count >= $this->exportInterval)) {
             if (($context = $this->getContextMessage()) !== '') {
                 $this->messages[] = [$context, Logger::LEVEL_INFO, 'application', YII_BEGIN_TIME];

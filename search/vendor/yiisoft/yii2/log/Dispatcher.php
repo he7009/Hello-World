@@ -184,8 +184,10 @@ class Dispatcher extends Component
     {
         $targetErrors = [];
         foreach ($this->targets as $target) {
+            //该服务是否已经开启
             if ($target->enabled) {
                 try {
+                    //如果已经开启服务则开始collect
                     $target->collect($messages, $final);
                 } catch (\Exception $e) {
                     $target->enabled = false;

@@ -127,7 +127,9 @@ class ServiceLocator extends Component
         if (isset($this->_components[$id])) {
             return $this->_components[$id];
         }
-
+        if($id == 'log'){
+            var_dump($this->_definitions[$id]);exit;
+        }
         if (isset($this->_definitions[$id])) {
             $definition = $this->_definitions[$id];
             if (is_object($definition) && !$definition instanceof Closure) {
