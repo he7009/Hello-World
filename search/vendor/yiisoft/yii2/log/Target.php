@@ -101,7 +101,10 @@ abstract class Target extends Component
      */
     public $microtime = false;
 
+    //记录日志的级别
     private $_levels = 0;
+
+    //检测是否已经启动
     private $_enabled = true;
 
 
@@ -128,6 +131,7 @@ abstract class Target extends Component
         //处理日志的条件
         //日志信息不为空、并且 （脚本结束之后、或者 信息条数大于等于 $this->exportInterval）
         if ($count > 0 && ($final || $this->exportInterval > 0 && $count >= $this->exportInterval)) {
+            //每次输出日志时组装额外的信息作为日志，大部份超全部变量里面的内容
             if (($context = $this->getContextMessage()) !== '') {
                 $this->messages[] = [$context, Logger::LEVEL_INFO, 'application', YII_BEGIN_TIME];
             }
@@ -145,6 +149,9 @@ abstract class Target extends Component
      * Generates the context information to be logged.
      * The default implementation will dump user information, system variables, etc.
      * @return string the context information. If an empty string, it means no context information.
+     *
+     *
+     * @额外输出日志
      */
     protected function getContextMessage()
     {
@@ -228,6 +235,7 @@ abstract class Target extends Component
     public static function filterMessages($messages, $levels = 0, $categories = [], $except = [])
     {
         foreach ($messages as $i => $message) {
+            //如果日志target设置了日志处理级别，则如果message 的 level 不在当前target处理的范围内则unset
             if ($levels && !($levels & $message[1])) {
                 unset($messages[$i]);
                 continue;
@@ -296,13 +304,18 @@ abstract class Target extends Component
      * @param array $message the message being exported.
      * The message structure follows that in [[Logger::messages]].
      * @return string the prefix string
+     *
+     * 获取消息的前缀
+     *
      */
     public function getMessagePrefix($message)
     {
+        //自定义消息前缀处理函数
         if ($this->prefix !== null) {
             return call_user_func($this->prefix, $message);
         }
 
+        //如果没有应用对象就出错了则没有前缀
         if (Yii::$app === null) {
             return '';
         }
