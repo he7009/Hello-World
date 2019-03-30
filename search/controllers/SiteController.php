@@ -17,8 +17,6 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        echo 2222;
-        throw new \yii\base\UserException('不好意思，我异常了');
         return $this->renderPartial('index');
     }
 

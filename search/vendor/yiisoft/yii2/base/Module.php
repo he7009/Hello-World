@@ -590,6 +590,7 @@ class Module extends ServiceLocator
             $controller = Yii::createObject($this->controllerMap[$id], [$id, $this]);
             return [$controller, $route];
         }
+
         $module = $this->getModule($id);
         if ($module !== null) {
             return $module->createController($route);
