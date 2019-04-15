@@ -6,6 +6,8 @@
  * Time: 21:24
  */
 
+include __DIR__."/../vender/log.php";
+
 class curl
 {
     /**
@@ -50,7 +52,25 @@ class curl
         $ch = curl_init();
 
         //设置请求URL
-        curl_setopt($ch, CURLOPT_URL, 'https://www.ydphp.site/');
+        curl_setopt($ch, CURLOPT_URL, 'http://test.helilan.cn/curl/server.php');
+
+        $options = [
+            'COOKIE' => "name=duanyude; sessionid=asdfeasdfawefasdf; title=哼哈二将",
+            'HTTPHEADER' => [
+                'Content-type: text/plain',
+                'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0',
+                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
+            ],
+            'REFERER' => '//www.dandureferer.com/',
+        ];
+        $data = [];
+
+
+        //设置 REFERER
+        if(!empty($options['REFERER'])){
+            curl_setopt($ch,CURLOPT_REFERER,$options['REFERER']);
+        }
 
         //设置 HTTP 头字段的数组。格式： array('Content-type: text/plain', 'Content-length: 100');
         if(!empty($options['HTTPHEADER'])) {
@@ -62,14 +82,23 @@ class curl
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
 
         //设定 HTTP 请求中"Cookie: "部分的内容。多个 cookie 用分号分隔，分号后带一个空格(例如， "fruit=apple; colour=red")。
-        curl_setopt($ch, CURLOPT_COOKIE, $options['COOKIE']);
+        if(!empty($options['COOKIE'])){
+            curl_setopt($ch, CURLOPT_COOKIE, $options['COOKIE']);
+        }
 
-        //设置请求方式,以及传递数据
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($data) ? http_build_query($data) : $data);
+        if(!empty($data)){
+            //设置请求方式,以及传递数据
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($data) ? http_build_query($data) : $data);
+        }
+
+
 
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
 
+        $response = curl_exec($ch);
+
+        var_dump($response);
 
 
 
