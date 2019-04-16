@@ -4,25 +4,60 @@ array (
   'title' => '哼哈二将',
 )
 array (
-  'Referer' => '//www.baidu.com',
+  'Content-Type' => 'application/x-www-form-urlencoded',
+  'Content-Length' => '64',
   'Accept-Language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
   'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
   'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0',
-  'Content-Type' => 'text/plain',
-  'Cookie' => 'name=duanyude; sessionid=asdfeasdfawefasdf; title=哼哈二将',
-  'Host' => 'test.helilan.cn',
-)
-array (
-  'name' => 'duanyude',
-  'sessionid' => 'asdfeasdfawefasdf',
-  'title' => '哼哈二将',
-)
-array (
-  'Accept-Language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
-  'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-  'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0',
-  'Content-Type' => 'text/plain',
   'Cookie' => 'name=duanyude; sessionid=asdfeasdfawefasdf; title=哼哈二将',
   'Referer' => '//www.dandureferer.com/',
   'Host' => 'test.helilan.cn',
+)
+name=段育德&age[0]=2222&age[1]=3333
+array (
+)
+array (
+  'name' => '段育德',
+  'age' => 
+  array (
+    0 => '2222',
+    1 => '3333',
+  ),
+)
+array (
+  'USER' => 'nobody',
+  'HOME' => '/',
+  'HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded',
+  'HTTP_CONTENT_LENGTH' => '64',
+  'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
+  'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0',
+  'HTTP_COOKIE' => 'name=duanyude; sessionid=asdfeasdfawefasdf; title=哼哈二将',
+  'HTTP_REFERER' => '//www.dandureferer.com/',
+  'HTTP_HOST' => 'test.helilan.cn',
+  'REDIRECT_STATUS' => '200',
+  'SERVER_NAME' => 'test.helilan.cn',
+  'SERVER_PORT' => '80',
+  'SERVER_ADDR' => '127.0.0.1',
+  'REMOTE_PORT' => '58758',
+  'REMOTE_ADDR' => '127.0.0.1',
+  'SERVER_SOFTWARE' => 'nginx/1.12.2',
+  'GATEWAY_INTERFACE' => 'CGI/1.1',
+  'REQUEST_SCHEME' => 'http',
+  'SERVER_PROTOCOL' => 'HTTP/1.1',
+  'DOCUMENT_ROOT' => '/vagrant/Hello-World/test',
+  'DOCUMENT_URI' => '/curl/server.php',
+  'REQUEST_URI' => '/curl/server.php',
+  'SCRIPT_NAME' => '/curl/server.php',
+  'CONTENT_LENGTH' => '64',
+  'CONTENT_TYPE' => 'application/x-www-form-urlencoded',
+  'REQUEST_METHOD' => 'POST',
+  'QUERY_STRING' => '',
+  'SCRIPT_FILENAME' => '/vagrant/Hello-World/test/curl/server.php',
+  'FCGI_ROLE' => 'RESPONDER',
+  'PHP_SELF' => '/curl/server.php',
+  'REQUEST_TIME_FLOAT' => 1555457840.655983,
+  'REQUEST_TIME' => 1555457840,
+)
+array (
 )
