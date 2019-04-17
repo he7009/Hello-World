@@ -30,12 +30,13 @@ $files = var_export($_FILES, true);
 $header = var_export(getallheaders(), true);
 
 $input = file_get_contents("php://input");
+$input = var_export(json_decode($input,true),true);
 
 log::write($cookie, 'info');
 
 log::write($header, 'info');
 
-log::write(urldecode($input),'info');
+log::write($input,'info');
 
 log::write($get,'info');
 

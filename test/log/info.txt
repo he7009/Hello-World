@@ -5,7 +5,7 @@ array (
 )
 array (
   'Content-Type' => 'application/x-www-form-urlencoded',
-  'Content-Length' => '64',
+  'Content-Length' => '47',
   'Accept-Language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
   'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
   'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0',
@@ -13,22 +13,27 @@ array (
   'Referer' => '//www.dandureferer.com/',
   'Host' => 'test.helilan.cn',
 )
-name=段育德&age[0]=2222&age[1]=3333
-array (
-)
 array (
   'name' => '段育德',
   'age' => 
   array (
-    0 => '2222',
-    1 => '3333',
+    0 => 2222,
+    1 => 3333,
+  ),
+)
+array (
+)
+array (
+  '{"name":"\\u6bb5\\u80b2\\u5fb7","age":' => 
+  array (
+    '2222,3333' => '',
   ),
 )
 array (
   'USER' => 'nobody',
   'HOME' => '/',
   'HTTP_CONTENT_TYPE' => 'application/x-www-form-urlencoded',
-  'HTTP_CONTENT_LENGTH' => '64',
+  'HTTP_CONTENT_LENGTH' => '47',
   'HTTP_ACCEPT_LANGUAGE' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
   'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
   'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0',
@@ -39,7 +44,7 @@ array (
   'SERVER_NAME' => 'test.helilan.cn',
   'SERVER_PORT' => '80',
   'SERVER_ADDR' => '127.0.0.1',
-  'REMOTE_PORT' => '58758',
+  'REMOTE_PORT' => '58784',
   'REMOTE_ADDR' => '127.0.0.1',
   'SERVER_SOFTWARE' => 'nginx/1.12.2',
   'GATEWAY_INTERFACE' => 'CGI/1.1',
@@ -49,15 +54,15 @@ array (
   'DOCUMENT_URI' => '/curl/server.php',
   'REQUEST_URI' => '/curl/server.php',
   'SCRIPT_NAME' => '/curl/server.php',
-  'CONTENT_LENGTH' => '64',
+  'CONTENT_LENGTH' => '47',
   'CONTENT_TYPE' => 'application/x-www-form-urlencoded',
   'REQUEST_METHOD' => 'POST',
   'QUERY_STRING' => '',
   'SCRIPT_FILENAME' => '/vagrant/Hello-World/test/curl/server.php',
   'FCGI_ROLE' => 'RESPONDER',
   'PHP_SELF' => '/curl/server.php',
-  'REQUEST_TIME_FLOAT' => 1555457840.655983,
-  'REQUEST_TIME' => 1555457840,
+  'REQUEST_TIME_FLOAT' => 1555513351.801414,
+  'REQUEST_TIME' => 1555513351,
 )
 array (
 )
