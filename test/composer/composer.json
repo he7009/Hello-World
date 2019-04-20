@@ -1,14 +1,13 @@
 {
-    "name": "he7009/composer",
-    "description": "用于学习composer,联系\b\b\b\b\b",
-    "type": "project",
+    "name": "he7009/hello-world",
+    "description": "xue\b\b",
+    "license": "MIT",
     "authors": [
         {
             "name": "he7009",
-            "email": "935005231@qq.com"
+            "email": "dydphp@163.com"
         }
     ],
-    "require": {
-        "gregwar/captcha": "1.*"
-    }
+    "minimum-stability": "stable",
+    "require": {}
 }
