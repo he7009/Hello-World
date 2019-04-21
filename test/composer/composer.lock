@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "152e50af43af1155de173736e90aeaaa",
+    "content-hash": "ce7ff1afcaccfab50f98b6077edede7b",
     "packages": [
         {
             "name": "google/recaptcha",
@@ -117,6 +117,42 @@
                 "spam"
             ],
             "time": "2018-08-17T22:57:28+00:00"
+        },
+        {
+            "name": "he7009/duanyude",
+            "version": "v1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/he7009/duanyude.git",
+                "reference": "4094d09479053200d0820ceb94a6ec2be9f53421"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/he7009/duanyude/zipball/4094d09479053200d0820ceb94a6ec2be9f53421",
+                "reference": "4094d09479053200d0820ceb94a6ec2be9f53421",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "src\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "he7009",
+                    "email": "dydphp@163.com"
+                }
+            ],
+            "description": "composer 学习",
+            "time": "2019-04-21T07:54:32+00:00"
         },
         {
             "name": "symfony/finder",

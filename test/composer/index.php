@@ -12,8 +12,11 @@ include __DIR__.'/vendor/autoload.php';
 //(new app\src\capture())->stare();
 
 //(new app\src\application\Home())->index();
-use Gregwar\Captcha\CaptchaBuilder;
-header('Content-type: image/jpeg');
-$builder = new CaptchaBuilder;
-$builder->build();
-$builder->output();
+//use Gregwar\Captcha\CaptchaBuilder;
+//header('Content-type: image/jpeg');
+//$builder = new CaptchaBuilder;
+//$builder->build();
+//$builder->output();
+
+$curl = new src\curl();
+$curl->start();

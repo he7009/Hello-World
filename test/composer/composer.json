@@ -11,7 +11,8 @@
     "minimum-stability": "stable",
     "require": {
         "google/recaptcha": "^1.2",
-        "gregwar/captcha": "^1.1"
+        "gregwar/captcha": "^1.1",
+        "he7009/duanyude": "^1.0"
     },
     "autoload": {
         "files": [

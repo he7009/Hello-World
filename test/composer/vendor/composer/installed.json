@@ -116,6 +116,44 @@
         ]
     },
     {
+        "name": "he7009/duanyude",
+        "version": "v1",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/he7009/duanyude.git",
+            "reference": "4094d09479053200d0820ceb94a6ec2be9f53421"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/he7009/duanyude/zipball/4094d09479053200d0820ceb94a6ec2be9f53421",
+            "reference": "4094d09479053200d0820ceb94a6ec2be9f53421",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "time": "2019-04-21T07:54:32+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "src\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "authors": [
+            {
+                "name": "he7009",
+                "email": "dydphp@163.com"
+            }
+        ],
+        "description": "composer 学习"
+    },
+    {
         "name": "symfony/finder",
         "version": "v4.2.7",
         "version_normalized": "4.2.7.0",
