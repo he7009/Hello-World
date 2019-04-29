@@ -1,14 +1,13 @@
 {
-    "name": "he7009/composer",
-    "description": "用于学习composer,联系\b\b\b\b\b",
-    "type": "project",
-    "authors": [
-        {
-            "name": "he7009",
-            "email": "935005231@qq.com"
+    "name": "he7009/hello-world",
+    "description": "xue",
+    "type": "proto\b",
+    "license": "mit",
+    "require": {},
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
         }
-    ],
-    "require": {
-        "gregwar/captcha": "1.*"
     }
 }
