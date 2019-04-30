@@ -32,16 +32,31 @@ $header = var_export(getallheaders(), true);
 $input = file_get_contents("php://input");
 $input = var_export(json_decode($input,true),true);
 
+log::write("--------cookie--------", 'info');
 log::write($cookie, 'info');
+log::write("--------cookie--------", 'info');
 
+log::write("--------header--------", 'info');
 log::write($header, 'info');
+log::write("--------header--------", 'info');
 
+log::write("--------input--------", 'info');
+log::write(file_get_contents("php://input"),'info');
 log::write($input,'info');
+log::write("--------input--------", 'info');
 
+log::write("--------get--------", 'info');
 log::write($get,'info');
+log::write("--------get--------", 'info');
 
+log::write("--------post--------", 'info');
 log::write($post,'info');
+log::write("--------post--------", 'info');
 
+log::write("--------server--------", 'info');
 log::write($server,'info');
+log::write("--------server--------", 'info');
 
+log::write("--------files--------", 'info');
 log::write($files,'info');
+log::write("--------files--------", 'info');
