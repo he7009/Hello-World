@@ -1,13 +1,25 @@
 {
-    "name": "he7009/hello-world",
-    "description": "xue",
-    "type": "proto\b",
-    "license": "mit",
-    "require": {},
-    "repositories": {
-        "packagist": {
-            "type": "composer",
-            "url": "https://packagist.phpcomposer.com"
+    "name": "he7009/composer",
+    "description": "学习composer",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "he7009",
+            "email": "dydphp@163.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "google/recaptcha": "^1.2",
+        "gregwar/captcha": "^1.1",
+        "he7009/duanyude": "^1.0"
+    },
+    "autoload": {
+        "files": [
+            "src/function.php"
+        ],
+        "psr-4": {
+            "app\\src\\": "src/"
         }
     }
 }

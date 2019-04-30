@@ -57,14 +57,18 @@ class curl
         $options = [
             'COOKIE' => "name=duanyude; sessionid=asdfeasdfawefasdf; title=哼哈二将",
             'HTTPHEADER' => [
-                'Content-type: text/plain',
                 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0',
                 "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 "Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
             ],
             'REFERER' => '//www.dandureferer.com/',
         ];
-        $data = [];
+        $data = [
+            'name' => "段育德",
+            'age' => array(2222,3333),
+        ];
+
+        $data = json_encode($data);
 
 
         //设置 REFERER
@@ -89,7 +93,8 @@ class curl
         if(!empty($data)){
             //设置请求方式,以及传递数据
             curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($data) ? http_build_query($data) : $data);
+//            curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($data) ? http_build_query($data) : $data);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         }
 
 

@@ -22,9 +22,26 @@ if (!function_exists('getallheaders')) {
 echo "Hello 早晨好";
 
 $cookie = var_export($_COOKIE, true);
+$get = var_export($_GET, true);
+$post = var_export($_POST, true);
+$server = var_export($_SERVER, true);
+$files = var_export($_FILES, true);
 
 $header = var_export(getallheaders(), true);
+
+$input = file_get_contents("php://input");
+$input = var_export(json_decode($input,true),true);
 
 log::write($cookie, 'info');
 
 log::write($header, 'info');
+
+log::write($input,'info');
+
+log::write($get,'info');
+
+log::write($post,'info');
+
+log::write($server,'info');
+
+log::write($files,'info');
