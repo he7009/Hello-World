@@ -8,11 +8,11 @@
 
 namespace duanyude\template;
 
-
 class template
 {
     private $arrayConfig = [
-        'suffix' => '.m'  //设置模板文件后缀
+        'suffix' => '.m',
+
     ];
 
 }
