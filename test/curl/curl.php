@@ -68,7 +68,8 @@ class curl
             'age' => array(2222,3333),
         ];
 
-        $data = json_encode($data);
+        echo http_build_query($data);exit;
+//        $data = json_encode($data);
 
 
         //设置 REFERER
@@ -93,8 +94,8 @@ class curl
         if(!empty($data)){
             //设置请求方式,以及传递数据
             curl_setopt($ch, CURLOPT_POST, true);
-//            curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($data) ? http_build_query($data) : $data);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, is_array($data) ? http_build_query($data) : $data);
+//            curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         }
 
 
