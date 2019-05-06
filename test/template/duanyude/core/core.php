@@ -19,16 +19,12 @@ class core
 
     public static function autoload($classname)
     {
-        echo $classname . "<br />";
         $classname = str_replace('\\', '/', $classname);
-        echo $classname . '<br />';
         if (strpos($classname, '/') !== false) {
             $namespace_path = substr($classname, 0, strpos($classname, '/'));
-            echo $namespace_path . "<br />";
             $classname = isset(self::$rootPath[$namespace_path]) ? self::$rootPath[$namespace_path] . substr($classname, strpos($classname, '/')) : BASEPATH . '/' . $classname;
         }
         $path = $classname . '.php';
-        echo $path . "<br />";
         if (is_file($path)) {
             include $path;
         }
@@ -36,9 +32,19 @@ class core
 
     public function start()
     {
+        //开启错误显示
+        ini_set('display_errors', 1);
+        ini_set('error_reporting',E_ALL);
+
+        //设置时区
+        ini_set('date.timezone','Asia/Shanghai');
+
+
         $r = \helper::request()->resoleRequest();
-        call_user_func_array(['controller' . '\\' . $r[0] . 'Controller', $r[1]], []);
-        die;
+        $controller_name = $this->defaultNamespace . '\\' . $r[0] . 'Controller';
+        $controller_obj = new $controller_name();
+        call_user_func_array([$controller_obj, $r[1]], []);
+        exit;
     }
 
 }
