@@ -8,56 +8,25 @@
 
 class index
 {
-    public static function singleProcess()
-    {
-        $starttime = microtime(true);
-        for ($i = 1;$i <= 10000000;$i++){
-            echo $i.PHP_EOL;
-        }
-        $endtime = microtime(true);
-
-        echo $endtime - $starttime.PHP_EOL;
-    }
-
-
-    public static function mulitProcess()
-    {
-        $maxprocess = 10;
-
-        for ($i = 1;$i <= $maxprocess;$i++){
-
-            $starnum = ($i - 1) * 1000000;
-            $endnum = $i * 1000000;
-
-            $pid= pcntl_fork();
-
-            if($pid == -1){
-                echo "create fail";
-            }else if($pid == 0){
-                echo 'child process NO:'.$i.PHP_EOL;
-                for ($j = $starnum;$j <= $endnum;$j++){
-                    echo $j.PHP_EOL;
-                }
-                exit;
-            }
-        }
-    }
-
     public static function study()
     {
-        $pid = pcntl_fork();
-        if($pid)
-        {
-            pcntl_wait($status);
-            $id = getmypid();
-            echo "parent process,pid {$id}, child pid {$pid}/n";
+        $array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,21,22,23,24];
+        $arr = array_chunk($array,4);
+        foreach ($arr as $val){
+            $pid = pcntl_fork();
+
+            if($pid == -1){
+                echo 'Create Fail';
+            }else if($pid == 0){
+                //子进程
+                echo "Child Process Success,Pa";
+            }else{
+                //父进程
+
+
+            }
         }
-        else
-        {
-            $id = getmypid();
-            echo "child process,pid {$id}/n";
-            sleep(2);
-        }
+
     }
 }
 
