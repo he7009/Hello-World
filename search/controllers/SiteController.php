@@ -28,4 +28,13 @@ class SiteController extends Controller
         return $this->renderPartial('error');
     }
 
+    /**
+     * rewrite
+     */
+    public function actionRewrite()
+    {
+        echo "echo Rewrete";
+        exit;
+    }
+
 }
