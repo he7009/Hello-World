@@ -29,11 +29,19 @@ class SiteController extends Controller
     }
 
     /**
+<<<<<<< HEAD
      * 重写测试
      */
     public function actionRewrite()
     {
         echo "Rwrite Action";
+=======
+     * rewrite
+     */
+    public function actionRewrite()
+    {
+        echo "echo Rewrete";
+>>>>>>> badc239e379b3f4ba389d7b5d762e9e099a6eeff
         exit;
     }
 
