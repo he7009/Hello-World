@@ -15,8 +15,8 @@ class Jk{
     {
         $banner = [
             ['banner_url' => HOSTIMAGE . 'index/index-red.png'],
-            ['banner_url' => HOSTIMAGE . 'index/index-blue.png'],
-            ['banner_url' => HOSTIMAGE . 'index/index-white.png']
+            ['banner_url' => HOSTIMAGE . 'index/index-red.png'],
+            ['banner_url' => HOSTIMAGE . 'index/index-red.png']
         ];
 
         //推荐
