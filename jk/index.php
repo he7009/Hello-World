@@ -141,40 +141,53 @@ class Jk{
                 'banner' => HOSTIMAGE . 'index/recom.png',
                 'cate_id' => 1,
                 'cate_name' => '红酒',
-                'ishaveChild' => true,
+                'ishaveChild' => 'true',
                 'children' => [
                     [
                         'child_id' => 1,
+                        'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '红酒-1'
                     ],
                     [
                         'child_id' => 2,
+                        'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '红酒-2'
                     ],
                     [
                         'child_id' => 3,
+                        'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '红酒-3'
+                    ],
+                    [
+                        'child_id' => 4,
+                        'image' => HOSTIMAGE . 'index/recom.png',
+                        'name' => '红酒-4'
+                    ],
+                    [
+                        'child_id' => 5,
+                        'image' => HOSTIMAGE . 'index/recom.png',
+                        'name' => '红酒-5'
                     ],
                 ]
             ],
             [
                 'banner' => HOSTIMAGE . 'index/recom.png',
-                'cate_id' => 1,
+                'cate_id' => 2,
                 'cate_name' => '白酒',
-                'ishaveChild' => true,
+                'ishaveChild' => 'true',
                 'children' => [
                     [
-                        'child_id' => 1,
+                        'child_id' => 6,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '白酒-1'
                     ],
                     [
-                        'child_id' => 2,
+                        'child_id' => 7,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '白酒-2'
                     ],
                     [
-                        'child_id' => 3,
+                        'child_id' => 8,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '白酒-3'
                     ],
@@ -182,22 +195,22 @@ class Jk{
             ],
             [
                 'banner' => HOSTIMAGE . 'index/recom.png',
-                'cate_id' => 1,
+                'cate_id' => 3,
                 'cate_name' => '啤酒',
-                'ishaveChild' => true,
+                'ishaveChild' => 'true',
                 'children' => [
                     [
-                        'child_id' => 1,
+                        'child_id' => 9,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '啤酒-1'
                     ],
                     [
-                        'child_id' => 2,
+                        'child_id' => 10,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '啤酒-2'
                     ],
                     [
-                        'child_id' => 3,
+                        'child_id' => 11,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '啤酒-3'
                     ],
@@ -205,22 +218,22 @@ class Jk{
             ],
             [
                 'banner' => HOSTIMAGE . 'index/recom.png',
-                'cate_id' => 1,
+                'cate_id' => 4,
                 'cate_name' => '饮料',
-                'ishaveChild' => true,
+                'ishaveChild' => 'true',
                 'children' => [
                     [
-                        'child_id' => 1,
+                        'child_id' => 12,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '饮料-1'
                     ],
                     [
-                        'child_id' => 2,
+                        'child_id' => 13,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '饮料-2'
                     ],
                     [
-                        'child_id' => 3,
+                        'child_id' => 14,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '饮料-3'
                     ],
@@ -228,22 +241,22 @@ class Jk{
             ],
             [
                 'banner' => HOSTIMAGE . 'index/recom.png',
-                'cate_id' => 1,
+                'cate_id' => 5,
                 'cate_name' => '其他',
-                'ishaveChild' => true,
+                'ishaveChild' => 'true',
                 'children' => [
                     [
-                        'child_id' => 1,
+                        'child_id' => 15,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '其他-1'
                     ],
                     [
-                        'child_id' => 2,
+                        'child_id' => 16,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '其他-2'
                     ],
                     [
-                        'child_id' => 3,
+                        'child_id' => 17,
                         'image' => HOSTIMAGE . 'index/recom.png',
                         'name' => '其他-3'
                     ],
