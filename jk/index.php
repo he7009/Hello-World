@@ -280,7 +280,7 @@ class Jk{
             [
                 'id' => 1,
                 'type' => 2,
-                'small_img' => '',
+                'small_img' => HOSTIMAGE . 'index/recom.png',
                 'name' => '江小白',
                 'special_price' => 19.8,
                 'price' => 29.8,
@@ -290,7 +290,7 @@ class Jk{
             [
                 'id' => 1,
                 'type' => 2,
-                'small_img' => '',
+                'small_img' => HOSTIMAGE . 'index/recom.png',
                 'name' => '江小白',
                 'special_price' => 19.8,
                 'price' => 29.8,
@@ -300,7 +300,7 @@ class Jk{
             [
                 'id' => 1,
                 'type' => 2,
-                'small_img' => '',
+                'small_img' => HOSTIMAGE . 'index/recom.png',
                 'name' => '江小白',
                 'special_price' => 19.8,
                 'price' => 29.8,
