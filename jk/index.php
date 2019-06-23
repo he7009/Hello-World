@@ -10,7 +10,9 @@ define("HOSTIMAGE",'//jk.helilan.cn/images/');
 
 class Jk{
 
-
+    /**
+     * 首页
+     */
     public function index()
     {
         $banner = [
@@ -134,6 +136,9 @@ class Jk{
         echo json_encode($data);
     }
 
+    /**
+     * 分类页
+     */
     public function cate()
     {
         $cateItems = [
@@ -266,6 +271,45 @@ class Jk{
 
 //        $data['cateitems'] = $cateItems;
         echo json_encode($cateItems);
+        exit;
+    }
+
+    public function lists()
+    {
+        $productList = [
+            [
+                'id' => 1,
+                'type' => 2,
+                'small_img' => '',
+                'name' => '江小白',
+                'special_price' => 19.8,
+                'price' => 29.8,
+                'sales_qty' => 11,
+                'url' => HOSTIMAGE . 'index/recom.png'
+            ],
+            [
+                'id' => 1,
+                'type' => 2,
+                'small_img' => '',
+                'name' => '江小白',
+                'special_price' => 19.8,
+                'price' => 29.8,
+                'sales_qty' => 11,
+                'url' => HOSTIMAGE . 'index/recom.png'
+            ],
+            [
+                'id' => 1,
+                'type' => 2,
+                'small_img' => '',
+                'name' => '江小白',
+                'special_price' => 19.8,
+                'price' => 29.8,
+                'sales_qty' => 11,
+                'url' => HOSTIMAGE . 'index/recom.png'
+            ]
+        ];
+
+        echo json_encode($productList);
         exit;
     }
 
