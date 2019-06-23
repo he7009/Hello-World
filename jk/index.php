@@ -313,6 +313,168 @@ class Jk{
         exit;
     }
 
+    public function detail()
+    {
+        $productInfo = [
+            'image_detail' => [
+                HOSTIMAGE . 'index/recom.png',
+                HOSTIMAGE . 'index/recom.png',
+                HOSTIMAGE . 'index/recom.png',
+                HOSTIMAGE . 'index/recom.png',
+                HOSTIMAGE . 'index/recom.png'
+            ],
+            'name' => '江小白',
+            'special_price' => 19.8,
+            'price' => 29.8,
+            'sales_qty' => 1000,
+            'description' => [
+                HOSTIMAGE . 'index/recom.png',
+                HOSTIMAGE . 'index/recom.png',
+                HOSTIMAGE . 'index/recom.png',
+                HOSTIMAGE . 'index/recom.png',
+                HOSTIMAGE . 'index/recom.png'
+            ],
+            'qty' => 100
+        ];
+
+        echo json_encode($productInfo);
+        exit;
+    }
+
+    public function car()
+    {
+        $carts = [
+            [
+                'stock_qty' => 10,
+                'selected' => true,
+                'id' => 1,
+                'type' => 1,
+                'small_img' => HOSTIMAGE . 'index/recom.png',
+                'name' => '江小白',
+                'special_price' => 19.8,
+                'price' => 29.8,
+                'options' => [
+                    [
+                        'title' => '规格',
+                        'value' => '箱'
+                    ],
+                    [
+                        'title' => '品种',
+                        'value' => '白酒'
+                    ],
+                    [
+                        'title' => '度数',
+                        'value' => '42'
+                    ]
+                ],
+                'qty' => 1
+            ],
+            [
+                'stock_qty' => 10,
+                'selected' => false,
+                'id' => 1,
+                'type' => 1,
+                'small_img' => HOSTIMAGE . 'index/recom.png',
+                'name' => '江小白',
+                'special_price' => 19.8,
+                'price' => 29.8,
+                'options' => [
+                    [
+                        'title' => '规格',
+                        'value' => '箱'
+                    ],
+                    [
+                        'title' => '品种',
+                        'value' => '白酒'
+                    ],
+                    [
+                        'title' => '度数',
+                        'value' => '42'
+                    ]
+                ],
+                'qty' => 1
+            ],
+            [
+                'stock_qty' => 10,
+                'selected' => false,
+                'id' => 1,
+                'type' => 1,
+                'small_img' => HOSTIMAGE . 'index/recom.png',
+                'name' => '江小白',
+                'special_price' => 19.8,
+                'price' => 29.8,
+                'options' => [
+                    [
+                        'title' => '规格',
+                        'value' => '箱'
+                    ],
+                    [
+                        'title' => '品种',
+                        'value' => '白酒'
+                    ],
+                    [
+                        'title' => '度数',
+                        'value' => '42'
+                    ]
+                ],
+                'qty' => 1
+            ],
+            [
+                'stock_qty' => 10,
+                'selected' => true,
+                'id' => 1,
+                'type' => 1,
+                'small_img' => HOSTIMAGE . 'index/recom.png',
+                'name' => '江小白',
+                'special_price' => 19.8,
+                'price' => 29.8,
+                'options' => [
+                    [
+                        'title' => '规格',
+                        'value' => '箱'
+                    ],
+                    [
+                        'title' => '品种',
+                        'value' => '白酒'
+                    ],
+                    [
+                        'title' => '度数',
+                        'value' => '42'
+                    ]
+                ],
+                'qty' => 1
+            ],
+            [
+                'stock_qty' => 10,
+                'selected' => true,
+                'id' => 1,
+                'type' => 1,
+                'small_img' => HOSTIMAGE . 'index/recom.png',
+                'name' => '江小白',
+                'special_price' => 19.8,
+                'price' => 29.8,
+                'options' => [
+                    [
+                        'title' => '规格',
+                        'value' => '箱'
+                    ],
+                    [
+                        'title' => '品种',
+                        'value' => '白酒'
+                    ],
+                    [
+                        'title' => '度数',
+                        'value' => '42'
+                    ]
+                ],
+                'qty' => 3
+            ]
+        ];
+
+        echo json_encode($carts);
+        exit;
+    }
+
 }
 
 $Jk = new Jk();
