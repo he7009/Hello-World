@@ -132,7 +132,6 @@ class Jk{
         $data['newList'] = $newList;
         $data['homeCategoryList'] = $homeCategoryList;
 
-
         echo json_encode($data);
     }
 
@@ -478,5 +477,5 @@ class Jk{
 }
 
 $Jk = new Jk();
-$action = !empty($_GET['action']) ? $_GET['action'] :( !empty($_POST['action']) ? $_POST['action'] : 'index');
+$action = !empty($_GET['action']) ? $_GET['action'] :( !empty($_POST['action']) ? $_POST['action'] : 'cate');
 $Jk->$action();
