@@ -477,5 +477,5 @@ class Jk{
 }
 
 $Jk = new Jk();
-$action = !empty($_GET['action']) ? $_GET['action'] :( !empty($_POST['action']) ? $_POST['action'] : 'cate');
+$action = !empty($_GET['action']) ? $_GET['action'] :( !empty($_POST['action']) ? $_POST['action'] : 'index');
 $Jk->$action();
