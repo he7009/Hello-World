@@ -16,121 +16,112 @@ class Jk{
     public function index()
     {
         $banner = [
-            ['banner_url' => HOSTIMAGE . 'index/index-white.png'],
-            ['banner_url' => HOSTIMAGE . 'index/index-white.png'],
-            ['banner_url' => HOSTIMAGE . 'index/index-white.png']
+            [
+                'banner_url' => HOSTIMAGE . 'index/index-white.png',
+                'cateid' => '111'
+            ],
+            [
+                'banner_url' => HOSTIMAGE . 'index/index-white.png',
+                'cateid' => '222'
+            ],
+            [
+                'banner_url' => HOSTIMAGE . 'index/index-white.png',
+                'cateid' => '333'
+            ]
+        ];
+
+        $cateList = [
+            [
+                'cateid' => '111',
+                'cate_name' => '白酒',
+                'icon_url' => HOSTIMAGE . 'index/recom.png'
+            ],
+            [
+                'cateid' => '222',
+                'cate_name' => '红酒',
+                'icon_url' => HOSTIMAGE . 'index/recom.png'
+            ],
+            [
+                'cateid' => '333',
+                'cate_name' => '鸡尾酒',
+                'icon_url' => HOSTIMAGE . 'index/recom.png'
+            ]
         ];
 
         //推荐
         $recommendList = [
             [
-                'name' => '啤酒',
-                'special_price' => '19.9',
-                'small_img' => HOSTIMAGE . 'index/recom.png'
+                'name' => '五粮液',
+                'price' => '19.9',
+                'imgurl' => HOSTIMAGE . 'index/recom.png'
             ],
             [
-                'name' => '啤酒',
-                'special_price' => '19.9',
-                'small_img' => HOSTIMAGE . 'index/recom.png'
+                'name' => '茅台',
+                'price' => '19.9',
+                'imgurl' => HOSTIMAGE . 'index/recom.png'
             ],
             [
-                'name' => '啤酒',
-                'special_price' => '19.9',
-                'small_img' => HOSTIMAGE . 'index/recom.png'
+                'name' => '雪花',
+                'price' => '19.9',
+                'imgurl' => HOSTIMAGE . 'index/recom.png'
             ],
             [
-                'name' => '啤酒',
-                'special_price' => '19.9',
-                'small_img' => HOSTIMAGE . 'index/recom.png'
+                'name' => '娃哈哈',
+                'price' => '19.9',
+                'imgurl' => HOSTIMAGE . 'index/recom.png'
             ],
         ];
 
-        $adList = [
+        $active = [
             [
-                'banner_url' => HOSTIMAGE . 'index/adlist.png'
+                'imgurl' => HOSTIMAGE . 'index/adlist.png',
+                'search' => '红酒'
             ],
             [
-                'banner_url' => HOSTIMAGE . 'index/adlist.png'
+                'imgurl' => HOSTIMAGE . 'index/adlist.png',
+                'search' => '白酒'
             ],
             [
-                'banner_url' => HOSTIMAGE . 'index/adlist.png'
+                'imgurl' => HOSTIMAGE . 'index/adlist.png',
+                'search' => '鸡尾酒'
             ],
             [
-                'banner_url' => HOSTIMAGE . 'index/adlist.png'
+                'imgurl' => HOSTIMAGE . 'index/adlist.png',
+                'search' => '娃哈哈'
             ]
         ];
 
         $newList = [
             [
                 'name' => '葡萄美酒',
-                'special_price' => '19.9',
-                'small_img' => HOSTIMAGE . 'index/recom.png'
+                'price' => '19.9',
+                'imgurl' => HOSTIMAGE . 'index/recom.png'
             ],
             [
                 'name' => '葡萄美酒',
-                'special_price' => '19.9',
-                'small_img' => HOSTIMAGE . 'index/recom.png'
+                'price' => '19.9',
+                'imgurl' => HOSTIMAGE . 'index/recom.png'
             ],
             [
                 'name' => '葡萄美酒',
-                'special_price' => '19.9',
-                'small_img' => HOSTIMAGE . 'index/recom.png'
+                'price' => '19.9',
+                'imgurl' => HOSTIMAGE . 'index/recom.png'
             ],
             [
                 'name' => '葡萄美酒',
-                'special_price' => '19.9',
-                'small_img' => HOSTIMAGE . 'index/recom.png'
+                'price' => '19.9',
+                'imgurl' => HOSTIMAGE . 'index/recom.png'
             ],
         ];
 
-        $homeCategoryList = [
-            [
-                'cate_name' => '葡萄酒',
-                'special_price' => '19.9',
-                'icon_url' => HOSTIMAGE . 'index/recom.png'
-            ],
-            [
-                'cate_name' => '葡萄酒',
-                'special_price' => '19.9',
-                'icon_url' => HOSTIMAGE . 'index/recom.png'
-            ],
-            [
-                'cate_name' => '葡萄酒',
-                'special_price' => '19.9',
-                'icon_url' => HOSTIMAGE . 'index/recom.png'
-            ],
-            [
-                'cate_name' => '葡萄酒',
-                'special_price' => '19.9',
-                'icon_url' => HOSTIMAGE . 'index/recom.png'
-            ],
-            [
-                'cate_name' => '葡萄酒',
-                'special_price' => '19.9',
-                'icon_url' => HOSTIMAGE . 'index/recom.png'
-            ],
-            [
-                'cate_name' => '葡萄酒',
-                'special_price' => '19.9',
-                'icon_url' => HOSTIMAGE . 'index/recom.png'
-            ],
-            [
-                'cate_name' => '葡萄酒',
-                'special_price' => '19.9',
-                'icon_url' => HOSTIMAGE . 'index/recom.png'
-            ],
-            [
-                'cate_name' => '葡萄酒',
-                'special_price' => '19.9',
-                'icon_url' => HOSTIMAGE . 'index/recom.png'
-            ],
-        ];
 
-        $data['banner'] = $banner;
+
+        $data['bannerList'] = $banner;
+        $data['cateList'] = $cateList;
         $data['recommendList'] = $recommendList;
-        $data['adList'] = $adList;
+        $data['active'] = $active;
         $data['newList'] = $newList;
-        $data['homeCategoryList'] = $homeCategoryList;
+
 
         echo json_encode($data);
     }
