@@ -11,7 +11,7 @@ class index
 {
     public function start()
     {
-        $value = 'http://www.ydphp.site';         //二维码内容
+        $value = 'http://test.helilan.cn/qrCode/u.php';         //二维码内容
         $errorCorrectionLevel = 'L';  //容错级别
         $matrixPointSize = 5;      //生成图片大小
         //生成二维码图片
