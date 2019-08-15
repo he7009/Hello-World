@@ -1,32 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"04/tree"
+	"fmt"
+)
 
-type Node struct {
-	Value string
-	Left *Node
-	Right *Node
-}
+func main()  {
+	node1 := tree.NodeTree{"我是最高级value",nil,nil}
 
-func (objj *Node) trav(){
-	if objj == nil {
-		return
-	}
-	objj.Left.trav()
-	fmt.Println(objj.Value)
-	objj.Right.trav()
-}
+	node1.Left = &tree.NodeTree{Value:"我是一级左侧value"}
+	node1.Right = &tree.NodeTree{Value:"我是一级右侧value"}
+	node1.Left.Left = &tree.NodeTree{Value:"我是一级左侧二级左侧value"}
+	node1.Left.Right = &tree.NodeTree{Value:"我是一级左侧二级右侧value"}
+	node1.Right.Left = &tree.NodeTree{Value:"我是一级右侧二级左侧value"}
+	node1.Right.Right = &tree.NodeTree{Value:"我是一级右侧二级右侧value"}
 
-func main() {
-	var node1 = Node{Value:"我是最高级value"}
-	//node1.Left = &Node{"我是左侧1级value",nil,nil}
-	//node1.Right = &Node{"我是右侧1级value",nil,nil}
-	//node1.Right.Left = &Node{Value:"我是右侧二级左侧value"}
-	//node1.Right.Right = &Node{Value:"我是右侧二级右侧value"}
-	//node1.Left.Left = &Node{Value:"我是左侧二级左侧value"}
-	//node1.Left.Right = &Node{Value:"我是左侧二级右侧value"}
-
-
-	node1.Left.Right.trav()
-
+	fmt.Println("--左侧遍历--")
+	//node1.LeftPrint()
+	fmt.Println("--右侧遍历--")
 }
