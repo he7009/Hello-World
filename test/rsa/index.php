@@ -9,7 +9,7 @@ $publicKey = openssl_pkey_get_public(file_get_contents($publicKeyFilePath));
 ($privateKey && $publicKey) or die('密钥或者公钥不可用');
 
 // 加密数据
-$originalData = '我的帐号是:toutiao,密码是:123456';
+$originalData = '28934823#ck190810001#3853';
 
 // 加密以后的数据
 $encryptData = '';
