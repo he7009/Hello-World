@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: ¶ÎÓıµÂ
+ * User: æ®µè‚²å¾·
  * Date: 2019/8/19
  * Time: 16:18
  */
@@ -10,26 +10,30 @@ class AES
 {
 
     /**
-     *  Ëã·¨/Ä£Ê½/Ìî³ä                16×Ö½Ú¼ÓÃÜºóÊı¾İ³¤¶È        ²»Âú16×Ö½Ú¼ÓÃÜºó³¤¶È
-        AES/CBC/NoPadding              16                          ²»Ö§³Ö
+     *  ç®—æ³•/æ¨¡å¼/å¡«å……                16å­—èŠ‚åŠ å¯†åæ•°æ®é•¿åº¦        ä¸æ»¡16å­—èŠ‚åŠ å¯†åé•¿åº¦
+        AES/CBC/NoPadding              16                          ä¸æ”¯æŒ
         AES/CBC/PKCS5Padding           32                          16
         AES/CBC/ISO10126Padding        32                          16
-        AES/CFB/NoPadding              16                          Ô­Ê¼Êı¾İ³¤¶È
+        AES/CFB/NoPadding              16                          åŸå§‹æ•°æ®é•¿åº¦
         AES/CFB/PKCS5Padding           32                          16
         AES/CFB/ISO10126Padding        32                          16
-        AES/ECB/NoPadding              16                          ²»Ö§³Ö
+        AES/ECB/NoPadding              16                          ä¸æ”¯æŒ
         AES/ECB/PKCS5Padding           32                          16
         AES/ECB/ISO10126Padding        32                          16
-        AES/OFB/NoPadding              16                          Ô­Ê¼Êı¾İ³¤¶È
+        AES/OFB/NoPadding              16                          åŸå§‹æ•°æ®é•¿åº¦
         AES/OFB/PKCS5Padding           32                          16
         AES/OFB/ISO10126Padding        32                          16
-        AES/PCBC/NoPadding             16                          ²»Ö§³Ö
+        AES/PCBC/NoPadding             16                          ä¸æ”¯æŒ
         AES/PCBC/PKCS5Padding          32                          16
         AES/PCBC/ISO10126Padding       32                          16
      */
     public function run()
     {
-        $this->aesCBC();
+        $key = "1234567812345678";
+        echo "key :" . $key . PHP_EOL;
+        $data = self::encrypt("duanyude&helilan",$key);
+        self::opensslEncrypt("duanyude&helilan",$key);
+        self::decrypt($data,$key);
     }
 
     /**
@@ -41,15 +45,72 @@ class AES
         $iv = "1234567812345678";
         $data = "Test String";
 
-        //¼ÓÃÜ
+        //åŠ å¯†
         $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $privateKey, $data, MCRYPT_MODE_CBC, $iv);
         $encryptData = base64_encode($encrypted);
-        echo $data . "¼ÓÃÜbase64Îª£º" . $encryptData . PHP_EOL;
+        echo $data . "åŠ å¯†base64ä¸ºï¼š" . $encryptData . PHP_EOL;
 
-        //½âÃÜ
+        //è§£å¯†
         $encryptedData = base64_decode($encryptData);
         $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $privateKey, $encryptedData, MCRYPT_MODE_CBC, $iv);
-        echo $encryptData . "base64 ½âÃÜÎª£º" . $decrypted . PHP_EOL;
+        echo $encryptData . "base64 è§£å¯†ä¸ºï¼š" . $decrypted . PHP_EOL;
+    }
+
+    public static function encrypt($input, $key) {
+        $key=md5($key.md5($key));
+        $size = mcrypt_get_block_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
+        $input = self::pkcs5_pad($input, $size);
+        $td = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_ECB, '');
+        $iv = mcrypt_create_iv (mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
+        mcrypt_generic_init($td, $key, $iv);
+        $data = mcrypt_generic($td, $input);
+        mcrypt_generic_deinit($td);
+        mcrypt_module_close($td);
+        $data = base64_encode($data);
+        echo "{$input} ECB128ä½åŠ å¯†ï¼š" . $data . PHP_EOL;
+        return $data;
+    }
+
+    private static function pkcs5_pad ($text, $blocksize) {
+        $pad = $blocksize - (strlen($text) % $blocksize);
+        return $text . str_repeat(chr($pad), $pad);
+    }
+
+    public static function decrypt($dStr, $dKey) {
+        $dKey=md5($dKey.md5($dKey));
+        $decrypted= mcrypt_decrypt(MCRYPT_RIJNDAEL_128,$dKey,base64_decode($dStr),MCRYPT_MODE_ECB);
+        $dec_s = strlen($decrypted);
+        $padding = ord($decrypted[$dec_s-1]);
+        $decrypted = substr($decrypted, 0, -$padding);
+        echo "{$dStr} ECB128ä½è§£å¯†ï¼š" . $decrypted . PHP_EOL;
+        return $decrypted;
+    }
+
+    /**
+     * [opensslDecrypt description]
+     * ä½¿ç”¨opensslåº“è¿›è¡ŒåŠ å¯†
+     * @param  [type] $sStr
+     * @param  [type] $sKey
+     * @return [type]
+     */
+    public static function opensslEncrypt($input, $sKey, $method = 'AES-256-ECB'){
+        $sKey=md5($sKey.md5($sKey));
+        $data = openssl_encrypt($input,$method,$sKey);
+        echo "{$input} ECB128ä½åŠ å¯†ï¼š" . $data . PHP_EOL;
+        return $data;
+    }
+
+    /**
+     * [opensslDecrypt description]
+     * ä½¿ç”¨opensslåº“è¿›è¡Œè§£å¯†
+     * @param  [type] $sStr
+     * @param  [type] $sKey
+     * @return [type]
+     */
+    public static function opensslDecrypt($sStr, $sKey, $method = 'AES-256-ECB'){
+        $sKey=md5($sKey.md5($sKey));
+        $str = openssl_decrypt($sStr,$method,$sKey);
+        return $str;
     }
 }
 
