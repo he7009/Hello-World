@@ -1,0 +1,21 @@
+-------- 上海甲凯 接入申请 配置信息  --------------
+
+【上海甲凯】测试环境访问地址：https://ydpttest.cn/apiSIT/shjk/
+
+【上海甲凯】 商户appID:7db7f404-1a20-7777-bf8b-2bb8060f67ad
+
+【上海甲凯】 商户appSecretKey:8f85134c-3ea4-6a27-e053-010000705858
+
+泰隆银行公钥【TLPublickey】:
+
+-----BEGIN CERTIFICATE REQUEST-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwQSFJN8fA4mxTeAnGGv6
+cAmfBJFukQwFsx6TyW/G0agMKZjWEpbt8ei9hPl4tQC3T6XJPVW08QYidYIs0JmP
+ftjVoU7hmmzdagXLybAig9C5rNeXXJMKaVYK+iiPc7Aipl0KBeNyVzqQaa4eXXD0
+TCyfDG7AClt853+YNiS0R7cp5RK+9ifWO3+CZbYDN7ufSvZQlz5c0CWxVA6TFSH3
+7GERbQAxQzf0Tgk8EjEvjMh2W6cIyQ34McytGwJGGlQf2Y1On7ExaZqJ4N3Burbj
+vmHPCWh4EMy2pb8hyb8sL/xkt8Hwtagcc7NDGSRjNEQikQqBtno0c7PSwITIaE9q
+fwIDAQAB
+-----END CERTIFICATE REQUEST-----
+
+

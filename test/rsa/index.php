@@ -36,7 +36,7 @@ if (openssl_private_encrypt($originalData, $encryptData, $privateKey)) {
 
 $decryptData ='';
 
-if (openssl_public_decrypt($encryptData, $decryptData, '22')) {
+if (openssl_public_decrypt($encryptData, $decryptData, $publicKey)) {
 
     echo '解密成功，解密后数据为:', $decryptData, PHP_EOL;
 
