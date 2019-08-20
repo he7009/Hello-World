@@ -15,6 +15,7 @@ class wxpayClient extends Base
     public function wxPay()
     {
         $reqData = $this->getReqData();
+        echo "-------Reqest Data-------" . PHP_EOL;
         var_dump($reqData);
         $res = $this->cityQuery($reqData,$this->config['wxPayUrl']);
         var_dump($res);
@@ -33,10 +34,10 @@ class wxpayClient extends Base
                 'txTime' => date("Y-m-d H:i:s"),
             ],
             'body' => [
-                "acctType" => "02",
-                'mechNo'=>"8201907040006301",
+                'mechNo'=>"8201908130041074",
                 'inetNo'=>$this->orderId(),
                 'sndTm' => date("YmdHis"),
+                "acctType" => "02",
                 'clntSbtpId' => 'ojo615ItD1RzFrFdJDC',
                 'wechatPublicNo' => 'wx45b627473bc41c3b',
                 'prdctMsg' => "Pay Test",

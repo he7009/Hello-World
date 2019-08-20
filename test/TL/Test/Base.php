@@ -24,8 +24,7 @@ class Base
      */
     public function getToken()
     {
-        return '3bbb2b757a6045e40f064d5d8b37da11';
-
+        return "28b3cbf15bc9138e2d367de5ef9acd01";
         $seqNO = (string)rand(100000,999999);
         $key = strtoupper(md5($this->getKey()));
         $data = [
