@@ -15,6 +15,22 @@ class JkController extends Controller
 {
     public function actionPay()
     {
-        Yii::info($_SERVER['HTTP_USER_AGENT']);
+
     }
+
+    public function actionRefund()
+    {
+
+    }
+
+    public function actionTransdetail()
+    {
+
+    }
+
+    public function actionTransstatus()
+    {
+
+    }
+
 }
