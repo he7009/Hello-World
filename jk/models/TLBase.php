@@ -8,6 +8,7 @@
 
 namespace app\models;
 
+use Codeception\PHPUnit\ResultPrinter\HTML;
 use yii\base\Model;
 use Yii;
 
@@ -63,6 +64,7 @@ class TLBase extends Model
      */
     public function cityQuery($postData = [],$url)
     {
+        $jktl = Yii::$app->params['JKTL'];
         $json = json_encode($postData, JSON_UNESCAPED_UNICODE);
         $seqNO = (string)rand(100000,999999);
         $key = strtoupper(md5($this->getKey()));
@@ -72,15 +74,12 @@ class TLBase extends Model
             'signMethod' => "MD5",
             'encryptMethod' => "AES",
             'appAccessToken'=> $this->getToken(),//获取token
-            'rsaEncryptData' => Encrypt::rsaEncryptByPrivateKey($key, Yii::$app->params['JKTL']['jkPrivateKey']),
+            'rsaEncryptData' => Encrypt::rsaEncryptByPrivateKey($key, $jktl['jkPrivateKey']),
         ];
-        //拼接签名字段
-        $data['sign'] = strtoupper(md5($json . $data['seqNO'] .  Yii::$app->params['JKTL']['appsecretkey'] . $key));
-        //AES加密业务数据
-        $data['reqData'] = $this->encrypt($json,strtoupper(md5($data['seqNO'] . $data['appAccessToken'] . $this->config['appsecretkey'] . $key)));
-        echo "-------Request Data-------" . PHP_EOL;
-        var_dump($data);
-        $res = http::curl($url,$data);
+        $data['sign'] = strtoupper(md5($json . $data['seqNO'] .  $jktl['appsecretkey'] . $key));
+        $aesKey = strtoupper(md5($data['seqNO'] . $data['appAccessToken'] . $jktl['appsecretkey'] . $key));
+        $data['reqData'] = Encrypt::aesEncryptByKey($json,$aesKey,$jktl['iv']);
+        $res = Http::curl($url,$data);
         return $res;
     }
 
