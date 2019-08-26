@@ -82,16 +82,21 @@ class TLBase extends Model
         echo json_encode($data) . "<br /><br />";
         echo "------返回结果------" . "<br /><br />";
         $res = Http::curl($url,$data);
+        echo $res . "<br /><br />";
+        if($name == '支付宝'){
+            $resArr = json_decode($res,true);
+            if($resArr['errorCode'] == '000000'){
+                $reskey = Encrypt::rsaDecryptByPublicKey($resArr['rsaEncryptData'],$jktl['TLPublicKey']);
+                $aeskey = strtoupper(md5($resArr['seqNO'] . $data['appAccessToken'] . $jktl['appsecretkey'] . $reskey));
+                $json = Encrypt::aesDecryptByKey($resArr['rspData'],$aeskey,$jktl['iv']);
 
-        $resArr = json_decode($res,true);
-        $reskey = Encrypt::rsaDecryptByPublicKey($resArr['rsaEncryptData'],$jktl['TLPublicKey']);
-        $aeskey = strtoupper(md5($resArr['seqNO'] . $data['appAccessToken'] . $jktl['appsecretkey'] . $reskey));
-        $json = Encrypt::aesDecryptByKey($resArr['rspData'],$aeskey,$jktl['iv']);
+                echo $res . "<br />";
+                $resdata = json_decode($json,true);
+                header('location:' . $resdata['body']['quickRspString']);
+                exit;
+            }
+        }
 
-        echo $res . "<br />";
-        $resdata = json_decode($json,true);
-        header('location:' . $resdata['body']['quickRspString']);
-        exit;
         return $res;
     }
 
