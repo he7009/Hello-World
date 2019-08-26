@@ -61,7 +61,7 @@ class TL extends TLBase
                 "acctType" => "02",
                 'clntSbtpId' => 'oRhbs4p8wuvK3umhKhyneOZkc',
                 'wechatPublicNo' => 'wx9c53fd99ad70512c',
-                'prdctMsg' => "Pay Test",
+                'prdctMsg' => "甲凯收款",
                 'payAmount' => "10",
                 "ccy" => "156",
                 'toUserNo' => 'CNJK020401'
