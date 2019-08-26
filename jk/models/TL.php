@@ -28,7 +28,7 @@ class TL extends TLBase
                 'sndTm' => date("YmdHis"),
 //                'clntSbtpId' => 'ojo615ItD1RzFrFdJDC',
 //                'wechatPublicNo' => 'wx45b627473bc41c3b',
-                'prdctMsg' => "Pay Test",
+                'prdctMsg' => "CK-190826-0001(珠溪酒业)",
                 'payAmount' => "10",
                 "ccy" => "156",
                 'sendDate' => date("Ymd"),
