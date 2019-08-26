@@ -17,7 +17,6 @@ class TLBase extends Model
     public $token = '';
 
     /**
-     * @获取TLtoken
      * @return bool|mixed
      * @throws \yii\db\Exception
      */
@@ -49,9 +48,9 @@ class TLBase extends Model
         }
         $insertdata = [];
         $insertdata['token'] = $token;
-        $insertdata['createtime'] = time();
-        $insertdata['expirationtime'] = time() + Yii::$app->params['JKTL']['tokenTime'];
-        Yii::$app->db->createCommand()->insert('jk_token', $insertdata);
+        $insertdata['createtime'] = date("Y-m-d H:i:s");
+        $insertdata['expirationtime'] = date("Y-m-d H:i:s",time() + Yii::$app->params['JKTL']['tokenTime']);
+        Yii::$app->db->createCommand()->insert('jk_token', $insertdata)->execute();
         $this->token = $token;
         return $token;
     }
@@ -69,7 +68,7 @@ class TLBase extends Model
         $seqNO = (string)rand(100000,999999);
         $key = strtoupper(md5($this->getKey()));
         $data = [
-            'appID' => $this->config['appId'],
+            'appID' => $jktl['appId'],
             'seqNO' => $seqNO,
             'signMethod' => "MD5",
             'encryptMethod' => "AES",
@@ -96,5 +95,25 @@ class TLBase extends Model
             $key .= $chars[mt_rand(0, strlen($chars) - 1)];
         }
         return $key;
+    }
+
+
+    /**
+     * @获取32位随机字符串
+     * @param string $string
+     * @return string
+     */
+    public function orderId($string = '')
+    {
+        return md5(uniqid() . rand(100000,999999) . $string);
+    }
+
+    /**
+     * @获取32位以内随机字符串
+     * @return string
+     */
+    public function introId()
+    {
+        return 'JK' . date('YmdHis') . rand(100000,999999);
     }
 }

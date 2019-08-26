@@ -8,14 +8,23 @@
 
 namespace app\controllers;
 
+use app\models\TL;
 use yii\web\Controller;
 use Yii;
 
 class JkController extends Controller
 {
-    public function actionPay()
+    public function actionAli()
     {
+        $tlModel = new TL();
+        $tlModel->aliPay();
+//        $tlModel->wxPay();
+    }
 
+    public function actionWx()
+    {
+        $tlModel = new TL();
+        $tlModel->wxPay();
     }
 
     public function actionRefund()
