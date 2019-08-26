@@ -32,9 +32,14 @@ class TL extends TLBase
                 'payAmount' => "10",
                 "ccy" => "156",
                 'sendDate' => date("Ymd"),
+                'userNo' => 'CNJK020401',
                 "channelCode" => "CNJK020401"
             ],
         ];
+        echo "------接口：支付宝------"  . "<br /><br />";
+        echo "------未加密data------" . "<br /><br />";
+        echo json_encode($data);
+        echo "<br /><br />";
         $res = $this->cityQuery($data,Yii::$app->params['JKTL']['aliPayUrl'],"支付宝");
         Yii::info($res);
         exit;
@@ -58,10 +63,15 @@ class TL extends TLBase
                 'wechatPublicNo' => 'wx9c53fd99ad70512c',
                 'prdctMsg' => "Pay Test",
                 'payAmount' => "10",
-                "ccy" => "156"
+                "ccy" => "156",
+                'toUserNo' => 'CNJK020401'
             ],
         ];
 
+        echo "------接口：微信------"  . "<br /><br />";
+        echo "------未加密data------" . "<br /><br />";
+        echo json_encode($data);
+        echo "<br /><br />";
         $res = $this->cityQuery($data,Yii::$app->params['JKTL']['wxPayUrl']);
         Yii::info($res);
         exit;
