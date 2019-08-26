@@ -35,11 +35,9 @@ class TL extends TLBase
                 "channelCode" => "CNJK020401"
             ],
         ];
-        $res = $this->cityQuery($data,Yii::$app->params['JKTL']['aliPayUrl']);
-        var_dump($res);
+        $res = $this->cityQuery($data,Yii::$app->params['JKTL']['aliPayUrl'],"支付宝");
         Yii::info($res);
-
-        return $data;
+        exit;
     }
 
     public function wxPay()
@@ -65,8 +63,8 @@ class TL extends TLBase
         ];
 
         $res = $this->cityQuery($data,Yii::$app->params['JKTL']['wxPayUrl']);
-        var_dump($res);
         Yii::info($res);
+        exit;
     }
 
 }

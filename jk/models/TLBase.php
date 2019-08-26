@@ -61,7 +61,7 @@ class TLBase extends Model
      * @param $url
      * @return mixed|null
      */
-    public function cityQuery($postData = [],$url)
+    public function cityQuery($postData = [],$url,$name = '微信支付')
     {
         $jktl = Yii::$app->params['JKTL'];
         $json = json_encode($postData, JSON_UNESCAPED_UNICODE);
@@ -78,7 +78,12 @@ class TLBase extends Model
         $data['sign'] = strtoupper(md5($json . $data['seqNO'] .  $jktl['appsecretkey'] . $key));
         $aesKey = strtoupper(md5($data['seqNO'] . $data['appAccessToken'] . $jktl['appsecretkey'] . $key));
         $data['reqData'] = Encrypt::aesEncryptByKey($json,$aesKey,$jktl['iv']);
+        echo "------接口：{$name}------"  . "<br /><br />";
+        echo "------传递参数------" . "<br /><br />";
+        echo json_encode($data) . "<br /><br />";
+        echo "------返回结果------" . "<br /><br />";
         $res = Http::curl($url,$data);
+        echo $res . "<br />";
         return $res;
     }
 
