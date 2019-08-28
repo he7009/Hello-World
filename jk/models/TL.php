@@ -23,7 +23,7 @@ class TL extends TLBase
             ],
             'body' => [
                 "acctType" => "03",
-                'mechNo'=>"8201908260041161",
+                'mechNo'=>"8201908280041143",
                 'inetNo'=>$this->orderId(),
                 'sndTm' => date("YmdHis"),
 //                'clntSbtpId' => 'ojo615ItD1RzFrFdJDC',
@@ -55,7 +55,7 @@ class TL extends TLBase
                 'txTime' => date("Y-m-d H:i:s"),
             ],
             'body' => [
-                'mechNo'=>"8201908260041161",
+                'mechNo'=>"8201908280041143",
                 'inetNo'=>$this->orderId(),
                 'sndTm' => date("YmdHis"),
                 "acctType" => "02",
