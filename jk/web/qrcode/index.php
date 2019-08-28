@@ -7,7 +7,7 @@
  */
 include __DIR__ . '/phpqrcode.php';
 
-$value = 'http://jk.helilan.cn/jk/pay/';
+$value = 'https://jk.helilan.cn/jk/ali/';
 $errorCorrectionLevel = 'L';
 $matrixPointSize = 5;
 \QRcode::png($value, false, $errorCorrectionLevel, $matrixPointSize, 2);

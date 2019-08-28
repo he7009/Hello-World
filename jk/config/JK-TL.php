@@ -2,12 +2,12 @@
 return [
     'appId' => "7db7f404-1a20-7777-bf8b-2bb8060f67ad",
     'appsecretkey' => "8f85134c-3ea4-6a27-e053-010000705858",
-    'tokenUrl' => "https://ydpttest.cn/apiSIT/shjk/approveDev/",
-    'wxPayUrl' => "https://ydpttest.cn/apiSIT/shjk/wechatOrder/",
-    'aliPayUrl' => "https://ydpttest.cn/apiSIT/shjk/alipayMerchantCodePayment/",
-    'refundUrl' => "https://ydpttest.cn/apiSIT/shjk/refundTransactions/",
-    'transDetailUrl' => "https://ydpttest.cn/apiSIT/shjk/transactionDetailQuery/",
-    'transStatusUrl' => "https://ydpttest.cn/apiSIT/shjk/transactionStatus/",
+    'tokenUrl' => "https://ydpttest.cn/api/shjk/approveDev/",
+    'wxPayUrl' => "https://ydpttest.cn/api/shjk/wechatOrder/",
+    'aliPayUrl' => "https://ydpttest.cn/api/shjk/alipayMerchantCodePayment/",
+    'refundUrl' => "https://ydpttest.cn/api/shjk/refundTransactions/",
+    'transDetailUrl' => "https://ydpttest.cn/api/shjk/transactionDetailQuery/",
+    'transStatusUrl' => "https://ydpttest.cn/api/shjk/transactionStatus/",
     'tokenTime' => 60 * 50,
     'TLPublicKey' => "-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwQSFJN8fA4mxTeAnGGv6

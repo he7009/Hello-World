@@ -28,7 +28,7 @@ class TL extends TLBase
                 'sndTm' => date("YmdHis"),
 //                'clntSbtpId' => 'ojo615ItD1RzFrFdJDC',
 //                'wechatPublicNo' => 'wx45b627473bc41c3b',
-                'prdctMsg' => "Pay Test",
+                'prdctMsg' => "CK-190826-0001(珠溪酒业)",
                 'payAmount' => "10",
                 "ccy" => "156",
                 'sendDate' => date("Ymd"),
@@ -61,7 +61,7 @@ class TL extends TLBase
                 "acctType" => "02",
                 'clntSbtpId' => 'oRhbs4p8wuvK3umhKhyneOZkc',
                 'wechatPublicNo' => 'wx9c53fd99ad70512c',
-                'prdctMsg' => "Pay Test",
+                'prdctMsg' => "CK-190826-0001",
                 'payAmount' => "10",
                 "ccy" => "156",
                 'toUserNo' => 'CNJK020401'

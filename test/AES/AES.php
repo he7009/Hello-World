@@ -8,140 +8,53 @@
 
 class AES
 {
+    private $data = '{"signMethod":"MD5","rspData":"W5MXBGmCwe8fs28FO0P8DnSreEaysdM9z+5xOxlHZlPexWptv0dfda6QBx5geqGkhV/CilNIRlKmYwRAbRQI/mN2XE32CLh1HJFQjPKU2B65+AkAjDOFlwJxBwX81dlG667nFAQSKqsZ/3RMnqMLNL19BJ38mlM0Nyn5iZ1Emz7yNH2fht8IB+g4WA1XNx4Ykf0L9AWTaO4D7ULHh8Pf6ffADauphmgHTGuy6cNGhnJTE/fYHYqiuMieqgxXiT6vxCnywMXs/zxz66YZoA9+q4pu9VhAkw72HBdQfznz7bVdY5atp6ZMqIxxjr9SunxozUmKrv2m9RBsHnIj5tNkccosRFinzaGycEI7AxdQ4y0ZJheHoh3Pzy2fkkByvWDuckGpy84Uu2ZUaEhs59JWVxG/THVk0x1c6yfH8f9YposN0xs82f1jU+urD3S+AZNOjRkLmFUNihUfb2ttbY8mXRYpPttgOJw+hhecvR6PUz4=","encryptMethod":"AES","errorCode":"000000","errorMsg":"交易成功","seqNO":"934208","appID":"7db7f404-1a20-7777-bf8b-2bb8060f67ad","rsaEncryptData":"B5N9geafVXE+wIdwv4voUbbkhIhi34PIfuoBt6ObVbqxR+oVo69vqAXZFVXl4Vaz+fG6jPyJD5xtd6qzeEMASw5AB4Y3S3O+vqlTY6yvANY6FFHyBQKPpoQr19tTXo7XvmZRjmI34KxQ6hMbxnA4fHrTcTnxu3Idq1/slp4RNu3GOSzTST+3ikePygOAzTYTHBSNnCM74znC5AlUnpPZ29SICjdQOK5bGAq758zmkCdDjuv8cfyamJoWNpdvFHAclwZEN3w4JXcVrk9jG/EujZmdpZp+AuyXGZbW8y/vlE0U9H47XGhWs/p9M29fmXlT4NRE6CJWaZ/85lbcdTRdVQ==","sign":"DAFF2476F3BC782D42238C498B473AB1"}';
 
-    /**
-     *  算法/模式/填充                16字节加密后数据长度        不满16字节加密后长度
-        AES/CBC/NoPadding              16                          不支持
-        AES/CBC/PKCS5Padding           32                          16
-        AES/CBC/ISO10126Padding        32                          16
-        AES/CFB/NoPadding              16                          原始数据长度
-        AES/CFB/PKCS5Padding           32                          16
-        AES/CFB/ISO10126Padding        32                          16
-        AES/ECB/NoPadding              16                          不支持
-        AES/ECB/PKCS5Padding           32                          16
-        AES/ECB/ISO10126Padding        32                          16
-        AES/OFB/NoPadding              16                          原始数据长度
-        AES/OFB/PKCS5Padding           32                          16
-        AES/OFB/ISO10126Padding        32                          16
-        AES/PCBC/NoPadding             16                          不支持
-        AES/PCBC/PKCS5Padding          32                          16
-        AES/PCBC/ISO10126Padding       32                          16
-     */
     public function run()
     {
-        $key = "1234567812345678";
-        echo "key :" . $key . PHP_EOL;
-        $data = self::encrypt("duanyude&helilan",$key);
-        self::opensslEncrypt("duanyude&helilan",$key);
-        $data = self::encryptTl("duanyude&helilan",$key);
-        self::opensslDecrypt($data,$key);
-//        self::decrypt($data,$key);
+        $dataArr = json_decode($this->data,true);
+        $token = $this->rsa($dataArr['rsaEncryptData']);
+        $asskey = strtoupper(md5($dataArr['seqNO'] . '34f562be78030eb74e35f8f8ad210d5a' . '8f85134c-3ea4-6a27-e053-010000705858' . $token));
+        $json = $this->aesDecryptByKey($dataArr['rspData'],$asskey);
+
+        $sign = strtoupper(md5($json . $dataArr['seqNO'] . '8f85134c-3ea4-6a27-e053-010000705858' . $token));
+        var_dump($token);
+        $reqdata = json_decode($json,true);
+        var_dump($reqdata);
+
+        echo $sign . PHP_EOL;
+        echo $dataArr['sign'] . PHP_EOL;
+//        var_dump($dataArr);
     }
 
-    /**
-     * AES CBC
-     */
-    public function aesCBC()
+    public function rsa($data)
     {
-        $privateKey = "1234567812345678";
-        $iv = "1234567812345678";
-        $data = "Test String";
-
-        //加密
-        $encrypted = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $privateKey, $data, MCRYPT_MODE_CBC, $iv);
-        $encryptData = base64_encode($encrypted);
-        echo $data . "加密base64为：" . $encryptData . PHP_EOL;
-
-        //解密
-        $encryptedData = base64_decode($encryptData);
-        $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $privateKey, $encryptedData, MCRYPT_MODE_CBC, $iv);
-        echo $encryptData . "base64 解密为：" . $decrypted . PHP_EOL;
-    }
-
-    public static function encrypt($input, $key) {
-        $key=md5($key.md5($key));
-        $size = @mcrypt_get_block_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
-        $input = self::pkcs5_pad($input, $size);
-        $td = @mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_ECB, '');
-        $iv = @mcrypt_create_iv (mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
-        @mcrypt_generic_init($td, $key, $iv);
-        $data = @mcrypt_generic($td, $input);
-        @mcrypt_generic_deinit($td);
-        @mcrypt_module_close($td);
-        $data = base64_encode($data);
-        echo "{$input} ECB128位加密：" . $data . PHP_EOL;
-        return $data;
-    }
-
-    private static function pkcs5_pad ($text, $blocksize) {
-        $pad = $blocksize - (strlen($text) % $blocksize);
-        return $text . str_repeat(chr($pad), $pad);
-    }
-
-    public static function decrypt($dStr, $dKey) {
-        $dKey=md5($dKey.md5($dKey));
-        $decrypted= mcrypt_decrypt(MCRYPT_RIJNDAEL_128,$dKey,base64_decode($dStr),MCRYPT_MODE_ECB);
-        $dec_s = strlen($decrypted);
-        $padding = ord($decrypted[$dec_s-1]);
-        $decrypted = substr($decrypted, 0, -$padding);
-        echo "{$dStr} ECB128位解密：" . $decrypted . PHP_EOL;
+        $data = base64_decode($data);
+        openssl_public_decrypt($data,$decrypted,"-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwQSFJN8fA4mxTeAnGGv6
+cAmfBJFukQwFsx6TyW/G0agMKZjWEpbt8ei9hPl4tQC3T6XJPVW08QYidYIs0JmP
+ftjVoU7hmmzdagXLybAig9C5rNeXXJMKaVYK+iiPc7Aipl0KBeNyVzqQaa4eXXD0
+TCyfDG7AClt853+YNiS0R7cp5RK+9ifWO3+CZbYDN7ufSvZQlz5c0CWxVA6TFSH3
+7GERbQAxQzf0Tgk8EjEvjMh2W6cIyQ34McytGwJGGlQf2Y1On7ExaZqJ4N3Burbj
+vmHPCWh4EMy2pb8hyb8sL/xkt8Hwtagcc7NDGSRjNEQikQqBtno0c7PSwITIaE9q
+fwIDAQAB
+-----END PUBLIC KEY-----",OPENSSL_PKCS1_PADDING);
         return $decrypted;
     }
 
     /**
-     * [opensslDecrypt description]
-     * 使用openssl库进行加密
-     * @param  [type] $sStr
-     * @param  [type] $sKey
-     * @return [type]
+     * @AES 对称解密
+     * @param $data
+     * @param $key
+     * @param $iv
+     * @param string $method
+     * @return bool|string
      */
-    public static function opensslEncrypt($input, $sKey, $method = 'AES-128-CBC'){
-//        $sKey=md5($sKey.md5($sKey));
-//        $data = openssl_encrypt($input,$method,$sKey);
-        $data = openssl_encrypt($input, $method,$sKey,OPENSSL_RAW_DATA  ,'abcdefghABCDEFGH');
-        $data = base64_encode($data);
-        echo "{$input} ECB128位加密：" . $data . PHP_EOL;
-        return $data;
-    }
-
-    /**
-     * [opensslDecrypt description]
-     * 使用openssl库进行解密
-     * @param  [type] $sStr
-     * @param  [type] $sKey
-     * @return [type]
-     */
-    public static function opensslDecrypt($sStr, $sKey, $method = 'AES-128-CBC'){
-//        $sKey=md5($sKey.md5($sKey));
-//        $str = openssl_decrypt($sStr,$method,$sKey);
-        $sStr = base64_decode($sStr);
-        $str = openssl_decrypt($sStr, $method,$sKey,OPENSSL_RAW_DATA  ,'abcdefghABCDEFGH');
-        echo '正确解密为：' . $str . PHP_EOL;
-    }
-
-    public static function encryptTl($encryptStr,$encryptKey,$iv = 'abcdefghABCDEFGH')
+    public static function aesDecryptByKey($data, $key, $iv = 'abcdefghABCDEFGH',$method = 'AES-256-CBC')
     {
-//        $encryptKey=md5($encryptKey.md5($encryptKey));
-        $localIV = $iv;
-
-        //Open module
-        $module = @mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, $localIV);
-
-        //print "module = $module <br/>" ;
-        @mcrypt_generic_init($module, $encryptKey, $localIV);
-
-        //Padding
-        $block = @mcrypt_get_block_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
-        $pad = $block - (strlen($encryptStr) % $block); //Compute how many characters need to pad
-        $encryptStr .= str_repeat(chr($pad), $pad); // After pad, the str length must be equal to block or its integer multiples
-        //encrypt
-        $encrypted = @mcrypt_generic($module, $encryptStr);
-
-        //Close
-        @mcrypt_generic_deinit($module);
-        @mcrypt_module_close($module);
-        echo "{$encryptStr} ECB128位加密：" . base64_encode($encrypted) . PHP_EOL;
-        return base64_encode($encrypted);
+        $data = base64_decode($data);
+        $data = openssl_decrypt($data,$method,$key,OPENSSL_RAW_DATA,$iv);
+        return $data;
     }
 }
 
