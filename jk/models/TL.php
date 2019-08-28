@@ -59,7 +59,7 @@ class TL extends TLBase
                 'inetNo'=>$this->orderId(),
                 'sndTm' => date("YmdHis"),
                 "acctType" => "02",
-                'clntSbtpId' => 'oRhbs4p8wuvK3umhKhyneOZkc',
+                'clntSbtpId' => 'oRhbs4p8wuvK3umhKhyneOZkc0Cw',
                 'wechatPublicNo' => 'wx9c53fd99ad70512c',
                 'prdctMsg' => "CK-190826-0001",
                 'payAmount' => "10",
