@@ -72,7 +72,7 @@ class TL extends TLBase
         echo "------未加密data------" . "<br /><br />";
         echo json_encode($data);
         echo "<br /><br />";
-        $res = $this->cityQuery($data,Yii::$app->params['JKTL']['wxPayUrl']);
+        $res = $this->cityQuery($data,Yii::$app->params['JKTL']['wxPayUrl'],"支付宝");
         Yii::info($res);
         exit;
     }
