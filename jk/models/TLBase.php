@@ -92,6 +92,8 @@ class TLBase extends Model
 
                 echo $res . "<br />";
                 $resdata = json_decode($json,true);
+                var_dump($resdata);
+                exit;
                 header('location:' . $resdata['body']['quickRspString']);
                 exit;
             }
