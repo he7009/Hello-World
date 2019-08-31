@@ -10,7 +10,7 @@ class index
 {
     public function run()
     {
-        header("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9c53fd99ad70512c&redirect_uri=https://jk.helilan.cn/jk/jkcall/&response_type=code&scope=snsapi_base");
+        header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9c53fd99ad70512c&redirect_uri=https://jk.helilan.cn/jk/jkcall/&response_type=code&scope=snsapi_base");
     }
 }
 
