@@ -42,4 +42,11 @@ class JkController extends Controller
 
     }
 
+    public function actionJkcall()
+    {
+        Yii::info($_GET);
+        Yii::info($_POST);
+        Yii::info($_SERVER);
+    }
+
 }

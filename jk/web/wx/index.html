@@ -9,18 +9,16 @@
 </body>
 <script type="application/javascript" src="//jk.helilan.cn/js/jquery-1.9.1.min.js"></script>
 <script type="application/javascript">
-    alert('wwww');
     $.ajax({
         type:"GET",
         url:'https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect',
         dataType:"json",
         success:function(data){
-            alert(data);
+            console.log(data);
         },
         error:function(error){
-            alert(error);
+            console.log(data);
         }
     });
-    alert(333);
 </script>
 </html>
