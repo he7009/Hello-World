@@ -18,13 +18,20 @@ class JkController extends Controller
     {
         $tlModel = new TL();
         $tlModel->aliPay();
-//        $tlModel->wxPay();
     }
 
     public function actionWx()
     {
         $tlModel = new TL();
         $tlModel->wxPay();
+    }
+
+    public function actionWxp()
+    {
+        $tlModel = new TL();
+        $code = Yii::$app->request->get("code");
+        $tlModel->setCode($code);
+        $tlModel->wxPPay();
     }
 
     public function actionRefund()
