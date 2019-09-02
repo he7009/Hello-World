@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\models\Http;
 use app\models\Paylist;
 use app\models\TL;
 use yii\web\Controller;
@@ -66,9 +67,10 @@ class JkController extends Controller
 
     public function actionJkcall()
     {
-        Yii::info($_GET);
-        Yii::info($_POST);
-        Yii::info($_SERVER);
+        $code = Yii::$app->request->get('code');
+        $content = Http::get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx3b494ab165585a3c&secret=29fb53c700fb0152aa65c80e0a043477&code={$code}&grant_type=authorization_code");
+        $this->layout = 'jk';
+        return $this->render("jkcall",['data' => $content]);
     }
 
 }
