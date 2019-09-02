@@ -13,6 +13,8 @@ class TL extends TLBase
 {
     private $code = 0;
 
+    private $openid = '';
+
     /**
      * 支付宝支付
      */
@@ -60,8 +62,8 @@ class TL extends TLBase
                 'inetNo'=>$this->orderId(),
                 'sndTm' => date("YmdHis"),
                 "acctType" => "02",
-                'clntSbtpId' => 'oRhbs4p8wuvK3umhKhyneOZkc0Cw',
-                'wechatPublicNo' => 'wx9c53fd99ad70512c',
+                'clntSbtpId' => $this->openid,
+                'wechatPublicNo' => 'wx3b494ab165585a3c',
                 'prdctMsg' => "CK-190826-0001",
                 'payAmount' => "10",
                 "ccy" => "156",
@@ -70,8 +72,7 @@ class TL extends TLBase
         ];
 
         $res = $this->cityQuery($data,Yii::$app->params['JKTL']['wxPayUrl']);
-        echo json_encode($res,JSON_UNESCAPED_UNICODE);
-        exit;
+        return json_encode($res,JSON_UNESCAPED_UNICODE);
     }
 
     //微信小程序
@@ -223,5 +224,20 @@ class TL extends TLBase
         $this->code = $code;
     }
 
+    /**
+     * @return string
+     */
+    public function getOpenid()
+    {
+        return $this->openid;
+    }
+
+    /**
+     * @param string $openid
+     */
+    public function setOpenid($openid)
+    {
+        $this->openid = $openid;
+    }
 
 }
