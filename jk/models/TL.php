@@ -136,7 +136,7 @@ class TL extends TLBase
                 'txTime' => date("Y-m-d H:i:s"),
             ],
             'body' => [
-                'mechNo'=>"8201907040006301",
+                'mechNo'=>"8201908280041143",
                 'inetNo'=>$this->orderId(),
                 'sndTm' => date("YmdHis"),
                 'oriInetNo' => "da712d31f85dcbdca0690c596eeb36d5",
@@ -171,7 +171,7 @@ class TL extends TLBase
                 'txTime' => date("Y-m-d H:i:s"),
             ],
             'body' => [
-                'mechNo'=>"8201907040006301",
+                'mechNo'=>"8201908280041143",
                 'oriInetNo'=>"da712d31f85dcbdca0690c596eeb36d5",
                 'inetNo'=>$this->orderId(),
                 'channelCode' => "CNJK020401",
@@ -202,7 +202,7 @@ class TL extends TLBase
                 'txTime' => date("Y-m-d H:i:s"),
             ],
             'body' => [
-                'mechNo'=>"8201907040006301",
+                'mechNo'=>"8201908280041143",
                 'inetNo'=>$this->orderId(),
                 'sndTm'=>date("YmdHis")
             ],
