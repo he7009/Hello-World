@@ -15,6 +15,8 @@ class TLBase extends Model
 {
     public $token = '';
 
+    public $insertId = 0;
+
     /**
      * @return bool|mixed
      * @throws \yii\db\Exception
@@ -151,6 +153,7 @@ class TLBase extends Model
         $insertData['updatetime'] = date('Y-m-d H:i:s');
 
         Yii::$app->db->createCommand()->insert("jk_pay",$insertData)->execute();
+        $this->insertId = Yii::$app->db->getLastInsertID();
     }
 
     /**
@@ -164,7 +167,7 @@ class TLBase extends Model
         $updateData = [];
         $updateData['resdata'] = $res;
         $updateData['paystatus'] = $paystatus;
-        Yii::$app->db->createCommand()->update("jk_pay",$updateData)->execute();
+        Yii::$app->db->createCommand()->update("jk_pay",$updateData,"id = {$this->insertId}")->execute();
     }
 
     /**
