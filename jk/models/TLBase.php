@@ -94,9 +94,7 @@ class TLBase extends Model
             }
         }
         $this->updatePay($res,3);
-        echo "交易失败！请联系客服！";
-        exit;
-
+        return $res;
     }
 
     /**
