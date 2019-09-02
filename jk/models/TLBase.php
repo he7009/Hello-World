@@ -100,6 +100,37 @@ class TLBase extends Model
     }
 
     /**
+     * @发送请求
+     * @param $array
+     * @param $url
+     * @return mixed|null
+     */
+    public function statusCityQuery($postData = [],$url)
+    {
+        $jktl = Yii::$app->params['JKTL'];
+        $json = json_encode($postData, JSON_UNESCAPED_UNICODE);
+        $seqNO = (string)rand(100000,999999);
+        $key = strtoupper(md5($this->getKey()));
+        $token = $this->getToken();
+        $data = [
+            'appID' => $jktl['appId'],
+            'seqNO' => $seqNO,
+            'signMethod' => "MD5",
+            'encryptMethod' => "AES",
+            'appAccessToken'=> $token,
+            'rsaEncryptData' => Encrypt::rsaEncryptByPrivateKey($key, $jktl['jkPrivateKey']),
+        ];
+        $data['sign'] = strtoupper(md5($json . $data['seqNO'] .  $jktl['appsecretkey'] . $key));
+        $aesKey = strtoupper(md5($data['seqNO'] . $data['appAccessToken'] . $jktl['appsecretkey'] . $key));
+        $data['reqData'] = Encrypt::aesEncryptByKey($json,$aesKey,$jktl['iv']);
+        $res = Http::curl($url,$data);
+        $result = [];
+        $result['data'] = $data;
+        $result['res'] = $res;
+        return $result;
+    }
+
+    /**
      * @创建支付订单
      * @param $reqData
      * @throws \yii\db\Exception

@@ -123,6 +123,102 @@ class TL extends TLBase
         return $output;
     }
 
+    /**
+     * @退款接口
+     */
+    public function refund()
+    {
+        $data = [
+            'head' => [
+                'txSno' => $this->orderId("txSno"),
+                'mrchSno' => $this->orderId("mrchSno"),
+                'bussSeqNo' => $this->orderId("bussSeqNo"),
+                'txTime' => date("Y-m-d H:i:s"),
+            ],
+            'body' => [
+                'mechNo'=>"8201907040006301",
+                'inetNo'=>$this->orderId(),
+                'sndTm' => date("YmdHis"),
+                'oriInetNo' => "da712d31f85dcbdca0690c596eeb36d5",
+                'oriTranSeqNo' => "9d92cbda0015491039e60ff976987608",
+                'oriTranDate' => "2019-09-02 07:42:56",
+                'channelCode' => "CNJK020401",
+                'refundAmt' => "10",
+                "ccy" => "156"
+            ],
+        ];
+
+        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['refundUrl']);
+        echo "----退款接口---- <br /> <br />";
+        echo "----未加密参数---- <br /> <br />";
+        echo json_encode($data,JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        echo "----发送数据---- <br /> <br />";
+        echo json_encode($res['data'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        echo "----响应内容---- <br /> <br />";
+        echo json_encode($res['res'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+    }
+
+    /**
+     * @交易详查询
+     */
+    public function transDetail()
+    {
+        $data = [
+            'head' => [
+                'txSno' => $this->orderId("txSno"),
+                'mrchSno' => $this->orderId("mrchSno"),
+                'bussSeqNo' => $this->orderId("bussSeqNo"),
+                'txTime' => date("Y-m-d H:i:s"),
+            ],
+            'body' => [
+                'mechNo'=>"8201907040006301",
+                'oriInetNo'=>"da712d31f85dcbdca0690c596eeb36d5",
+                'inetNo'=>$this->orderId(),
+                'channelCode' => "CNJK020401",
+                'userNo' => "CNJK020401",
+            ],
+        ];
+
+        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['transDetailUrl']);
+        echo "----订单详情查询---- <br /> <br />";
+        echo "----未加密参数---- <br /> <br />";
+        echo json_encode($data,JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        echo "----发送数据---- <br /> <br />";
+        echo json_encode($res['data'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        echo "----响应内容---- <br /> <br />";
+        echo json_encode($res['res'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+    }
+
+    /**
+     * @交易详查询
+     */
+    public function transStatus()
+    {
+        $data = [
+            'head' => [
+                'txSno' => $this->orderId("txSno"),
+                'mrchSno' => $this->orderId("mrchSno"),
+                'bussSeqNo' => $this->orderId("bussSeqNo"),
+                'txTime' => date("Y-m-d H:i:s"),
+            ],
+            'body' => [
+                'mechNo'=>"8201907040006301",
+                'inetNo'=>$this->orderId(),
+                'sndTm'=>date("YmdHis")
+            ],
+        ];
+
+        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['transDetailUrl']);
+        echo "----交易状态查询---- <br /> <br />";
+        echo "----未加密参数---- <br /> <br />";
+        echo json_encode($data,JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        echo "----发送数据---- <br /> <br />";
+        echo json_encode($res['data'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        echo "----响应内容---- <br /> <br />";
+        echo json_encode($res['res'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+    }
+
+
     public function setCode($code)
     {
         $this->code = $code;

@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\models\Paylist;
 use app\models\TL;
 use yii\web\Controller;
 use Yii;
@@ -34,19 +35,33 @@ class JkController extends Controller
         $tlModel->wxPPay();
     }
 
+    public function actionPaylist()
+    {
+        $paystatus = intval(Yii::$app->request->get('paystatus'));
+        $paylistModel = new Paylist();
+        $paylistModel->setPaystatus($paystatus);
+        $data = $paylistModel->getPayList();
+        $viewData['paylist'] = $data;
+        $this->layout = 'jk';
+        return $this->render('paylist',$viewData);
+    }
+
     public function actionRefund()
     {
-
+        $tlModel = new TL();
+        $tlModel->refund();
     }
 
     public function actionTransdetail()
     {
-
+        $tlModel = new TL();
+        $tlModel->transDetail();
     }
 
     public function actionTransstatus()
     {
-
+        $tlModel = new TL();
+        $tlModel->transStatus();
     }
 
     public function actionJkcall()
