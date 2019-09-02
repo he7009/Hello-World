@@ -139,9 +139,8 @@ class TL extends TLBase
                 'mechNo'=>"8201908280041143",
                 'inetNo'=>$this->orderId(),
                 'sndTm' => date("YmdHis"),
-                'oriInetNo' => "da712d31f85dcbdca0690c596eeb36d5",
-                'oriTranSeqNo' => "9d92cbda0015491039e60ff976987608",
-                'oriTranDate' => "2019-09-02 07:42:56",
+                'oriInetNo' => "82019090210094356711950985018565",
+                'oriTranSeqNo' => "82019090210122029765865898342648",
                 'channelCode' => "CNJK020401",
                 'refundAmt' => "10",
                 "ccy" => "156"
