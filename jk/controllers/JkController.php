@@ -24,15 +24,15 @@ class JkController extends Controller
 
     public function actionWx()
     {
-//        $code = Yii::$app->request->get('code');
-//        $rsp = Http::get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx3b494ab165585a3c&secret=29fb53c700fb0152aa65c80e0a043477&code={$code}&grant_type=authorization_code");
-//        $rspArr = json_decode($rsp,true);
-//        if(empty($rspArr) || !$rspArr['openid']){
-//           echo "<script>alert('Failed,Please try again');</script>";
-//           exit;
-//        }
-//        $openId = $rspArr['openid'];
-        $openId = 'oGAHm01BQK_zDbGOTJwEWTumtrz4';
+        $code = Yii::$app->request->get('code');
+        $rsp = Http::get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx3b494ab165585a3c&secret=29fb53c700fb0152aa65c80e0a043477&code={$code}&grant_type=authorization_code");
+        $rspArr = json_decode($rsp,true);
+        if(empty($rspArr) || !$rspArr['openid']){
+           echo "<script>alert('Failed,Please try again');</script>";
+           exit;
+        }
+        $openId = $rspArr['openid'];
+//        $openId = 'oGAHm01BQK_zDbGOTJwEWTumtrz4';
         $tlModel = new TL();
         $tlModel->setOpenid($openId);
         $resArr = $tlModel->wxPay();
