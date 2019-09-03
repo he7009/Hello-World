@@ -213,7 +213,8 @@ class TL extends TLBase
                 'mechNo'=>"8201908280041143",
                 'oriInetNo'=>"7c43b593504f8106a337042e2493f780",
                 'inetNo'=>$this->orderId(),
-                'sndTm'=>date("YmdHis")
+                'sndTm'=>date("YmdHis"),
+                "channelCode" => "CNJK020401"
             ],
         ];
 
