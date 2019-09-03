@@ -72,6 +72,14 @@ class TL extends TLBase
         ];
 
         $res = $this->cityQuery($data,Yii::$app->params['JKTL']['wxPayUrl']);
+        echo "----微信支付---- <br /><br />";
+        echo "----参数---- <br /><br />";
+        var_dump($data);
+        echo "<br /><br />";
+        echo "----响应---- <br /><br />";
+        var_dump($res);
+        echo "<br /><br />";
+        exit;
         return json_encode($res,JSON_UNESCAPED_UNICODE);
     }
 
