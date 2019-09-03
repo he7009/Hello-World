@@ -8,6 +8,7 @@ return [
     'refundUrl' => "https://ydpttest.cn/api/shjk/refundTransactions/",
     'transDetailUrl' => "https://ydpttest.cn/api/shjk/transactionDetailQuery/",
     'transStatusUrl' => "https://ydpttest.cn/api/shjk/transactionStatus/",
+    'scanPayUrl' => "https://ydpttest.cn/api/shjk/scanPaymentCode/",
     'tokenTime' => 60 * 50,
     'TLPublicKey' => "-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwQSFJN8fA4mxTeAnGGv6

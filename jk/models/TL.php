@@ -15,6 +15,8 @@ class TL extends TLBase
 
     private $openid = '';
 
+    private $accttype = '02';
+
     /**
      * 支付宝支付
      */
@@ -223,6 +225,38 @@ class TL extends TLBase
         echo json_encode($res['res'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
     }
 
+    /**
+     * @交易详查询
+     */
+    public function scanPay()
+    {
+        $data = [
+            'head' => [
+                'txSno' => $this->orderId("txSno"),
+                'mrchSno' => $this->orderId("mrchSno"),
+                'bussSeqNo' => $this->orderId("bussSeqNo"),
+                'txTime' => date("Y-m-d H:i:s"),
+            ],
+            'body' => [
+                'mechNo'=>"8201908280041143",
+                'acctNo' => $this->code,
+                'tranAmt'=> "1",
+                'inetNo'=>$this->orderId('main'),
+                'userNo'=>"CNJK020401",
+                "channelCode" => "CNJK020401",
+            ],
+        ];
+
+        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['scanPayUrl']);
+        echo "----交易状态查询---- <br /> <br />";
+        echo "----未加密参数---- <br /> <br />";
+        echo json_encode($data,JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        echo "----发送数据---- <br /> <br />";
+        echo json_encode($res['data'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        echo "----响应内容---- <br /> <br />";
+        echo json_encode($res['res'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+    }
+
 
     public function setCode($code)
     {
@@ -243,6 +277,22 @@ class TL extends TLBase
     public function setOpenid($openid)
     {
         $this->openid = $openid;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAccttype()
+    {
+        return $this->accttype;
+    }
+
+    /**
+     * @param string $accttype
+     */
+    public function setAccttype($accttype)
+    {
+        $this->accttype = $accttype;
     }
 
 }

@@ -84,6 +84,16 @@ class JkController extends Controller
         $tlModel->transStatus();
     }
 
+    public function actionScanpay()
+    {
+        $tlModel = new TL();
+        $code = Yii::$app->request->get('code');
+        $at = Yii::$app->request->get('at');
+        $tlModel->setCode($code);
+        $tlModel->setAccttype($at);
+        $tlModel->scanPay();
+    }
+
     public function actionJkcall()
     {
         $code = Yii::$app->request->get('code');
