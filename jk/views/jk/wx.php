@@ -3,7 +3,7 @@
     function onBridgeReady(){
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest', {
-                "appId":"wx2421b1c4370ec43b",     //公众号名称，由商户传入
+                "appId":"wx3b494ab165585a3c",     //公众号名称，由商户传入
                 "timeStamp":"<?php echo $resArr['body']['timestamp'];?>",         //时间戳，自1970年以来的秒数
                 "nonceStr":"<?php echo $resArr['body']['remark'];?>", //随机串
                 "package":"<?php echo $resArr['body']['quickRspString'];?>",
