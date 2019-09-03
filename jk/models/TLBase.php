@@ -96,7 +96,7 @@ class TLBase extends Model
             }
         }
         $this->updatePay($res,3);
-        return $res;
+        return $resArr;
     }
 
     /**
