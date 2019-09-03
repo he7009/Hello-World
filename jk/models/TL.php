@@ -180,8 +180,9 @@ class TL extends TLBase
             ],
             'body' => [
                 'mechNo'=>"8201908280041143",
-                'oriInetNo'=>"d47c0a4e30037d2b72307cd9f7ee913c",
-                'inetNo'=>$this->orderId(),
+//                'oriInetNo'=>"d47c0a4e30037d2b72307cd9f7ee913c",
+                'inetNo'=>'d47c0a4e30037d2b72307cd9f7ee913c',
+//                'inetNo'=>$this->orderId(),
                 'channelCode' => "CNJK020401",
                 'userNo' => "CNJK020401",
             ],
@@ -211,8 +212,8 @@ class TL extends TLBase
             ],
             'body' => [
                 'mechNo'=>"8201908280041143",
-                'oriInetNo'=>"d47c0a4e30037d2b72307cd9f7ee913c",
-                'inetNo'=>$this->orderId(),
+//                'oriInetNo'=>"d47c0a4e30037d2b72307cd9f7ee913c",
+                'inetNo'=>'d47c0a4e30037d2b72307cd9f7ee913c',
                 'sndTm'=>date("YmdHis"),
                 "channelCode" => "CNJK020401",
                 'userNo' => "CNJK020401",
