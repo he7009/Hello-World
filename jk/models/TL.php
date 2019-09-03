@@ -214,7 +214,8 @@ class TL extends TLBase
                 'oriInetNo'=>"7c43b593504f8106a337042e2493f780",
                 'inetNo'=>$this->orderId(),
                 'sndTm'=>date("YmdHis"),
-                "channelCode" => "CNJK020401"
+                "channelCode" => "CNJK020401",
+                'userNo' => "CNJK020401",
             ],
         ];
 
