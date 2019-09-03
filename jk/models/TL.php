@@ -180,7 +180,7 @@ class TL extends TLBase
             ],
             'body' => [
                 'mechNo'=>"8201908280041143",
-                'oriInetNo'=>"7c43b593504f8106a337042e2493f780",
+                'oriInetNo'=>"d47c0a4e30037d2b72307cd9f7ee913c",
                 'inetNo'=>$this->orderId(),
                 'channelCode' => "CNJK020401",
                 'userNo' => "CNJK020401",
@@ -211,7 +211,7 @@ class TL extends TLBase
             ],
             'body' => [
                 'mechNo'=>"8201908280041143",
-                'oriInetNo'=>"7c43b593504f8106a337042e2493f780",
+                'oriInetNo'=>"d47c0a4e30037d2b72307cd9f7ee913c",
                 'inetNo'=>$this->orderId(),
                 'sndTm'=>date("YmdHis"),
                 "channelCode" => "CNJK020401",
