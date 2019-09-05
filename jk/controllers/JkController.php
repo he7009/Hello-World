@@ -69,6 +69,8 @@ class JkController extends Controller
     public function actionRefund()
     {
         $tlModel = new TL();
+        $oriInetNo = Yii::$app->request->get('order');
+        $tlModel->setOriInetNo($oriInetNo);
         $tlModel->refund();
     }
 

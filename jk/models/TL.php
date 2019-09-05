@@ -17,6 +17,8 @@ class TL extends TLBase
 
     private $accttype = '02';
 
+    private $oriInetNo = '';
+
     /**
      * 支付宝支付
      */
@@ -143,7 +145,7 @@ class TL extends TLBase
                 'mechNo'=>"8201908280041143",
                 'inetNo'=>$this->orderId(),
                 'sndTm' => date("YmdHis"),
-                'oriInetNo' => "d47c0a4e30037d2b72307cd9f7ee913c",
+                'oriInetNo' => $this->oriInetNo,
                 'oriTranDate' => '20190903',
                 'channelCode' => "CNJK020401",
                 'refundAmt' => "10",
@@ -293,6 +295,22 @@ class TL extends TLBase
     public function setAccttype($accttype)
     {
         $this->accttype = $accttype;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOriInetNo()
+    {
+        return $this->oriInetNo;
+    }
+
+    /**
+     * @param string $oriInetNo
+     */
+    public function setOriInetNo($oriInetNo)
+    {
+        $this->oriInetNo = $oriInetNo;
     }
 
 }
