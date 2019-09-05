@@ -178,7 +178,7 @@ class TL extends TLBase
             'body' => [
                 'mechNo'=>"8201908280041143",
 //                'oriInetNo'=>"d47c0a4e30037d2b72307cd9f7ee913c",
-                'inetNo'=>'d47c0a4e30037d2b72307cd9f7ee913c',
+                'inetNo'=>$this->oriInetNo,
 //                'inetNo'=>$this->orderId(),
                 'channelCode' => "CNJK020401",
                 'userNo' => "CNJK020401",
@@ -186,13 +186,7 @@ class TL extends TLBase
         ];
 
         $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['transDetailUrl']);
-        echo "----订单详情查询---- <br /> <br />";
-        echo "----未加密参数---- <br /> <br />";
-        echo json_encode($data,JSON_UNESCAPED_UNICODE) . "<br /> <br />";
-        echo "----发送数据---- <br /> <br />";
-        echo json_encode($res['data'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
-        echo "----响应内容---- <br /> <br />";
-        echo json_encode($res['res'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        var_dump($res);
     }
 
     /**
@@ -210,21 +204,15 @@ class TL extends TLBase
             'body' => [
                 'mechNo'=>"8201908280041143",
 //                'oriInetNo'=>"d47c0a4e30037d2b72307cd9f7ee913c",
-                'inetNo'=>'d47c0a4e30037d2b72307cd9f7ee913c',
+                'inetNo'=>$this->oriInetNo,
                 'sndTm'=>date("YmdHis"),
                 "channelCode" => "CNJK020401",
                 'userNo' => "CNJK020401",
             ],
         ];
 
-        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['transDetailUrl']);
-        echo "----交易状态查询---- <br /> <br />";
-        echo "----未加密参数---- <br /> <br />";
-        echo json_encode($data,JSON_UNESCAPED_UNICODE) . "<br /> <br />";
-        echo "----发送数据---- <br /> <br />";
-        echo json_encode($res['data'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
-        echo "----响应内容---- <br /> <br />";
-        echo json_encode($res['res'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['transStatusUrl']);
+        var_dump($res);
     }
 
     /**

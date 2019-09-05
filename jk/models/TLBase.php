@@ -124,10 +124,17 @@ class TLBase extends Model
         $aesKey = strtoupper(md5($data['seqNO'] . $data['appAccessToken'] . $jktl['appsecretkey'] . $key));
         $data['reqData'] = Encrypt::aesEncryptByKey($json,$aesKey,$jktl['iv']);
         $res = Http::curl($url,$data);
-        $result = [];
-        $result['data'] = $data;
-        $result['res'] = $res;
-        return $result;
+        $resArr = json_decode($res,true);
+        if($resArr['errorCode'] == '000000'){
+            $reskey = Encrypt::rsaDecryptByPublicKey($resArr['rsaEncryptData'],$jktl['TLPublicKey']);
+            $aeskey = strtoupper(md5($resArr['seqNO'] . $data['appAccessToken'] . $jktl['appsecretkey'] . $reskey));
+            $json = Encrypt::aesDecryptByKey($resArr['rspData'],$aeskey,$jktl['iv']);
+            $resdata = json_decode($json,true);
+            if(is_array($resdata) && $resdata){
+                return $resdata;
+            }
+        }
+        return $resArr;
     }
 
     /**

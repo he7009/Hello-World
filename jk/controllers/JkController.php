@@ -77,12 +77,16 @@ class JkController extends Controller
     public function actionTransdetail()
     {
         $tlModel = new TL();
+        $oriInetNo = Yii::$app->request->get('order');
+        $tlModel->setOriInetNo($oriInetNo);
         $tlModel->transDetail();
     }
 
     public function actionTransstatus()
     {
         $tlModel = new TL();
+        $oriInetNo = Yii::$app->request->get('order');
+        $tlModel->setOriInetNo($oriInetNo);
         $tlModel->transStatus();
     }
 
