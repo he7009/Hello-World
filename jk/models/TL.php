@@ -153,14 +153,10 @@ class TL extends TLBase
             ],
         ];
 
+        var_dump($data['body']['inetNo']);
+
         $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['refundUrl']);
-        echo "----退款接口---- <br /> <br />";
-        echo "----未加密参数---- <br /> <br />";
-        echo json_encode($data,JSON_UNESCAPED_UNICODE) . "<br /> <br />";
-        echo "----发送数据---- <br /> <br />";
-        echo json_encode($res['data'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
-        echo "----响应内容---- <br /> <br />";
-        echo json_encode($res['res'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        var_dump($res);
     }
 
     /**
