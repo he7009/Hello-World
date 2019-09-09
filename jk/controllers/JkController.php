@@ -27,7 +27,7 @@ class JkController extends Controller
     public function actionWx()
     {
         $code = Yii::$app->request->get('code');
-        $status = Yii::$app->request->get('status','10');
+        $state = Yii::$app->request->get('state','10');
         $rsp = Http::get("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx3b494ab165585a3c&secret=29fb53c700fb0152aa65c80e0a043477&code={$code}&grant_type=authorization_code");
         $rspArr = json_decode($rsp,true);
         if(empty($rspArr) || !$rspArr['openid']){
@@ -37,7 +37,7 @@ class JkController extends Controller
         $openId = $rspArr['openid'];
 //        $openId = 'oGAHm01BQK_zDbGOTJwEWTumtrz4';
         $tlModel = new TL();
-        $tlModel->setPayAmount($status);
+        $tlModel->setPayAmount($state);
         $tlModel->setOpenid($openId);
         $resArr = $tlModel->wxPay();
 
