@@ -75,7 +75,9 @@ class JkController extends Controller
     {
         $tlModel = new TL();
         $oriInetNo = Yii::$app->request->get('order');
+        $m = Yii::$app->request->get('m','10');
         $tlModel->setOriInetNo($oriInetNo);
+        $tlModel->setPayAmount($m);
         $tlModel->refund();
     }
 

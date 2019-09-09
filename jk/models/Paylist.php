@@ -18,7 +18,7 @@ class Paylist extends Model
 
     public function getPayList()
     {
-        $sql = " SELECT * FROM jk_pay WHERE paystatus = {$this->paystatus} limit 20";
+        $sql = " SELECT * FROM jk_pay ORDER BY id DESC  limit 40 ";
         $data = Yii::$app->db->createCommand($sql)->queryAll();
         return $data;
     }

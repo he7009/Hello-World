@@ -39,7 +39,7 @@ class TL extends TLBase
                 'inetNo'=>$this->orderId(),
                 'sndTm' => date("YmdHis"),
                 'prdctMsg' => "CK-190826-0001(珠溪酒业)",
-                'payAmount' => "10",
+                'payAmount' => $this->payAmount,
                 "ccy" => "156",
                 'sendDate' => date("Ymd"),
                 'userNo' => 'CNJK020401',
@@ -71,7 +71,7 @@ class TL extends TLBase
                 'clntSbtpId' => $this->openid,
                 'wechatPublicNo' => 'wx3b494ab165585a3c',
                 'prdctMsg' => "CK-190826-0001",
-                'payAmount' => "10",
+                'payAmount' => $this->payAmount,
                 "ccy" => "156",
                 'toUserNo' => 'CNJK020401'
             ],
@@ -150,7 +150,7 @@ class TL extends TLBase
                 'oriInetNo' => $this->oriInetNo,
                 'oriTranDate' => '20190903',
                 'channelCode' => "CNJK020401",
-                'refundAmt' => "10",
+                'refundAmt' => $this->payAmount,
                 "ccy" => "156"
             ],
         ];
