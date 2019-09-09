@@ -154,10 +154,7 @@ class TL extends TLBase
                 "ccy" => "156"
             ],
         ];
-
-        var_dump($data['body']['inetNo']);
-
-        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['refundUrl']);
+        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['refundUrl'],true);
         var_dump($res);
     }
 
@@ -235,14 +232,8 @@ class TL extends TLBase
             ],
         ];
 
-        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['scanPayUrl']);
-        echo "----交易状态查询---- <br /> <br />";
-        echo "----未加密参数---- <br /> <br />";
-        echo json_encode($data,JSON_UNESCAPED_UNICODE) . "<br /> <br />";
-        echo "----发送数据---- <br /> <br />";
-        echo json_encode($res['data'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
-        echo "----响应内容---- <br /> <br />";
-        echo json_encode($res['res'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['scanPayUrl'],true);
+        var_dump($res);
     }
 
 
