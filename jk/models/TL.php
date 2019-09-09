@@ -228,7 +228,7 @@ class TL extends TLBase
             'body' => [
                 'mechNo'=>"8201908280041143",
                 'acctNo' => $this->code,
-                'tranAmt'=> "1",
+                'tranAmt'=> $this->payAmount,
                 'inetNo'=>$this->orderId('main'),
                 'userNo'=>"CNJK020401",
                 "channelCode" => "CNJK020401",
