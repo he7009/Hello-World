@@ -8,7 +8,8 @@
  */
 include __DIR__ . '/phpqrcode.php';
 
-$value = 'https://jk.helilan.cn/jk/ali/';
+$m = isset($_GET['m']) ? $_GET['m'] : '';
+$value = 'https://jk.helilan.cn/jk/ali/?m=' . $m;
 $errorCorrectionLevel = 'L';
 $matrixPointSize = 5;
 \QRcode::png($value, false, $errorCorrectionLevel, $matrixPointSize, 2);

@@ -15,6 +15,8 @@ class TL extends TLBase
 
     private $openid = '';
 
+    private $payAmount = "10";
+
     private $accttype = '02';
 
     private $oriInetNo = '';
@@ -295,6 +297,22 @@ class TL extends TLBase
     public function setOriInetNo($oriInetNo)
     {
         $this->oriInetNo = $oriInetNo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPayAmount()
+    {
+        return $this->payAmount;
+    }
+
+    /**
+     * @param string $payAmount
+     */
+    public function setPayAmount($payAmount)
+    {
+        $this->payAmount = $payAmount > 0 ? $payAmount : "10";
     }
 
 }
