@@ -1,62 +1,74 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: 段育德
- * Date: 2019/8/19
- * Time: 16:18
- */
 
-class AES
+class CryptAES
 {
-    private $data = '{"signMethod":"MD5","rspData":"W5MXBGmCwe8fs28FO0P8DnSreEaysdM9z+5xOxlHZlPexWptv0dfda6QBx5geqGkhV/CilNIRlKmYwRAbRQI/mN2XE32CLh1HJFQjPKU2B65+AkAjDOFlwJxBwX81dlG667nFAQSKqsZ/3RMnqMLNL19BJ38mlM0Nyn5iZ1Emz7yNH2fht8IB+g4WA1XNx4Ykf0L9AWTaO4D7ULHh8Pf6ffADauphmgHTGuy6cNGhnJTE/fYHYqiuMieqgxXiT6vxCnywMXs/zxz66YZoA9+q4pu9VhAkw72HBdQfznz7bVdY5atp6ZMqIxxjr9SunxozUmKrv2m9RBsHnIj5tNkccosRFinzaGycEI7AxdQ4y0ZJheHoh3Pzy2fkkByvWDuckGpy84Uu2ZUaEhs59JWVxG/THVk0x1c6yfH8f9YposN0xs82f1jU+urD3S+AZNOjRkLmFUNihUfb2ttbY8mXRYpPttgOJw+hhecvR6PUz4=","encryptMethod":"AES","errorCode":"000000","errorMsg":"交易成功","seqNO":"934208","appID":"7db7f404-1a20-7777-bf8b-2bb8060f67ad","rsaEncryptData":"B5N9geafVXE+wIdwv4voUbbkhIhi34PIfuoBt6ObVbqxR+oVo69vqAXZFVXl4Vaz+fG6jPyJD5xtd6qzeEMASw5AB4Y3S3O+vqlTY6yvANY6FFHyBQKPpoQr19tTXo7XvmZRjmI34KxQ6hMbxnA4fHrTcTnxu3Idq1/slp4RNu3GOSzTST+3ikePygOAzTYTHBSNnCM74znC5AlUnpPZ29SICjdQOK5bGAq758zmkCdDjuv8cfyamJoWNpdvFHAclwZEN3w4JXcVrk9jG/EujZmdpZp+AuyXGZbW8y/vlE0U9H47XGhWs/p9M29fmXlT4NRE6CJWaZ/85lbcdTRdVQ==","sign":"DAFF2476F3BC782D42238C498B473AB1"}';
+    /**
+     * var string $method 加解密方法，可通过openssl_get_cipher_methods()获得
+     */
+    protected $method;
 
-    public function run()
+    /**
+     * var string $secret_key 加解密的密钥
+     */
+    protected $secret_key;
+
+    /**
+     * var string $iv 加解密的向量，有些方法需要设置比如CBC
+     */
+    protected $iv;
+
+    /**
+     * var string $options （不知道怎么解释，目前设置为0没什么问题）
+     */
+    protected $options;
+
+    /**
+     * 构造函数
+     *
+     * @param string $key 密钥
+     * @param string $method 加密方式
+     * @param string $iv iv向量
+     * @param mixed $options 还不是很清楚
+     *
+     */
+    public function __construct($key, $method = 'AES-128-ECB', $iv = '', $options = OPENSSL_RAW_DATA)
     {
-        $dataArr = json_decode($this->data,true);
-        $token = $this->rsa($dataArr['rsaEncryptData']);
-        $asskey = strtoupper(md5($dataArr['seqNO'] . '34f562be78030eb74e35f8f8ad210d5a' . '8f85134c-3ea4-6a27-e053-010000705858' . $token));
-        $json = $this->aesDecryptByKey($dataArr['rspData'],$asskey);
+        // key是必须要设置的
+        $this->secret_key = isset($key) ? $key : exit('key为必须项');
 
-        $sign = strtoupper(md5($json . $dataArr['seqNO'] . '8f85134c-3ea4-6a27-e053-010000705858' . $token));
-        var_dump($token);
-        $reqdata = json_decode($json,true);
-        var_dump($reqdata);
+        $this->method = $method;
 
-        echo $sign . PHP_EOL;
-        echo $dataArr['sign'] . PHP_EOL;
-//        var_dump($dataArr);
-    }
+        $this->iv = $iv;
 
-    public function rsa($data)
-    {
-        $data = base64_decode($data);
-        openssl_public_decrypt($data,$decrypted,"-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwQSFJN8fA4mxTeAnGGv6
-cAmfBJFukQwFsx6TyW/G0agMKZjWEpbt8ei9hPl4tQC3T6XJPVW08QYidYIs0JmP
-ftjVoU7hmmzdagXLybAig9C5rNeXXJMKaVYK+iiPc7Aipl0KBeNyVzqQaa4eXXD0
-TCyfDG7AClt853+YNiS0R7cp5RK+9ifWO3+CZbYDN7ufSvZQlz5c0CWxVA6TFSH3
-7GERbQAxQzf0Tgk8EjEvjMh2W6cIyQ34McytGwJGGlQf2Y1On7ExaZqJ4N3Burbj
-vmHPCWh4EMy2pb8hyb8sL/xkt8Hwtagcc7NDGSRjNEQikQqBtno0c7PSwITIaE9q
-fwIDAQAB
------END PUBLIC KEY-----",OPENSSL_PKCS1_PADDING);
-        return $decrypted;
+        $this->options = $options;
     }
 
     /**
-     * @AES 对称解密
-     * @param $data
-     * @param $key
-     * @param $iv
-     * @param string $method
-     * @return bool|string
+     * 加密方法，对数据进行加密，返回加密后的数据
+     *
+     * @param string $data 要加密的数据
+     *
+     * @return string
+     *
      */
-    public static function aesDecryptByKey($data, $key, $iv = 'abcdefghABCDEFGH',$method = 'AES-256-CBC')
+    public function encrypt($data)
     {
-        $data = base64_decode($data);
-        $data = openssl_decrypt($data,$method,$key,OPENSSL_RAW_DATA,$iv);
-        return $data;
+//        var_dump(openssl_get_cipher_methods());
+//        exit;
+//        $block = 16;
+//        $pad = $block - (strlen($data) % $block); //Compute how many characters need to pad
+//        $data .= str_repeat(chr($pad), $pad);
+        return strtoupper(bin2hex(openssl_encrypt($data, 'aes-256-ecb', "fLMbFYkTC8vTlwKaGyrb0KmvyWC57IvO", 1)));
+    }
+
+    public function decrypt($data){
+        $data = pack("H*",strtolower($data));
+        return openssl_decrypt($data, 'aes-256-ecb', "fLMbFYkTC8vTlwKaGyrb0KmvyWC57IvO", 1);
     }
 }
 
-$aes = new AES();
-$aes->run();
+$Crypt = new CryptAES("1111111122222222","AES-128-ECB");
+
+echo "加密结果：" . $Crypt->encrypt("sh=8201908280041143&dh=B3A49E95D046440D2D67E9F38&je=3560.00") . PHP_EOL;
+
+echo "解密结果：" . $Crypt->decrypt("6BC3970CD3D50F6A6651929F8A0E2271C3D50318343D5C27B8B7D92A166A5CAE33288D7A8DC8EEB921CE027A229E7BA6573D6502E601424248F41521532CD2B866CD30F3AE55B8ECBA3DA6C0C401CA19") . PHP_EOL;
