@@ -105,8 +105,11 @@ class TLBase extends Model
      * @param $url
      * @return mixed|null
      */
-    public function statusCityQuery($postData = [],$url)
+    public function statusCityQuery($postData = [],$url,$recode = false)
     {
+        if($recode){
+            $this->createPay($postData);
+        }
         $jktl = Yii::$app->params['JKTL'];
         $json = json_encode($postData, JSON_UNESCAPED_UNICODE);
         $seqNO = (string)rand(100000,999999);
@@ -130,10 +133,12 @@ class TLBase extends Model
             $aeskey = strtoupper(md5($resArr['seqNO'] . $data['appAccessToken'] . $jktl['appsecretkey'] . $reskey));
             $json = Encrypt::aesDecryptByKey($resArr['rspData'],$aeskey,$jktl['iv']);
             $resdata = json_decode($json,true);
-            if(is_array($resdata) && $resdata){
+            if(is_array($resdata) && $resdata && $recode){
+                $this->updatePay($res,2);
                 return $resdata;
             }
         }
+        $recode && $this->updatePay($res,3);
         return $resArr;
     }
 
@@ -146,13 +151,13 @@ class TLBase extends Model
     {
         $insertData = [];
         $insertData['uid'] = isset($reqData['body']['clntSbtpId']) ? $reqData['body']['clntSbtpId'] : '';
-        $insertData['accttye'] = intval($reqData['body']['acctType']);
+        $insertData['accttye'] = isset($reqData['body']['acctType']) ? intval($reqData['body']['acctType']) : 0;
         $insertData['mechno'] = $reqData['body']['mechNo'];
         $insertData['inetno'] = $reqData['body']['inetNo'];
         $insertData['txsno'] = $reqData['head']['txSno'];
         $insertData['mrchsno'] = $reqData['head']['mrchSno'];
         $insertData['txtime'] = $reqData['head']['txTime'];
-        $insertData['payamount'] = $reqData['body']['payAmount'];
+        $insertData['payamount'] = isset($reqData['body']['payAmount']) ? $reqData['body']['payAmount'] : (isset($reqData['body']['refundAmt']) ? $reqData['body']['refundAmt'] : (isset($reqData['body']['tranAmt']) ? $reqData['body']['tranAmt'] : 0));
         $insertData['reqdata'] = json_encode($reqData,JSON_UNESCAPED_UNICODE);
         $insertData['resdata'] = '';
         $insertData['paystatus'] = 1;

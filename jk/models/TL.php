@@ -15,6 +15,8 @@ class TL extends TLBase
 
     private $openid = '';
 
+    private $payAmount = "10";
+
     private $accttype = '02';
 
     private $oriInetNo = '';
@@ -37,7 +39,7 @@ class TL extends TLBase
                 'inetNo'=>$this->orderId(),
                 'sndTm' => date("YmdHis"),
                 'prdctMsg' => "CK-190826-0001(珠溪酒业)",
-                'payAmount' => "10",
+                'payAmount' => $this->payAmount,
                 "ccy" => "156",
                 'sendDate' => date("Ymd"),
                 'userNo' => 'CNJK020401',
@@ -69,7 +71,7 @@ class TL extends TLBase
                 'clntSbtpId' => $this->openid,
                 'wechatPublicNo' => 'wx3b494ab165585a3c',
                 'prdctMsg' => "CK-190826-0001",
-                'payAmount' => "10",
+                'payAmount' => $this->payAmount,
                 "ccy" => "156",
                 'toUserNo' => 'CNJK020401'
             ],
@@ -148,14 +150,11 @@ class TL extends TLBase
                 'oriInetNo' => $this->oriInetNo,
                 'oriTranDate' => '20190903',
                 'channelCode' => "CNJK020401",
-                'refundAmt' => "10",
+                'refundAmt' => $this->payAmount,
                 "ccy" => "156"
             ],
         ];
-
-        var_dump($data['body']['inetNo']);
-
-        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['refundUrl']);
+        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['refundUrl'],true);
         var_dump($res);
     }
 
@@ -226,21 +225,15 @@ class TL extends TLBase
             'body' => [
                 'mechNo'=>"8201908280041143",
                 'acctNo' => $this->code,
-                'tranAmt'=> "1",
+                'tranAmt'=> $this->payAmount,
                 'inetNo'=>$this->orderId('main'),
                 'userNo'=>"CNJK020401",
                 "channelCode" => "CNJK020401",
             ],
         ];
 
-        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['scanPayUrl']);
-        echo "----交易状态查询---- <br /> <br />";
-        echo "----未加密参数---- <br /> <br />";
-        echo json_encode($data,JSON_UNESCAPED_UNICODE) . "<br /> <br />";
-        echo "----发送数据---- <br /> <br />";
-        echo json_encode($res['data'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
-        echo "----响应内容---- <br /> <br />";
-        echo json_encode($res['res'],JSON_UNESCAPED_UNICODE) . "<br /> <br />";
+        $res = $this->statusCityQuery($data,Yii::$app->params['JKTL']['scanPayUrl'],true);
+        var_dump($res);
     }
 
 
@@ -295,6 +288,22 @@ class TL extends TLBase
     public function setOriInetNo($oriInetNo)
     {
         $this->oriInetNo = $oriInetNo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPayAmount()
+    {
+        return $this->payAmount;
+    }
+
+    /**
+     * @param string $payAmount
+     */
+    public function setPayAmount($payAmount)
+    {
+        $this->payAmount = $payAmount > 0 ? $payAmount : "10";
     }
 
 }
