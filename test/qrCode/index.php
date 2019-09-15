@@ -11,7 +11,7 @@ class index
 {
     public function start()
     {
-        $value = 'http://test.helilan.cn/qrCode/u.php';
+        $value = 'https://sk.helilan.cn/jk/bscan/?p=e1d507d110788378ed361af99c7d89940abd1574f3f194d7703570bdc3f7fd0cb238b04fd60afc5375ad8dd5f8387f8d';
         $errorCorrectionLevel = 'L';  //容错级别
         $matrixPointSize = 5;      //生成图片大小
         QRcode::png($value, false, $errorCorrectionLevel, $matrixPointSize, 2);
