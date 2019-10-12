@@ -63,12 +63,12 @@ class CryptAES
 
 $Crypt = new CryptAES("1111111122222222","AES-128-ECB");
 
-$str = 'sh=8201908280041143&dh=ck9091400020';
 
+$str = 'sh=8201908280041143&dh=ckdydT00001&je=0.01&code=134704280346946267';
 echo "未加密字符串：" . $str . PHP_EOL;
 
 echo "加密结果：" . $Crypt->encrypt($str) . PHP_EOL;
 
 echo "解密结果：" . $Crypt->decrypt("E1D507D110788378ED361AF99C7D89946D02CD2D868B7B205A9658AAC21C8E42A5F90BB88CDD5DC78DDF41676C304C2E") . PHP_EOL;
 
-echo "请求URL: " . "https://sk.helilan.cn/g/b/?p=" . $Crypt->encrypt($str) . PHP_EOL;
+echo "请求URL: " . "https://sk.jkmjk.com/g/z/?p=" . $Crypt->encrypt($str) . PHP_EOL;
