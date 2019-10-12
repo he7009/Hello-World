@@ -63,7 +63,7 @@ class CryptAES
 
 $Crypt = new CryptAES("1111111122222222","AES-128-ECB");
 
-$str = 'sh=8201908280041143&dh=ck9091400014&je=0.02';
+$str = 'sh=8201908280041143&dh=ck9091400020';
 
 echo "未加密字符串：" . $str . PHP_EOL;
 
