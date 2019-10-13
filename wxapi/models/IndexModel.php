@@ -14,10 +14,13 @@ use app\models\table;
 
 class IndexModel extends Model
 {
+    /**
+     *
+     */
     public function ad()
     {
         $tableAd = new table\Ad();
-        $data = $tableAd::find()->asArray()->all();
+        $tableAd::find()->asArray()->all();
         var_dump($data);
         exit;
     }
