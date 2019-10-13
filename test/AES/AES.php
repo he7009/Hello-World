@@ -63,8 +63,8 @@ class CryptAES
 
 $Crypt = new CryptAES("1111111122222222","AES-128-ECB");
 
-$str = 'sh=8201908280041143&dh=ckdydT00001&je=0.01&code=134704280346946267';
 
+$str = 'sh=8201908280041143&dh=ckdydT00001&je=0.01&code=134704280346946267';
 echo "未加密字符串：" . $str . PHP_EOL;
 
 echo "加密结果：" . $Crypt->encrypt($str) . PHP_EOL;
