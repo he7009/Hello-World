@@ -33,7 +33,16 @@ class SiteController extends Controller
      */
     public function actionRewrite()
     {
-        echo "echo Rewrete";
+        $userTable = new \app\models\table\User();
+        $userTable->username = "zhagnsan";
+        $userTable->passwd = md5("jianing" . time());
+        $userTable->createtime = date("Y-m-d H:i:s");
+        $userTable->save();
+
+        $userTable = new \app\models\table\User();
+        $userTable->loginname = "jianing";
+        $userTable->createtime = date("Y-m-d H:i:s");
+        $userTable->save();
         exit;
     }
 
