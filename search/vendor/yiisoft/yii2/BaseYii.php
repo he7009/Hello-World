@@ -128,7 +128,7 @@ class BaseYii
      * @throws InvalidArgumentException if the alias is invalid while $throwException is true.
      * @see setAlias()
      *
-     * getAlias 是一个解析真是路径的方法，可以把路径中的 “别名” 替换为 “别名” 对应的真实路径
+     * getAlias 是一个解析真实路径的方法，可以把路径中的 “别名” 替换为 “别名” 对应的真实路径
      * 获取别名路径对应的真实路径（字符串-路径 对应关系）逻辑
      * 1.如果首字符不是@，则不是别名，而是直接路径，直接返回
      * 2.获取跟文件夹
