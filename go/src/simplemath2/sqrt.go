@@ -1,4 +1,4 @@
-package simplemath
+package simplemath2
 
 import "math"
 
