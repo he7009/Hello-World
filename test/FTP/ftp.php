@@ -4,7 +4,7 @@
 $conn = ftp_connect('ftp.jkmjk.com');
 
 // 使用username和password登录
-ftp_login($conn, 'ftpUser1', 'Appleid-88');
+ftp_login($conn, 'ftpTaiLong', 'c5!sPscHbLCNab#F');
 
 // 获取远端系统类型
 ftp_systype($conn);
