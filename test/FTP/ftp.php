@@ -1,7 +1,7 @@
 <?php
 
 // 联接FTP服务器
-$conn = ftp_connect('47.103.137.236',21);
+$conn = ftp_connect('ftp.jkmjk.com');
 
 // 使用username和password登录
 ftp_login($conn, 'ftpUser1', 'Appleid-88');
