@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"sync"
+	"time"
 )
 
 var (
@@ -34,7 +35,7 @@ func player(name string, court chan int) {
 			fmt.Printf("Player: %s Won\n", name)
 			return
 		}
-
+		rand.Seed(time.Now().UnixNano())
 		n := rand.Intn(100)
 		if n%13 == 0 {
 			fmt.Printf("Player: %s Missed\n", name)
