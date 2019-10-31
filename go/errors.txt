@@ -1,0 +1,2 @@
+Error2019/11/01 07:05:08 F:/vagrant/wwwroot/Hello-World/go/src/log/main.go:32: 我是文件，哈哈哈哈
+Error： 2019/11/01 07:05:55 F:/vagrant/wwwroot/Hello-World/go/src/log/main.go:32: 我是文件，哈哈哈哈
