@@ -66,6 +66,7 @@ use yii\base\InvalidConfigException;
  * marks a relation as inverse of another relation and [[onCondition()]] which adds a condition that
  * is to be added to relational query join condition.
  *
+ *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @author Carsten Brandt <mail@cebe.cc>
  * @since 2.0
@@ -120,6 +121,17 @@ class ActiveQuery extends Query implements ActiveQueryInterface
     {
         parent::init();
         $this->trigger(self::EVENT_INIT);
+    }
+
+    /**
+     * Sets the [[asArray]] property.
+     * @param bool $value whether to return the query results in terms of arrays instead of Active Records.
+     * @return $this the query object itself
+     */
+    public function asArray($value = true)
+    {
+        $this->asArray = $value;
+        return $this;
     }
 
     /**
