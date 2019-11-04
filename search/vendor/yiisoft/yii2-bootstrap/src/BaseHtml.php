@@ -42,7 +42,7 @@ class BaseHtml extends \yii\helpers\Html
     /**
      * Renders Bootstrap static form control.
      *
-     * By default value will be HTML-encoded using [[encode()]], you may control this loginBehavior
+     * By default value will be HTML-encoded using [[encode()]], you may control this behavior
      * via 'encode' option.
      * @param string $value static control value.
      * @param array $options the tag options in terms of name-value pairs. These will be rendered as

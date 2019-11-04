@@ -602,7 +602,7 @@ abstract class BaseMigrateController extends Controller
      *
      * In order to generate a namespaced migration, you should specify a namespace before the migration's name.
      * Note that backslash (`\`) is usually considered a special character in the shell, so you need to escape it
-     * properly to avoid shell errors or incorrect loginBehavior.
+     * properly to avoid shell errors or incorrect behavior.
      * For example:
      *
      * ```

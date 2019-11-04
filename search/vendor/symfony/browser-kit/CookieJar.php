@@ -18,7 +18,7 @@ namespace Symfony\Component\BrowserKit;
  */
 class CookieJar
 {
-    protected $cookieJar = array();
+    protected $cookieJar = [];
 
     public function set(Cookie $cookie)
     {
@@ -30,7 +30,7 @@ class CookieJar
      *
      * You should never use an empty domain, but if you do so,
      * this method returns the first cookie for the given name/path
-     * (this loginBehavior ensures a BC loginBehavior with previous versions of
+     * (this behavior ensures a BC behavior with previous versions of
      * Symfony).
      *
      * @param string $name   The cookie name
@@ -66,8 +66,8 @@ class CookieJar
      * Removes a cookie by name.
      *
      * You should never use an empty domain, but if you do so,
-     * all cookies for the given name/path expire (this loginBehavior
-     * ensures a BC loginBehavior with previous versions of Symfony).
+     * all cookies for the given name/path expire (this behavior
+     * ensures a BC behavior with previous versions of Symfony).
      *
      * @param string $name   The cookie name
      * @param string $path   The cookie path
@@ -84,7 +84,7 @@ class CookieJar
             // this should never happen but it allows for a better BC
             $domains = array_keys($this->cookieJar);
         } else {
-            $domains = array($domain);
+            $domains = [$domain];
         }
 
         foreach ($domains as $domain) {
@@ -105,7 +105,7 @@ class CookieJar
      */
     public function clear()
     {
-        $this->cookieJar = array();
+        $this->cookieJar = [];
     }
 
     /**
@@ -116,7 +116,7 @@ class CookieJar
      */
     public function updateFromSetCookie(array $setCookies, $uri = null)
     {
-        $cookies = array();
+        $cookies = [];
 
         foreach ($setCookies as $cookie) {
             foreach (explode(',', $cookie) as $i => $part) {
@@ -157,7 +157,7 @@ class CookieJar
     {
         $this->flushExpiredCookies();
 
-        $flattenedCookies = array();
+        $flattenedCookies = [];
         foreach ($this->cookieJar as $path) {
             foreach ($path as $cookies) {
                 foreach ($cookies as $cookie) {
@@ -181,8 +181,8 @@ class CookieJar
     {
         $this->flushExpiredCookies();
 
-        $parts = array_replace(array('path' => '/'), parse_url($uri));
-        $cookies = array();
+        $parts = array_replace(['path' => '/'], parse_url($uri));
+        $cookies = [];
         foreach ($this->cookieJar as $domain => $pathCookies) {
             if ($domain) {
                 $domain = '.'.ltrim($domain, '.');

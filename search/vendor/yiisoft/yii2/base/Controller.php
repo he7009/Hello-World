@@ -53,7 +53,7 @@ class Controller extends Component implements ViewContextInterface
     public $defaultAction = 'index';
     /**
      * @var null|string|false the name of the layout to be applied to this controller's views.
-     * This property mainly affects the loginBehavior of [[render()]].
+     * This property mainly affects the behavior of [[render()]].
      * Defaults to null, meaning the actual layout value should inherit that from [[module]]'s layout value.
      * If false, no layout will be applied.
      */
@@ -83,7 +83,6 @@ class Controller extends Component implements ViewContextInterface
     {
         $this->id = $id;
         $this->module = $module;
-//        $this->on(self::EVENT_BEFORE_ACTION,['app\study\event\cbeforeActionEvent','requestBefore']);
         parent::__construct($config);
     }
 
@@ -124,7 +123,6 @@ class Controller extends Component implements ViewContextInterface
      */
     public function runAction($id, $params = [])
     {
-        //创建方法Action对象
         $action = $this->createAction($id);
         if ($action === null) {
             throw new InvalidRouteException('Unable to resolve the request: ' . $this->getUniqueId() . '/' . $id);
@@ -153,6 +151,7 @@ class Controller extends Component implements ViewContextInterface
         }
 
         $result = null;
+
         if ($runAction && $this->beforeAction($action)) {
             // run the action
             $result = $action->runWithParams($params);
@@ -197,7 +196,7 @@ class Controller extends Component implements ViewContextInterface
 
     /**
      * Binds the parameters to the action.
-     * This method is invoked by [[Action]]d when it begins to run with the given parameters.
+     * This method is invoked by [[Action]] when it begins to run with the given parameters.
      * @param Action $action the action to be bound with parameters.
      * @param array $params the parameters to be bound to the action.
      * @return array the valid parameters that the action can run with.
@@ -212,7 +211,7 @@ class Controller extends Component implements ViewContextInterface
      * The method first checks if the action ID has been declared in [[actions()]]. If so,
      * it will use the configuration declared there to create the action object.
      * If not, it will look for a controller method whose name is in the format of `actionXyz`
-     * where `Xyz` stands for the action ID. If found, an [[InlineAction]] representing that
+     * where `xyz` is the action ID. If found, an [[InlineAction]] representing that
      * method will be created and returned.
      * @param string $id the action ID.
      * @return Action|null the newly created action instance. Null if the ID doesn't resolve into any action.
@@ -227,14 +226,7 @@ class Controller extends Component implements ViewContextInterface
         if (isset($actionMap[$id])) {
             return Yii::createObject($actionMap[$id], [$id, $this]);
         } elseif (preg_match('/^[a-z0-9\\-_]+$/', $id) && strpos($id, '--') === false && trim($id, '-') === $id) {
-            /**
-             * 解析方法名称
-             * 方法名，多个单词组成并且首字母大写的访问链接方法需要使用中划线(-)连接
-             * 例如：
-             * 方法名: actionDoubleWord
-             * 访问:double-word
-             */
-            $methodName = 'action' . str_replace(' ', '', ucwords(implode(' ', explode('-', $id))));
+            $methodName = 'action' . str_replace(' ', '', ucwords(str_replace('-', ' ', $id)));
             if (method_exists($this, $methodName)) {
                 $method = new \ReflectionMethod($this, $methodName);
                 if ($method->isPublic() && $method->getName() === $methodName) {
@@ -304,7 +296,7 @@ class Controller extends Component implements ViewContextInterface
      * @param mixed $result the action return result.
      * @return mixed the processed action result.
      */
-    public function  afterAction($action, $result)
+    public function afterAction($action, $result)
     {
         $event = new ActionEvent($action);
         $event->result = $result;
@@ -322,9 +314,7 @@ class Controller extends Component implements ViewContextInterface
     {
         $modules = [$this->module];
         $module = $this->module;
-        //循环遍历module.找到所有module层
         while ($module->module !== null) {
-            //在前面插入，高层次的module在前面执行
             array_unshift($modules, $module->module);
             $module = $module->module;
         }
@@ -508,6 +498,7 @@ class Controller extends Component implements ViewContextInterface
                 $layout = $module->layout;
             }
         }
+
         if (!isset($layout)) {
             return false;
         }

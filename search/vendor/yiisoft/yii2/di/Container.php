@@ -163,19 +163,14 @@ class Container extends Component
             $object = call_user_func($definition, $this, $params, $config);
         } elseif (is_array($definition)) {
             $concrete = $definition['class'];
-            //删除class,为后面合并$definition直接携带的参数扫除障碍
             unset($definition['class']);
 
-            //合并$definition直接携带的参数
-            //处理类实例化需要的param config
             $config = array_merge($definition, $config);
             $params = $this->mergeParams($class, $params);
 
             if ($concrete === $class) {
-                //相同则直接构建，不存在循环_definitions
                 $object = $this->build($class, $params, $config);
             } else {
-                //查看是否存在循环_definitions
                 $object = $this->get($concrete, $params, $config);
             }
         } elseif (is_object($definition)) {
@@ -186,7 +181,6 @@ class Container extends Component
 
         if (array_key_exists($class, $this->_singletons)) {
             // singleton
-            //如果设置单例则进行单例缓存
             $this->_singletons[$class] = $object;
         }
 
@@ -262,6 +256,7 @@ class Container extends Component
         unset($this->_singletons[$class]);
         return $this;
     }
+
     /**
      * Registers a class definition with this container and marks the class as a singleton class.
      *
@@ -367,15 +362,13 @@ class Container extends Component
     protected function build($class, $params, $config)
     {
         /* @var $reflection ReflectionClass */
-        //获取反射类、依赖关系（类构造函数参数相关信息）
         list($reflection, $dependencies) = $this->getDependencies($class);
-        //传参覆盖默认值
+
         foreach ($params as $index => $param) {
             $dependencies[$index] = $param;
         }
-        //解析依赖，实例化其中的依赖类，可能会触发递归
+
         $dependencies = $this->resolveDependencies($dependencies, $reflection);
-        //检查类是否可以实例化
         if (!$reflection->isInstantiable()) {
             throw new NotInstantiableException($reflection->name);
         }
@@ -385,13 +378,12 @@ class Container extends Component
 
         $config = $this->resolveDependencies($config);
 
-        //实现接口Configurable 放入参数实例化自动配置
         if (!empty($dependencies) && $reflection->implementsInterface('yii\base\Configurable')) {
             // set $config as the last parameter (existing one will be overwritten)
             $dependencies[count($dependencies) - 1] = $config;
             return $reflection->newInstanceArgs($dependencies);
         }
-        //没有实现接口，或者以来为空实现config配置
+
         $object = $reflection->newInstanceArgs($dependencies);
         foreach ($config as $name => $value) {
             $object->$name = $value;
@@ -426,6 +418,7 @@ class Container extends Component
      * Returns the dependencies of the specified class.
      * @param string $class class name, interface name or alias name
      * @return array the dependencies of the specified class.
+     * @throws InvalidConfigException if a dependency cannot be resolved or if a dependency cannot be fulfilled.
      */
     protected function getDependencies($class)
     {
@@ -434,10 +427,13 @@ class Container extends Component
         }
 
         $dependencies = [];
-        $reflection = new ReflectionClass($class);
+        try {
+            $reflection = new ReflectionClass($class);
+        } catch (\ReflectionException $e) {
+            throw new InvalidConfigException('Failed to instantiate component or class "' . $class . '".', 0, $e);
+        }
 
         $constructor = $reflection->getConstructor();
-
         if ($constructor !== null) {
             foreach ($constructor->getParameters() as $param) {
                 if (version_compare(PHP_VERSION, '5.6.0', '>=') && $param->isVariadic()) {
@@ -509,11 +505,7 @@ class Container extends Component
      */
     public function invoke(callable $callback, $params = [])
     {
-        if (is_callable($callback)) {
-            return call_user_func_array($callback, $this->resolveCallableDependencies($callback, $params));
-        }
-
-        return call_user_func_array($callback, $params);
+        return call_user_func_array($callback, $this->resolveCallableDependencies($callback, $params));
     }
 
     /**
@@ -533,6 +525,8 @@ class Container extends Component
     {
         if (is_array($callback)) {
             $reflection = new \ReflectionMethod($callback[0], $callback[1]);
+        } elseif (is_object($callback) && !$callback instanceof \Closure) {
+            $reflection = new \ReflectionMethod($callback, '__invoke');
         } else {
             $reflection = new \ReflectionFunction($callback);
         }

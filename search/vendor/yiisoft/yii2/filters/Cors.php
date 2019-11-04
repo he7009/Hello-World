@@ -9,6 +9,7 @@ namespace yii\filters;
 
 use Yii;
 use yii\base\ActionFilter;
+use yii\base\InvalidConfigException;
 use yii\web\Request;
 use yii\web\Response;
 
@@ -18,7 +19,7 @@ use yii\web\Response;
  * Make sure to read carefully what CORS does and does not. CORS do not secure your API,
  * but allow the developer to grant access to third party code (ajax calls from external domain).
  *
- * You may use CORS filter by attaching it as a loginBehavior to a controller or module, like the following,
+ * You may use CORS filter by attaching it as a behavior to a controller or module, like the following,
  *
  * ```php
  * public function behaviors()
@@ -43,10 +44,11 @@ use yii\web\Response;
  *             'cors' => [
  *                 // restrict access to
  *                 'Origin' => ['http://www.myserver.com', 'https://www.myserver.com'],
- *                 'Access-Control-Request-Method' => ['POST', 'PUT'],
  *                 // Allow only POST and PUT methods
- *                 'Access-Control-Request-Headers' => ['X-Wsse'],
+ *                 'Access-Control-Request-Method' => ['POST', 'PUT'],
  *                 // Allow only headers 'X-Wsse'
+ *                 'Access-Control-Request-Headers' => ['X-Wsse'],
+ *                 // Allow credentials (cookies, authorization headers, etc.) to be exposed to the browser
  *                 'Access-Control-Allow-Credentials' => true,
  *                 // Allow OPTIONS caching
  *                 'Access-Control-Max-Age' => 3600,
@@ -160,8 +162,21 @@ class Cors extends ActionFilter
         $responseHeaders = [];
         // handle Origin
         if (isset($requestHeaders['Origin'], $this->cors['Origin'])) {
-            if (in_array('*', $this->cors['Origin']) || in_array($requestHeaders['Origin'], $this->cors['Origin'])) {
+            if (in_array($requestHeaders['Origin'], $this->cors['Origin'], true)) {
                 $responseHeaders['Access-Control-Allow-Origin'] = $requestHeaders['Origin'];
+            }
+
+            if (in_array('*', $this->cors['Origin'], true)) {
+                // Per CORS standard (https://fetch.spec.whatwg.org), wildcard origins shouldn't be used together with credentials
+                if (isset($this->cors['Access-Control-Allow-Credentials']) && $this->cors['Access-Control-Allow-Credentials']) {
+                    if (YII_DEBUG) {
+                        throw new InvalidConfigException("Allowing credentials for wildcard origins is insecure. Please specify more restrictive origins or set 'credentials' to false in your CORS configuration.");
+                    } else {
+                        Yii::error("Allowing credentials for wildcard origins is insecure. Please specify more restrictive origins or set 'credentials' to false in your CORS configuration.", __METHOD__);
+                    }
+                } else {
+                    $responseHeaders['Access-Control-Allow-Origin'] = '*';
+                }
             }
         }
 

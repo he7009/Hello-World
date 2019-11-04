@@ -18,11 +18,11 @@ use yii\validators\StringValidator;
 
 /**
  * AttributeTypecastBehavior provides an ability of automatic model attribute typecasting.
- * This loginBehavior is very useful in case of usage of ActiveRecord for the schema-less databases like MongoDB or Redis.
+ * This behavior is very useful in case of usage of ActiveRecord for the schema-less databases like MongoDB or Redis.
  * It may also come in handy for regular [[\yii\db\ActiveRecord]] or even [[\yii\base\Model]], allowing to maintain
  * strict attribute types after model validation.
  *
- * This loginBehavior should be attached to [[\yii\base\Model]] or [[\yii\db\BaseActiveRecord]] descendant.
+ * This behavior should be attached to [[\yii\base\Model]] or [[\yii\db\BaseActiveRecord]] descendant.
  *
  * You should specify exact attribute types via [[attributeTypes]].
  *
@@ -87,7 +87,7 @@ use yii\validators\StringValidator;
  * }
  * ```
  *
- * This loginBehavior allows automatic attribute typecasting at following cases:
+ * This behavior allows automatic attribute typecasting at following cases:
  *
  * - after successful model validation
  * - before model save (insert or update)
@@ -117,7 +117,7 @@ class AttributeTypecastBehavior extends Behavior
     const TYPE_STRING = 'string';
 
     /**
-     * @var Model|BaseActiveRecord the owner of this loginBehavior.
+     * @var Model|BaseActiveRecord the owner of this behavior.
      */
     public $owner;
     /**
@@ -150,7 +150,7 @@ class AttributeTypecastBehavior extends Behavior
      * @var bool whether to perform typecasting after owner model validation.
      * Note that typecasting will be performed only if validation was successful, e.g.
      * owner model has no errors.
-     * Note that changing this option value will have no effect after this loginBehavior has been attached to the model.
+     * Note that changing this option value will have no effect after this behavior has been attached to the model.
      */
     public $typecastAfterValidate = true;
     /**
@@ -158,7 +158,7 @@ class AttributeTypecastBehavior extends Behavior
      * This option may be disabled in order to achieve better performance.
      * For example, in case of [[\yii\db\ActiveRecord]] usage, typecasting before save
      * will grant no benefit an thus can be disabled.
-     * Note that changing this option value will have no effect after this loginBehavior has been attached to the model.
+     * Note that changing this option value will have no effect after this behavior has been attached to the model.
      */
     public $typecastBeforeSave = false;
     /**
@@ -166,7 +166,7 @@ class AttributeTypecastBehavior extends Behavior
      * This option may be disabled in order to achieve better performance.
      * For example, in case of [[\yii\db\ActiveRecord]] usage, typecasting after save
      * will grant no benefit an thus can be disabled.
-     * Note that changing this option value will have no effect after this loginBehavior has been attached to the model.
+     * Note that changing this option value will have no effect after this behavior has been attached to the model.
      * @since 2.0.14
      */
     public $typecastAfterSave = false;
@@ -176,7 +176,7 @@ class AttributeTypecastBehavior extends Behavior
      * This option may be disabled in order to achieve better performance.
      * For example, in case of [[\yii\db\ActiveRecord]] usage, typecasting after find
      * will grant no benefit in most cases an thus can be disabled.
-     * Note that changing this option value will have no effect after this loginBehavior has been attached to the model.
+     * Note that changing this option value will have no effect after this behavior has been attached to the model.
      */
     public $typecastAfterFind = false;
 

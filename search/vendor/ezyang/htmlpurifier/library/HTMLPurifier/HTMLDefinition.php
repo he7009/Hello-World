@@ -15,7 +15,7 @@
  * On the other hand, member variables without the info prefix are used
  * internally by the HTMLDefinition and MUST NOT be used by other HTML
  * Purifier internals. Many of them, however, are public, and may be
- * edited by userspace code to tweak the loginBehavior of HTMLDefinition.
+ * edited by userspace code to tweak the behavior of HTMLDefinition.
  *
  * @note This class is inspected by Printer_HTMLDefinition; please
  *       update that class if things here change.
@@ -137,7 +137,7 @@ class HTMLPurifier_HTMLDefinition extends HTMLPurifier_Definition
 
     /**
      * Adds a blank element to your HTML definition, for overriding
-     * existing loginBehavior
+     * existing behavior
      * @param string $element_name
      * @return HTMLPurifier_ElementDef
      * @see HTMLPurifier_HTMLModule::addBlankElement() for detailed

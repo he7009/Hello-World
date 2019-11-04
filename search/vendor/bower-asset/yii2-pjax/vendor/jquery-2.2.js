@@ -6062,7 +6062,7 @@ function showHide( elements, show ) {
 jQuery.extend( {
 
 	// Add in style property hooks for overriding the default
-	// loginBehavior of getting and setting a style property
+	// behavior of getting and setting a style property
 	cssHooks: {
 		opacity: {
 			get: function( elem, computed ) {
@@ -8971,7 +8971,7 @@ jQuery.param = function( a, traditional ) {
 			s[ s.length ] = encodeURIComponent( key ) + "=" + encodeURIComponent( value );
 		};
 
-	// Set traditional to true for jQuery <= 1.3.2 loginBehavior.
+	// Set traditional to true for jQuery <= 1.3.2 behavior.
 	if ( traditional === undefined ) {
 		traditional = jQuery.ajaxSettings && jQuery.ajaxSettings.traditional;
 	}

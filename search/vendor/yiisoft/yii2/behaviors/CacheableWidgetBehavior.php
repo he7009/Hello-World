@@ -16,9 +16,9 @@ use yii\caching\Dependency;
 use yii\di\Instance;
 
 /**
- * Cacheable widget loginBehavior automatically caches widget contents according to duration and dependencies specified.
+ * Cacheable widget behavior automatically caches widget contents according to duration and dependencies specified.
  *
- * The loginBehavior may be used without any configuration if an application has `cache` component configured.
+ * The behavior may be used without any configuration if an application has `cache` component configured.
  * By default the widget will be cached for one minute.
  *
  * The following example will cache the posts widget for an indefinite duration until any post is modified.

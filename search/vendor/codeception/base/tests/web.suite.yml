@@ -4,7 +4,7 @@ modules:
   config:
     WebDriver:
       url: http://localhost:8000
-      browser: chrome
+      browser: firefox
       window_size: 1200x768
       restart: true # Use a new browser window for each test (to isolate test cases from each other)
 env:
@@ -30,7 +30,6 @@ env:
         WebDriver:
           browser: chrome
           window_size: false
-          restart: false
           capabilities:
             chromeOptions:
               args: ["--headless", "--disable-gpu", "--disable-extensions"]

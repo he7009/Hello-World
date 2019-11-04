@@ -269,7 +269,6 @@ class Request extends \yii\base\Request
      */
     public function resolve()
     {
-        //urlmanager对象解析url规则，经过request对象通过url规则获取参数并返回
         $result = Yii::$app->getUrlManager()->parseRequest($this);
         if ($result !== false) {
             list($route, $params) = $result;
@@ -279,7 +278,7 @@ class Request extends \yii\base\Request
                 $this->_queryParams = $params + $this->_queryParams;
             }
 
-            return [$route, $this->getQueryParams()];  //返回解析的数组,和超全局变量$_GET
+            return [$route, $this->getQueryParams()];
         }
 
         throw new NotFoundHttpException(Yii::t('yii', 'Page not found.'));
@@ -372,7 +371,12 @@ class Request extends \yii\base\Request
      */
     public function getMethod()
     {
-        if (isset($_POST[$this->methodParam])) {
+        if (
+            isset($_POST[$this->methodParam])
+            // Never allow to downgrade request from WRITE methods (POST, PATCH, DELETE, etc)
+            // to read methods (GET, HEAD, OPTIONS) for security reasons.
+            && !in_array(strtoupper($_POST[$this->methodParam]), ['GET', 'HEAD', 'OPTIONS'], true)
+        ) {
             return strtoupper($_POST[$this->methodParam]);
         }
 
@@ -660,25 +664,6 @@ class Request extends \yii\base\Request
     }
 
     /**
-     * @获取get post 请求
-     * @param null $name
-     * @param null $defaultValue
-     * @return array|mixed
-     */
-    public function getPost($name = null,$defaultValue = null)
-    {
-        if($this->isGet){
-            return $this->get($name,$defaultValue);
-        }
-
-        if($this->isPost){
-            return $this->post($name,$defaultValue);
-        }
-
-        return $this->get($name,$defaultValue);
-    }
-
-    /**
      * Returns the named GET parameter value.
      * If the GET parameter does not exist, the second parameter passed to this method will be returned.
      * @param string $name the GET parameter name.
@@ -703,7 +688,7 @@ class Request extends \yii\base\Request
      *
      * By default this value is based on the user request information. This method will
      * return the value of `$_SERVER['HTTP_HOST']` if it is available or `$_SERVER['SERVER_NAME']` if not.
-     * You may want to check out the [PHP documentation](http://php.net/manual/en/reserved.variables.server.php)
+     * You may want to check out the [PHP documentation](https://secure.php.net/manual/en/reserved.variables.server.php)
      * for more information on these variables.
      *
      * You may explicitly specify it by setting the [[setHostInfo()|hostInfo]] property.
@@ -730,7 +715,7 @@ class Request extends \yii\base\Request
             $http = $secure ? 'https' : 'http';
 
             if ($this->headers->has('X-Forwarded-Host')) {
-                $this->_hostInfo = $http . '://' . $this->headers->get('X-Forwarded-Host');
+                $this->_hostInfo = $http . '://' . trim(explode(',', $this->headers->get('X-Forwarded-Host'))[0]);
             } elseif ($this->headers->has('Host')) {
                 $this->_hostInfo = $http . '://' . $this->headers->get('Host');
             } elseif (isset($_SERVER['SERVER_NAME'])) {
@@ -799,7 +784,7 @@ class Request extends \yii\base\Request
     /**
      * Sets the relative URL for the application.
      * By default the URL is determined based on the entry script URL.
-     * This setter is provided in case you want to change this loginBehavior.
+     * This setter is provided in case you want to change this behavior.
      * @param string $value the relative URL for the application
      */
     public function setBaseUrl($value)
@@ -942,7 +927,7 @@ class Request extends \yii\base\Request
             | \xF4[\x80-\x8F][\x80-\xBF]{2}      # plane 16
             )*$%xs', $pathInfo)
         ) {
-            $pathInfo = utf8_encode($pathInfo);
+            $pathInfo = $this->utf8Encode($pathInfo);
         }
 
         $scriptUrl = $this->getScriptUrl();
@@ -957,11 +942,31 @@ class Request extends \yii\base\Request
             throw new InvalidConfigException('Unable to determine the path info of the current request.');
         }
 
-        if (substr($pathInfo, 0, 1) === '/') {
+        if (strncmp($pathInfo, '/', 1) === 0) {
             $pathInfo = substr($pathInfo, 1);
         }
 
         return (string) $pathInfo;
+    }
+
+    /**
+     * Encodes an ISO-8859-1 string to UTF-8
+     * @param string $s
+     * @return string the UTF-8 translation of `s`.
+     * @see https://github.com/symfony/polyfill-php72/blob/master/Php72.php#L24
+     */
+    private function utf8Encode($s)
+    {
+        $s .= $s;
+        $len = \strlen($s);
+        for ($i = $len >> 1, $j = 0; $i < $len; ++$i, ++$j) {
+            switch (true) {
+                case $s[$i] < "\x80": $s[$j] = $s[$i]; break;
+                case $s[$i] < "\xC0": $s[$j] = "\xC2"; $s[++$j] = $s[$i]; break;
+                default: $s[$j] = "\xC3"; $s[++$j] = \chr(\ord($s[$i]) - 64); break;
+            }
+        }
+        return substr($s, 0, $j);
     }
 
     /**
@@ -1581,7 +1586,11 @@ class Request extends \yii\base\Request
                 if ($data === false) {
                     continue;
                 }
-                $data = @unserialize($data);
+                if (defined('PHP_VERSION_ID') && PHP_VERSION_ID >= 70000) {
+                    $data = @unserialize($data, ['allowed_classes' => false]);
+                } else {
+                    $data = @unserialize($data);
+                }
                 if (is_array($data) && isset($data[0], $data[1]) && $data[0] === $name) {
                     $cookies[$name] = Yii::createObject([
                         'class' => 'yii\web\Cookie',
@@ -1732,6 +1741,6 @@ class Request extends \yii\base\Request
 
         $security = Yii::$app->security;
 
-        return $security->unmaskToken($clientSuppliedToken) === $security->unmaskToken($trueToken);
+        return $security->compareString($security->unmaskToken($clientSuppliedToken), $security->unmaskToken($trueToken));
     }
 }

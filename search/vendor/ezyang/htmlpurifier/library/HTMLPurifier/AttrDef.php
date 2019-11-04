@@ -54,7 +54,7 @@ abstract class HTMLPurifier_AttrDef
      * @warning This processing is inconsistent with XML's whitespace handling
      *          as specified by section 3.3.3 and referenced XHTML 1.0 section
      *          4.7.  However, note that we are NOT necessarily
-     *          parsing XML, thus, this loginBehavior may still be correct. We
+     *          parsing XML, thus, this behavior may still be correct. We
      *          assume that newlines have been normalized.
      */
     public function parseCDATA($string)

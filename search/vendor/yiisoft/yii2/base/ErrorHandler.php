@@ -57,11 +57,8 @@ abstract class ErrorHandler extends Component
      */
     public function register()
     {
-        //关闭PHP默认错误处理
         ini_set('display_errors', false);
-        //设置异常处理程序，当抛出异常且没有被catch的时候调用
         set_exception_handler([$this, 'handleException']);
-        //设置错误处理程序 部分错误无法被set_error_handle 处理
         if (defined('HHVM_VERSION')) {
             set_error_handler([$this, 'handleHhvmError']);
         } else {
@@ -70,9 +67,6 @@ abstract class ErrorHandler extends Component
         if ($this->memoryReserveSize > 0) {
             $this->_memoryReserve = str_repeat('x', $this->memoryReserveSize);
         }
-        //设置脚本结束执行的程序
-        //为了是处理部分无法被 set_error_handle 处理的错误 例如FatalError
-        //使用 error_get_last() 函数
         register_shutdown_function([$this, 'handleFatalError']);
     }
 
@@ -105,17 +99,13 @@ abstract class ErrorHandler extends Component
 
         // set preventive HTTP status code to 500 in case error handling somehow fails and headers are sent
         // HTTP exceptions will override this value in renderException()
-        // 不是命令行模式
         if (PHP_SAPI !== 'cli') {
             http_response_code(500);
         }
 
         try {
-            //记录异常日志
             $this->logException($exception);
-            //属性是否清除退出前的输出缓冲区，默认为true
             if ($this->discardExistingOutput) {
-                //清除之前缓冲区内容
                 $this->clearOutput();
             }
             $this->renderException($exception);
@@ -334,17 +324,14 @@ abstract class ErrorHandler extends Component
      */
     public static function convertExceptionToString($exception)
     {
-        //用户错误
         if ($exception instanceof UserException) {
             return "{$exception->getName()}: {$exception->getMessage()}";
         }
 
-        //如果不是用户错误，并且是DEBUG模式，转换为详细的错误字符消息
         if (YII_DEBUG) {
             return static::convertExceptionToVerboseString($exception);
         }
 
-        //
         return 'An internal server error occurred.';
     }
 

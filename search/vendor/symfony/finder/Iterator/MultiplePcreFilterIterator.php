@@ -18,8 +18,8 @@ namespace Symfony\Component\Finder\Iterator;
  */
 abstract class MultiplePcreFilterIterator extends \FilterIterator
 {
-    protected $matchRegexps = array();
-    protected $noMatchRegexps = array();
+    protected $matchRegexps = [];
+    protected $noMatchRegexps = [];
 
     /**
      * @param \Iterator $iterator        The Iterator to filter
@@ -44,7 +44,7 @@ abstract class MultiplePcreFilterIterator extends \FilterIterator
      *
      * If there is no regexps defined in the class, this method will accept the string.
      * Such case can be handled by child classes before calling the method if they want to
-     * apply a different loginBehavior.
+     * apply a different behavior.
      *
      * @param string $string The string to be matched against filters
      *
@@ -91,7 +91,7 @@ abstract class MultiplePcreFilterIterator extends \FilterIterator
                 return !preg_match('/[*?[:alnum:] \\\\]/', $start);
             }
 
-            foreach (array(array('{', '}'), array('(', ')'), array('[', ']'), array('<', '>')) as $delimiters) {
+            foreach ([['{', '}'], ['(', ')'], ['[', ']'], ['<', '>']] as $delimiters) {
                 if ($start === $delimiters[0] && $end === $delimiters[1]) {
                     return true;
                 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Configuration object that triggers customizable loginBehavior.
+ * Configuration object that triggers customizable behavior.
  *
  * @warning This class is strongly defined: that means that the class
  *          will fail if an undefined directive is retrieved or set.

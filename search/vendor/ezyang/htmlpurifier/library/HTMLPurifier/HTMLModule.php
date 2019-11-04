@@ -56,7 +56,7 @@ class HTMLPurifier_HTMLModule
      * the global collections. Example is the StyleAttribute module adding
      * the style attribute to the Core. Corresponds to HTMLDefinition's
      * attr_collections->info, since the object's data is only info,
-     * with extra loginBehavior associated with it.
+     * with extra behavior associated with it.
      * @type array
      */
     public $attr_collections = array();

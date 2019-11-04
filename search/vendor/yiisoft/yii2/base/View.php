@@ -149,9 +149,6 @@ class View extends Component implements DynamicContentAwareInterface
      * @throws ViewNotFoundException if the view file does not exist.
      * @throws InvalidCallException if the view cannot be resolved.
      * @see renderFile()
-     *
-     * @findViewFile     寻找目标视图文件
-     * @renderFile       解析目标视图文件
      */
     public function render($view, $params = [], $context = null)
     {
@@ -187,11 +184,12 @@ class View extends Component implements DynamicContentAwareInterface
             }
         } elseif ($context instanceof ViewContextInterface) {
             $file = $context->getViewPath() . DIRECTORY_SEPARATOR . $view;
-        } elseif (($currentViewFile = $this->getViewFile()) !== false) {
+        } elseif (($currentViewFile = $this->getRequestedViewFile()) !== false) {
             $file = dirname($currentViewFile) . DIRECTORY_SEPARATOR . $view;
         } else {
             throw new InvalidCallException("Unable to resolve view file for view '$view': no active view context.");
         }
+
         if (pathinfo($file, PATHINFO_EXTENSION) !== '') {
             return $file;
         }
@@ -224,7 +222,7 @@ class View extends Component implements DynamicContentAwareInterface
      */
     public function renderFile($viewFile, $params = [], $context = null)
     {
-        $viewFile = Yii::getAlias($viewFile);
+        $viewFile = $requestedFile = Yii::getAlias($viewFile);
 
         if ($this->theme !== null) {
             $viewFile = $this->theme->applyTo($viewFile);
@@ -240,12 +238,14 @@ class View extends Component implements DynamicContentAwareInterface
             $this->context = $context;
         }
         $output = '';
-        $this->_viewFiles[] = $viewFile;
+        $this->_viewFiles[] = [
+            'resolved' => $viewFile,
+            'requested' => $requestedFile
+        ];
 
         if ($this->beforeRender($viewFile, $params)) {
             Yii::debug("Rendering view file: $viewFile", __METHOD__);
             $ext = pathinfo($viewFile, PATHINFO_EXTENSION);
-            //根据后缀决定使用的模板引擎
             if (isset($this->renderers[$ext])) {
                 if (is_array($this->renderers[$ext]) || is_string($this->renderers[$ext])) {
                     $this->renderers[$ext] = Yii::createObject($this->renderers[$ext]);
@@ -261,6 +261,7 @@ class View extends Component implements DynamicContentAwareInterface
 
         array_pop($this->_viewFiles);
         $this->context = $oldContext;
+
         return $output;
     }
 
@@ -269,7 +270,16 @@ class View extends Component implements DynamicContentAwareInterface
      */
     public function getViewFile()
     {
-        return end($this->_viewFiles);
+        return empty($this->_viewFiles) ? false : end($this->_viewFiles)['resolved'];
+    }
+
+    /**
+     * @return string|bool the requested view currently being rendered. False if no view file is being rendered.
+     * @since 2.0.16
+     */
+    protected function getRequestedViewFile()
+    {
+        return empty($this->_viewFiles) ? false : end($this->_viewFiles)['requested'];
     }
 
     /**
@@ -560,7 +570,7 @@ class View extends Component implements DynamicContentAwareInterface
     public function beginPage()
     {
         ob_start();
-        ob_implicit_flush(false);  //关不绝对刷送，绝对刷送：绝对（隐式）刷送将导致在每次输出调用后有一次刷送操作，以便不再需要对 flush() 的显式调用。
+        ob_implicit_flush(false);
 
         $this->trigger(self::EVENT_BEGIN_PAGE);
     }

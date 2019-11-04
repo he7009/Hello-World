@@ -72,7 +72,7 @@ class HTMLPurifier_PercentEncoder
     /**
      * Fix up percent-encoding by decoding unreserved characters and normalizing.
      * @warning This function is affected by $preserve, even though the
-     *          usual desired loginBehavior is for this not to preserve those
+     *          usual desired behavior is for this not to preserve those
      *          characters. Be careful when reusing instances of PercentEncoder!
      * @param string $string String to normalize
      * @return string

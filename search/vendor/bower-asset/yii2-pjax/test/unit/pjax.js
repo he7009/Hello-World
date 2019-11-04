@@ -499,7 +499,7 @@ if ($.support.pjax) {
     })
   })
 
-  asyncTest("stopping pjax:error disables default loginBehavior", function() {
+  asyncTest("stopping pjax:error disables default behavior", function() {
     var frame = this.frame
 
     frame.$("#main").on("pjax:error", function(event, xhr) {
@@ -540,7 +540,7 @@ if ($.support.pjax) {
     }
   })
 
-  asyncTest("stopping pjax:timeout disables default loginBehavior", function() {
+  asyncTest("stopping pjax:timeout disables default behavior", function() {
     var frame = this.frame
 
     frame.$("#main").on("pjax:timeout", function(event, xhr) {

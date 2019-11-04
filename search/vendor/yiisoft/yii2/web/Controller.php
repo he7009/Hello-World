@@ -113,12 +113,6 @@ class Controller extends \yii\base\Controller
      * @param array $params the parameters to be bound to the action
      * @return array the valid parameters that the action can run with.
      * @throws BadRequestHttpException if there are missing or invalid parameters.
-     *
-     * @
-     * 1.利用反射机制分析方法接受的参数
-     * 2.如果传递过来的参数中存在对应的参数，则提取出来
-     * 3.提取出来的参数放置到 actionParams 属性中
-     * 4.返回提取到的参数
      */
     public function bindActionParams($action, $params)
     {
@@ -206,6 +200,7 @@ class Controller extends \yii\base\Controller
      */
     public function redirect($url, $statusCode = 302)
     {
+        // calling Url::to() here because Response::redirect() modifies route before calling Url::to()
         return Yii::$app->getResponse()->redirect(Url::to($url), $statusCode);
     }
 

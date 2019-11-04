@@ -103,16 +103,16 @@
             positionCaretOnTab: true, //when enabled the caret position is set after the latest valid position on TAB
             tabThrough: false, //allows for tabbing through the different parts of the masked field
             supportsInputType: ["text", "tel", "password"], //list with the supported input types
-            //specify keyCodes which should not be considered in the keypress event, otherwise the preventDefault will stop their default loginBehavior especially in FF
+            //specify keyCodes which should not be considered in the keypress event, otherwise the preventDefault will stop their default behavior especially in FF
             ignorables: [8, 9, 13, 19, 27, 33, 34, 35, 36, 37, 38, 39, 40, 45, 46, 93, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 0, 229],
             isComplete: null, //override for isComplete - args => buffer, opts - return true || false
-            canClearPosition: $.noop, //hook to alter the clear loginBehavior in the stripValidPositions args => maskset, position, lastValidPosition, opts => return true|false/command object
+            canClearPosition: $.noop, //hook to alter the clear behavior in the stripValidPositions args => maskset, position, lastValidPosition, opts => return true|false/command object
             preValidation: null, //hook to preValidate the input.  Usefull for validating regardless the definition.	args => buffer, pos, char, isSelection, opts => return true/false/command object
             postValidation: null, //hook to postValidate the result from isValid.	Usefull for validating the entry as a whole.	args => buffer, currentResult, opts => return true/false/json
             staticDefinitionSymbol: undefined, //specify a definitionSymbol for static content, used to make matches for alternators
             jitMasking: false, //just in time masking ~ only mask while typing, can n (number), true or false
             nullable: true, //return nothing instead of the buffertemplate when the user hasn't entered anything.
-            inputEventOnly: false, //dev option - testing inputfallback loginBehavior
+            inputEventOnly: false, //dev option - testing inputfallback behavior
             noValuePatching: false, //disable value property patching
             positionCaretOnClick: "lvp", //none, lvp (based on the last valid position (default), radixFocus (position caret to radixpoint on initial click)
             casing: null, //mask-level casing. Options: null, "upper", "lower" or "title" or callback args => elem, test, pos, validPositions return charValue
@@ -1437,7 +1437,7 @@
                 return selection && posObj.begin === 0 && posObj.end === getMaskSet().maskLength ? "full" : selection;
             }
 
-            strict = strict === true; //always set a value to strict to prevent possible strange loginBehavior in the extensions
+            strict = strict === true; //always set a value to strict to prevent possible strange behavior in the extensions
 
             var maskPos = pos;
             if (pos.begin !== undefined) { //position was a position object - used to handle a delete by typing over a selection

@@ -138,14 +138,6 @@ class Logger extends Component
      * `Logger::LEVEL_ERROR`, `Logger::LEVEL_WARNING`, `Logger::LEVEL_INFO`, `Logger::LEVEL_TRACE`,
      * `Logger::LEVEL_PROFILE_BEGIN`, `Logger::LEVEL_PROFILE_END`.
      * @param string $category the category of the message.
-     *
-     *
-     *
-     * $this->traceLevel 控制日志中是否包含 debug_backtrace
-     *
-     * $this->flushInterval  批量操作日志，优化性能
-     * $this->flushInterval 默认值 1000，控制在代码执行过程中多少条日志信息之后在进行 flush(即把日志信息交给targit处理),
-     * 如果日志信息始终达不到 $this->flushInterval 的标准，则register_shutdown_function 注册flush,在脚本执行结束后今日日志的操作
      */
     public function log($message, $level, $category = 'application')
     {
@@ -182,8 +174,6 @@ class Logger extends Component
         // new messages could be logged while the existing ones are being handled by targets
         $this->messages = [];
         if ($this->dispatcher instanceof Dispatcher) {
-            //交给日志服务调度器处理日志信息
-            //可以调度多个日志处理器分别进行日志的处理
             $this->dispatcher->dispatch($messages, $final);
         }
     }

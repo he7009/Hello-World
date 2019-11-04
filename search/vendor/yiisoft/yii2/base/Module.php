@@ -519,13 +519,12 @@ class Module extends ServiceLocator
      */
     public function runAction($route, $params = [])
     {
-        $parts = $this->createController($route);  //创造控制器对象
+        $parts = $this->createController($route);
         if (is_array($parts)) {
             /* @var $controller Controller */
-            list($controller, $actionID) = $parts; //$actionID 方法
+            list($controller, $actionID) = $parts;
             $oldController = Yii::$app->controller;
             Yii::$app->controller = $controller;
-            //控制器对象创建成功，开始执行控制器方法
             $result = $controller->runAction($actionID, $params);
             if ($oldController !== null) {
                 Yii::$app->controller = $oldController;
@@ -572,12 +571,6 @@ class Module extends ServiceLocator
             return false;
         }
 
-        /**
-         * @根据传参解析控制器，方法
-         * @例如 site/index
-         * @$id: site 控制器
-         * @$route : index 执行的方法
-         */
         if (strpos($route, '/') !== false) {
             list($id, $route) = explode('/', $route, 2);
         } else {
@@ -590,13 +583,11 @@ class Module extends ServiceLocator
             $controller = Yii::createObject($this->controllerMap[$id], [$id, $this]);
             return [$controller, $route];
         }
-
         $module = $this->getModule($id);
         if ($module !== null) {
             return $module->createController($route);
         }
 
-        //再次分隔参数
         if (($pos = strrpos($route, '/')) !== false) {
             $id .= '/' . substr($route, 0, $pos);
             $route = substr($route, $pos + 1);
@@ -635,7 +626,6 @@ class Module extends ServiceLocator
             $className = substr($id, $pos + 1);
         }
 
-        //检测是否满足命名规则
         if ($this->isIncorrectClassNameOrPrefix($className, $prefix)) {
             return null;
         }
@@ -643,17 +633,12 @@ class Module extends ServiceLocator
         $className = preg_replace_callback('%-([a-z0-9_])%i', function ($matches) {
                 return ucfirst($matches[1]);
             }, ucfirst($className)) . 'Controller';
-
-        /**
-         * @拼接控制器路径
-         * @控制器命名空间 $this->controllerNamespace = 'app\\controllers';
-         */
         $className = ltrim($this->controllerNamespace . '\\' . str_replace('/', '\\', $prefix) . $className, '\\');
         if (strpos($className, '-') !== false || !class_exists($className)) {
             return null;
         }
 
-        if (is_subclass_of($className, 'yii\base\Controller')) {  //检测是否继承 yii\base\Controller
+        if (is_subclass_of($className, 'yii\base\Controller')) {
             $controller = Yii::createObject($className, [$id, $this]);
             return get_class($controller) === $className ? $controller : null;
         } elseif (YII_DEBUG) {

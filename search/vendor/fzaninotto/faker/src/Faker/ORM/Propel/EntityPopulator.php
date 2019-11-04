@@ -63,7 +63,7 @@ class EntityPopulator
         $nameGuesser = new \Faker\Guesser\Name($generator);
         $columnTypeGuesser = new \Faker\ORM\Propel\ColumnTypeGuesser($generator);
         foreach ($tableMap->getColumns() as $columnMap) {
-            // skip loginBehavior columns, handled by modifiers
+            // skip behavior columns, handled by modifiers
             if ($this->isColumnBehavior($columnMap)) {
                 continue;
             }

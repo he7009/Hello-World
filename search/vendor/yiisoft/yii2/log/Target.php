@@ -29,8 +29,8 @@ use yii\web\Request;
  * @property bool $enabled Indicates whether this log target is enabled. Defaults to true. Note that the type
  * of this property differs in getter and setter. See [[getEnabled()]] and [[setEnabled()]] for details.
  * @property int $levels The message levels that this target is interested in. This is a bitmap of level
- * values. Defaults to 0, meaning  all available levels. Note that the type of this property differs in getter
- * and setter. See [[getLevels()]] and [[setLevels()]] for details.
+ * values. Defaults to 0, meaning all available levels. Note that the type of this property differs in getter and
+ * setter. See [[getLevels()]] and [[setLevels()]] for details.
  *
  * For more details and usage information on Target, see the [guide article on logging & targets](guide:runtime-logging).
  *
@@ -73,7 +73,32 @@ abstract class Target extends Component
      *
      * @see \yii\helpers\ArrayHelper::filter()
      */
-    public $logVars = ['_GET', '_POST', '_FILES', '_COOKIE', '_SESSION', '_SERVER'];
+    public $logVars = [
+        '_GET',
+        '_POST',
+        '_FILES',
+        '_COOKIE',
+        '_SESSION',
+        '_SERVER',
+    ];
+    /**
+     * @var array list of the PHP predefined variables that should NOT be logged "as is" and should always be replaced
+     * with a mask `***` before logging, when exist.
+     *
+     * Defaults to `[ '_SERVER.HTTP_AUTHORIZATION', '_SERVER.PHP_AUTH_USER', '_SERVER.PHP_AUTH_PW']`
+     *
+     * Each element could be specified as one of the following:
+     *
+     * - `var` - `var` will be logged as `***`
+     * - `var.key` - only `var[key]` will be logged as `***`
+     *
+     * @since 2.0.16
+     */
+    public $maskVars = [
+        '_SERVER.HTTP_AUTHORIZATION',
+        '_SERVER.PHP_AUTH_USER',
+        '_SERVER.PHP_AUTH_PW',
+    ];
     /**
      * @var callable a PHP callable that returns a string to be prefixed to every exported message.
      *
@@ -101,10 +126,7 @@ abstract class Target extends Component
      */
     public $microtime = false;
 
-    //记录日志的级别
     private $_levels = 0;
-
-    //检测是否已经启动
     private $_enabled = true;
 
 
@@ -124,14 +146,9 @@ abstract class Target extends Component
      */
     public function collect($messages, $final)
     {
-        //获取需要处理的日志信息
-        //static::filterMessages过滤部分不需要处理的日志信息
         $this->messages = array_merge($this->messages, static::filterMessages($messages, $this->getLevels(), $this->categories, $this->except));
         $count = count($this->messages);
-        //处理日志的条件
-        //日志信息不为空、并且 （脚本结束之后、或者 信息条数大于等于 $this->exportInterval）
         if ($count > 0 && ($final || $this->exportInterval > 0 && $count >= $this->exportInterval)) {
-            //每次输出日志时组装额外的信息作为日志，大部份超全部变量里面的内容
             if (($context = $this->getContextMessage()) !== '') {
                 $this->messages[] = [$context, Logger::LEVEL_INFO, 'application', YII_BEGIN_TIME];
             }
@@ -149,13 +166,15 @@ abstract class Target extends Component
      * Generates the context information to be logged.
      * The default implementation will dump user information, system variables, etc.
      * @return string the context information. If an empty string, it means no context information.
-     *
-     *
-     * @额外输出日志
      */
     protected function getContextMessage()
     {
         $context = ArrayHelper::filter($GLOBALS, $this->logVars);
+        foreach ($this->maskVars as $var) {
+            if (ArrayHelper::getValue($context, $var) !== null) {
+                ArrayHelper::setValue($context, $var, '***');
+            }
+        }
         $result = [];
         foreach ($context as $key => $value) {
             $result[] = "\${$key} = " . VarDumper::dumpAsString($value);
@@ -166,7 +185,7 @@ abstract class Target extends Component
 
     /**
      * @return int the message levels that this target is interested in. This is a bitmap of
-     * level values. Defaults to 0, meaning  all available levels.
+     * level values. Defaults to 0, meaning all available levels.
      */
     public function getLevels()
     {
@@ -235,7 +254,6 @@ abstract class Target extends Component
     public static function filterMessages($messages, $levels = 0, $categories = [], $except = [])
     {
         foreach ($messages as $i => $message) {
-            //如果日志target设置了日志处理级别，则如果message 的 level 不在当前target处理的范围内则unset
             if ($levels && !($levels & $message[1])) {
                 unset($messages[$i]);
                 continue;
@@ -304,18 +322,13 @@ abstract class Target extends Component
      * @param array $message the message being exported.
      * The message structure follows that in [[Logger::messages]].
      * @return string the prefix string
-     *
-     * 获取消息的前缀
-     *
      */
     public function getMessagePrefix($message)
     {
-        //自定义消息前缀处理函数
         if ($this->prefix !== null) {
             return call_user_func($this->prefix, $message);
         }
 
-        //如果没有应用对象就出错了则没有前缀
         if (Yii::$app === null) {
             return '';
         }
@@ -381,8 +394,8 @@ abstract class Target extends Component
      */
     protected function getTime($timestamp)
     {
-        $parts = explode('.', StringHelper::floatToString($timestamp));
+        $parts = explode('.', sprintf('%F', $timestamp));
 
-        return date('Y-m-d H:i:s', $parts[0]) . ($this->microtime && isset($parts[1]) ? ('.' . $parts[1]) : '');
+        return date('Y-m-d H:i:s', $parts[0]) . ($this->microtime ? ('.' . $parts[1]) : '');
     }
 }

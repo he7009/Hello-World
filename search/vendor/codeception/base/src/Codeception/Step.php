@@ -164,9 +164,8 @@ abstract class Step
                 $argument = $this->getClassName($argument);
             }
         }
-        $arg_str = json_encode($argument, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        $arg_str = str_replace('\"', '"', $arg_str);
-        return $arg_str;
+
+        return json_encode($argument, JSON_UNESCAPED_UNICODE);
     }
 
     protected function getClassName($argument)
@@ -245,7 +244,7 @@ abstract class Step
         $text = preg_replace('/([A-Z]+)([A-Z][a-z])/', '\\1 \\2', $text);
         $text = preg_replace('/([a-z\d])([A-Z])/', '\\1 \\2', $text);
         $text = preg_replace('~\bdont\b~', 'don\'t', $text);
-        return mb_strtolower($text, 'UTF-8');
+        return strtolower($text);
     }
 
     public function run(ModuleContainer $container = null)
@@ -305,14 +304,8 @@ abstract class Step
             }, array_values($step['args'])));
             $this->metaStep->setTraceInfo($step['file'], $step['line']);
 
-            codecept_debug(get_class($step['object']));
             // pageobjects or other classes should not be included with "I"
             if (!in_array('Codeception\Actor', class_parents($step['class']))) {
-                if (isset($step['object'])) {
-                    $this->metaStep->setPrefix(get_class($step['object']) . ':');
-                    return;
-                }
-
                 $this->metaStep->setPrefix($step['class'] . ':');
             }
             return;

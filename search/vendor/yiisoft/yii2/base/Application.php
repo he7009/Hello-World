@@ -13,7 +13,7 @@ use Yii;
  * Application is the base class for all application classes.
  *
  * For more details and usage information on Application, see the [guide article on applications](guide:structure-applications).
- *YII_ENV_TEST
+ *
  * @property \yii\web\AssetManager $assetManager The asset manager application component. This property is
  * read-only.
  * @property \yii\rbac\ManagerInterface $authManager The auth manager application component. Null is returned
@@ -115,7 +115,6 @@ abstract class Application extends Module
      */
     public $sourceLanguage = 'en-US';
     /**
-     * @请求控制器
      * @var Controller the currently active controller instance
      */
     public $controller;
@@ -123,13 +122,12 @@ abstract class Application extends Module
      * @var string|bool the layout that should be applied for views in this application. Defaults to 'main'.
      * If this is false, layout will be disabled.
      */
-    public $layout = false;
+    public $layout = 'main';
     /**
      * @var string the requested route
      */
     public $requestedRoute;
     /**
-     * @请求方法
      * @var Action the requested Action. If null, it means the request cannot be resolved into an action.
      */
     public $requestedAction;
@@ -197,21 +195,12 @@ abstract class Application extends Module
     public function __construct($config = [])
     {
         Yii::$app = $this;
-        //对象放到属性 loadedModules 中
         static::setInstance($this);
-        //设置代码运行的阶段(start)
+
         $this->state = self::STATE_BEGIN;
 
-        /**
-         * 设置部分跟别名
-         * 设置时区
-         * 整合核心组件到配置文件
-         */
         $this->preInit($config);
 
-        /**
-         * 注册错误处理程序
-         */
         $this->registerErrorHandler($config);
 
         Component::__construct($config);
@@ -311,6 +300,7 @@ abstract class Application extends Module
                 }
             }
         }
+
         foreach ($this->bootstrap as $mixed) {
             $component = null;
             if ($mixed instanceof \Closure) {
@@ -369,7 +359,6 @@ abstract class Application extends Module
     }
 
     /**
-     * 设置项目根目录，同时设置根目录对应的根命名空间
      * Sets the root directory of the application and the @app alias.
      * This method can only be invoked at the beginning of the constructor.
      * @param string $path the root directory of the application.
@@ -482,7 +471,7 @@ abstract class Application extends Module
      * If time zone is not configured in php.ini or application config,
      * it will be set to UTC by default.
      * @return string the time zone used by this application.
-     * @see http://php.net/manual/en/function.date-default-timezone-get.php
+     * @see https://secure.php.net/manual/en/function.date-default-timezone-get.php
      */
     public function getTimeZone()
     {
@@ -492,9 +481,9 @@ abstract class Application extends Module
     /**
      * Sets the time zone used by this application.
      * This is a simple wrapper of PHP function date_default_timezone_set().
-     * Refer to the [php manual](http://www.php.net/manual/en/timezones.php) for available timezones.
+     * Refer to the [php manual](https://secure.php.net/manual/en/timezones.php) for available timezones.
      * @param string $value the time zone used by this application.
-     * @see http://php.net/manual/en/function.date-default-timezone-set.php
+     * @see https://secure.php.net/manual/en/function.date-default-timezone-set.php
      */
     public function setTimeZone($value)
     {

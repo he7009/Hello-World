@@ -146,7 +146,7 @@ class HTMLPurifier_AttrDef_CSS_FontFamily extends HTMLPurifier_AttrDef
             //    Internet Explorer's cssText translation (which I
             //    believe is invoked by innerHTML) normalizes any
             //    quoting to single quotes, and fails to escape single
-            //    quotes.  (Note that this is not IE's loginBehavior for all
+            //    quotes.  (Note that this is not IE's behavior for all
             //    CSS properties, just some sort of special casing for
             //    font-family).  So a single quote *cannot* be used
             //    safely in the font-family context if there will be an
@@ -158,9 +158,9 @@ class HTMLPurifier_AttrDef_CSS_FontFamily extends HTMLPurifier_AttrDef
             //    support, where they special cased to preserve encoded
             //    double quotes, but still translate unadorned double
             //    quotes into single quotes.)  So, because their
-            //    fixpoint loginBehavior is identical to single quotes, they
+            //    fixpoint behavior is identical to single quotes, they
             //    cannot be allowed either.  Firefox 3.x displays
-            //    single-quote style loginBehavior.
+            //    single-quote style behavior.
             //  - Backslashes are reduced by one (so \\ -> \) every
             //    iteration, so they cannot be used safely.  This shows
             //    up in IE7, IE8 and FF3

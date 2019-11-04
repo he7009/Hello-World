@@ -18,7 +18,7 @@ use yii\helpers\Html;
  *
  * An input widget can be associated with a data [[model]] and an [[attribute]],
  * or a [[name]] and a [[value]]. If the former, the name and the value will
- * be generated automatically (subclasses may call [[renderInputHtml()]] to follow this loginBehavior).
+ * be generated automatically (subclasses may call [[renderInputHtml()]] to follow this behavior).
  *
  * Classes extending from this widget can be used in an [[\yii\widgets\ActiveForm|ActiveForm]]
  * using the [[\yii\widgets\ActiveField::widget()|widget()]] method, for example like this:

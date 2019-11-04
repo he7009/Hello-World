@@ -261,7 +261,7 @@ class Model extends Component implements StaticInstanceInterface, IteratorAggreg
     /**
      * Returns the list of attribute names.
      * By default, this method returns all public non-static properties of the class.
-     * You may override this method to change the default loginBehavior.
+     * You may override this method to change the default behavior.
      * @return array list of attribute names.
      */
     public function attributes()
@@ -431,10 +431,20 @@ class Model extends Component implements StaticInstanceInterface, IteratorAggreg
      */
     public function getActiveValidators($attribute = null)
     {
-        $validators = [];
+        $activeAttributes = $this->activeAttributes();
+        if ($attribute !== null && !in_array($attribute, $activeAttributes, true)) {
+            return [];
+        }
         $scenario = $this->getScenario();
+        $validators = [];
         foreach ($this->getValidators() as $validator) {
-            if ($validator->isActive($scenario) && ($attribute === null || in_array($attribute, $validator->getAttributeNames(), true))) {
+            if ($attribute === null) {
+                $validatorAttributes = $validator->getValidationAttributes($activeAttributes);
+                $attributeValid = !empty($validatorAttributes);
+            } else {
+                $attributeValid = in_array($attribute, $validator->getValidationAttributes($attribute), true);
+            }
+            if ($attributeValid && $validator->isActive($scenario)) {
                 $validators[] = $validator;
             }
         }

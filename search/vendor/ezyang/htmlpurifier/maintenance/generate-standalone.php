@@ -18,7 +18,7 @@ assertCli();
 $GLOBALS['loaded'] = array();
 
 /**
- * Custom FSTools for this script that overloads some loginBehavior
+ * Custom FSTools for this script that overloads some behavior
  * @warning The overloading of copy() is not necessarily global for
  *          this script. Watch out!
  */

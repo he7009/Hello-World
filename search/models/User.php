@@ -2,50 +2,104 @@
 
 namespace app\models;
 
-use Yii;
-
-/**
- * This is the model class for table "search_user".
- *
- * @property int $id 自增编号
- * @property string $username 用户昵称
- * @property string $passwd 用户密码
- * @property string $loginname 登录名称
- * @property string $createtime 创建时间
- */
-class User extends \yii\db\ActiveRecord
+class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 {
+    public $id;
+    public $username;
+    public $password;
+    public $authKey;
+    public $accessToken;
+
+    private static $users = [
+        '100' => [
+            'id' => '100',
+            'username' => 'admin',
+            'password' => 'admin',
+            'authKey' => 'test100key',
+            'accessToken' => '100-token',
+        ],
+        '101' => [
+            'id' => '101',
+            'username' => 'demo',
+            'password' => 'demo',
+            'authKey' => 'test101key',
+            'accessToken' => '101-token',
+        ],
+    ];
+
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public static function findIdentity($id)
     {
-        return 'search_user';
+        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public static function findIdentityByAccessToken($token, $type = null)
     {
-        return [
-            [['createtime'], 'safe'],
-            [['username', 'loginname'], 'string', 'max' => 50],
-            [['passwd'], 'string', 'max' => 32],
-        ];
+        foreach (self::$users as $user) {
+            if ($user['accessToken'] === $token) {
+                return new static($user);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByUsername($username)
+    {
+        foreach (self::$users as $user) {
+            if (strcasecmp($user['username'], $username) === 0) {
+                return new static($user);
+            }
+        }
+
+        return null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public function getId()
     {
-        return [
-            'id' => '自增编号',
-            'username' => '用户昵称',
-            'passwd' => '用户密码',
-            'loginname' => '登录名称',
-            'createtime' => '创建时间',
-        ];
+        return $this->id;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAuthKey()
+    {
+        return $this->authKey;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->authKey === $authKey;
+    }
+
+    /**
+     * Validates password
+     *
+     * @param string $password password to validate
+     * @return bool if password provided is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        return $this->password === $password;
+    }
+    
 }

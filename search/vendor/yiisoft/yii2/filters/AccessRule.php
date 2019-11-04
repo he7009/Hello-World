@@ -12,6 +12,7 @@ use yii\base\Action;
 use yii\base\Component;
 use yii\base\Controller;
 use yii\base\InvalidConfigException;
+use yii\helpers\IpHelper;
 use yii\helpers\StringHelper;
 use yii\web\Request;
 use yii\web\User;
@@ -140,7 +141,7 @@ class AccessRule extends Component
      * the current action should be denied. This is the case when this rule matches
      * and [[$allow]] is set to `false`.
      *
-     * If not set, the loginBehavior will be determined by [[AccessControl]],
+     * If not set, the behavior will be determined by [[AccessControl]],
      * either using [[AccessControl::denyAccess()]]
      * or [[AccessControl::$denyCallback]], if configured.
      *
@@ -266,6 +267,10 @@ class AccessRule extends Component
                     $ip !== null &&
                     ($pos = strpos($rule, '*')) !== false &&
                     strncmp($ip, $rule, $pos) === 0
+                ) ||
+                (
+                    ($pos = strpos($rule, '/')) !== false &&
+                    IpHelper::inRange($ip, $rule) === true
                 )
             ) {
                 return true;

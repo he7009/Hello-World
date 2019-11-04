@@ -3478,7 +3478,7 @@ function adoptValue( value, resolve, reject, noValue ) {
 
 	try {
 
-		// Check for promise aspect first to privilege synchronous loginBehavior
+		// Check for promise aspect first to privilege synchronous behavior
 		if ( value && jQuery.isFunction( ( method = value.promise ) ) ) {
 			method.call( value ).done( resolve ).fail( reject );
 
@@ -3631,7 +3631,7 @@ jQuery.extend( {
 									} else {
 
 										// Only substitute handlers pass on context
-										// and multiple values (non-spec loginBehavior)
+										// and multiple values (non-spec behavior)
 										if ( handler !== Identity ) {
 											that = undefined;
 											args = [ returned ];
@@ -3662,7 +3662,7 @@ jQuery.extend( {
 											if ( depth + 1 >= maxDepth ) {
 
 												// Only substitute handlers pass on context
-												// and multiple values (non-spec loginBehavior)
+												// and multiple values (non-spec behavior)
 												if ( handler !== Thrower ) {
 													that = undefined;
 													args = [ e ];
@@ -6382,7 +6382,7 @@ function getWidthOrHeight( elem, name, extra ) {
 jQuery.extend( {
 
 	// Add in style property hooks for overriding the default
-	// loginBehavior of getting and setting a style property
+	// behavior of getting and setting a style property
 	cssHooks: {
 		opacity: {
 			get: function( elem, computed ) {

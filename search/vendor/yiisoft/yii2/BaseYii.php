@@ -93,7 +93,7 @@ class BaseYii
      */
     public static function getVersion()
     {
-        return '2.0.15.1';
+        return '2.0.17';
     }
 
     /**
@@ -127,19 +127,10 @@ class BaseYii
      * @return string|bool the path corresponding to the alias, false if the root alias is not previously registered.
      * @throws InvalidArgumentException if the alias is invalid while $throwException is true.
      * @see setAlias()
-     *
-     * getAlias 是一个解析真实路径的方法，可以把路径中的 “别名” 替换为 “别名” 对应的真实路径
-     * 获取别名路径对应的真实路径（字符串-路径 对应关系）逻辑
-     * 1.如果首字符不是@，则不是别名，而是直接路径，直接返回
-     * 2.获取跟文件夹
-     *      如果存在“/”  ：从开始截取到“/” 视为$root(根文件夹)
-     *      如果不存在“/”：整个字符串视为$root(根文件夹)
-     *
-     *
      */
     public static function getAlias($alias, $throwException = true)
     {
-        if (strncmp($alias, '@', 1)) {  //首字符不是 @ ，路径直接返回
+        if (strncmp($alias, '@', 1)) {
             // not an alias
             return $alias;
         }
@@ -222,31 +213,15 @@ class BaseYii
      *
      * @throws InvalidArgumentException if $path is an invalid alias.
      * @see getAlias()
-     *
-     * 设置别名，设置别名和真实路径的对应关系逻辑
-     * 1.如果别名字符串首字符不是@，自动补全@
-     * 2.截取根文件夹
-     *         如果存在“/”  ：从开始截取到“/” 视为$root(根文件夹)
-     *         如果不存在“/”：整个字符串视为$root(根文件夹)
-     * 3.判断参数$path是否传参
-     *         $path 传参：设置别名
-     *         $path 不传参：取消别名
-     *
-     * 后面的逻辑在$path 存在的基础上
-     * 4.判断$path是否是别名路径
-     *         $path 是别名路径：使用getAlias($path)方法获取真实路径
-     *         $paht 不是别名路径：
-     *
      */
     public static function setAlias($alias, $path)
     {
-        if (strncmp($alias, '@', 1)) {  //如果别名字符串首字符不是@，自动补全@
+        if (strncmp($alias, '@', 1)) {
             $alias = '@' . $alias;
         }
         $pos = strpos($alias, '/');
         $root = $pos === false ? $alias : substr($alias, 0, $pos);
         if ($path !== null) {
-            //rtrim($path, '\\/')  去除右侧 “/” 和 “\”;  切记，rtrim 使用单个字符为单位清除，不是以整个字符串。
             $path = strncmp($path, '@', 1) ? rtrim($path, '\\/') : static::getAlias($path);
             if (!isset(static::$aliases[$root])) {
                 if ($pos === false) {
@@ -267,7 +242,7 @@ class BaseYii
                 static::$aliases[$root][$alias] = $path;
                 krsort(static::$aliases[$root]);
             }
-        } elseif (isset(static::$aliases[$root])) {  //如果路径为NULL,则删除对应别名
+        } elseif (isset(static::$aliases[$root])) {
             if (is_array(static::$aliases[$root])) {
                 unset(static::$aliases[$root][$alias]);
             } elseif ($pos === false) {
@@ -314,6 +289,7 @@ class BaseYii
         } else {
             return;
         }
+
         include $classFile;
 
         if (YII_DEBUG && !class_exists($className, false) && !interface_exists($className, false) && !trait_exists($className, false)) {
@@ -534,7 +510,7 @@ class BaseYii
      * echo \Yii::t('app', 'Hello, {username}!', ['username' => $username]);
      * ```
      *
-     * Further formatting of message parameters is supported using the [PHP intl extensions](http://www.php.net/manual/en/intro.intl.php)
+     * Further formatting of message parameters is supported using the [PHP intl extensions](https://secure.php.net/manual/en/intro.intl.php)
      * message formatter. See [[\yii\i18n\I18N::translate()]] for more details.
      *
      * @param string $category the message category.

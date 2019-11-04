@@ -81,7 +81,7 @@ use Codeception\TestInterface;
  * sq('user') => 'user_876asd8as87a'
  * ```
  *
- * This loginBehavior can be configured using `prefix` config param.
+ * This behavior can be configured using `prefix` config param.
  *
  * Old style sequences:
  *
