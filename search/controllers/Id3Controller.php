@@ -18,9 +18,10 @@ class Id3Controller extends Controller
     {
         try{
             $tag = id3_get_tag();
+            echo 222;
             var_dump($tag);
             exit;
-        }catch (\Exception $e){
+        }catch (\Error $e){
             return $e->getMessage();
         }
 
