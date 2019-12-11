@@ -26,7 +26,7 @@ use yii\helpers\VarDumper;
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @author Timur Ruziev <resurtm@gmail.com>
- * @since 2.0
+ * @since 2.0renderException
  */
 class ErrorHandler extends \yii\base\ErrorHandler
 {
