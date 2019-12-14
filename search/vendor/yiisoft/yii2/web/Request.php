@@ -269,6 +269,7 @@ class Request extends \yii\base\Request
      */
     public function resolve()
     {
+        //如果没有开启 PrettyUrl 则返回[r对应的get的值,[]]
         $result = Yii::$app->getUrlManager()->parseRequest($this);
         if ($result !== false) {
             list($route, $params) = $result;
@@ -524,6 +525,10 @@ class Request extends \yii\base\Request
      * @see getMethod()
      * @see getBodyParam()
      * @see setBodyParams()
+     *
+     *
+     * body 中的参与根据content-type不同有不同的形式，具体情况具体解析，
+     * 这个只处理$_post
      */
     public function getBodyParams()
     {
