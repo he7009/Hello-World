@@ -63,6 +63,7 @@ class Application extends \yii\base\Application
     protected function bootstrap()
     {
         $request = $this->getRequest();
+//        $this->on("beforeRequest",["\app\models\Events\BeforeRequest","start"],"duanyude");
         Yii::setAlias('@webroot', dirname($request->getScriptFile()));
         Yii::setAlias('@web', $request->getBaseUrl());
 

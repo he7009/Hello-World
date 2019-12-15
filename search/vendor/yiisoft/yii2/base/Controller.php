@@ -221,7 +221,6 @@ class Controller extends Component implements ViewContextInterface
         if ($id === '') {
             $id = $this->defaultAction;
         }
-
         $actionMap = $this->actions();
         if (isset($actionMap[$id])) {
             return Yii::createObject($actionMap[$id], [$id, $this]);

@@ -53,6 +53,7 @@ $config = [
         */
     ],
     'params' => $params,
+    'on beforeRequest' => ["\app\models\Events\BeforeRequest","start"],
 ];
 
 if (YII_ENV_DEV) {
