@@ -366,7 +366,6 @@ class BaseYii
         if (self::$_logger !== null) {
             return self::$_logger;
         }
-
         return self::$_logger = static::createObject('yii\log\Logger');
     }
 

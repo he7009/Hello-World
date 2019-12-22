@@ -96,7 +96,6 @@ class Dispatcher extends Component
     public function init()
     {
         parent::init();
-
         foreach ($this->targets as $name => $target) {
             if (!$target instanceof Target) {
                 $this->targets[$name] = Yii::createObject($target);

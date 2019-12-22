@@ -91,7 +91,6 @@ abstract class ErrorHandler extends Component
         if ($exception instanceof ExitException) {
             return;
         }
-
         $this->exception = $exception;
 
         // disable error capturing to avoid recursive errors while handling exceptions

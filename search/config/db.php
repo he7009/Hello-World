@@ -6,4 +6,5 @@ return [
     'username' => 'www',
     'password' => '123456',
     'charset' => 'utf8',
+    'tablePrefix' => "search_"
 ];
