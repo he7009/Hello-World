@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <h2>wsHttp/index.html_6</h2>
+</head>
+<body>
+
+</body>
+<script>
+    var wsClient = new WebSocket("ws://192.168.33.10:9511");
+
+    wsClient.onopen = function (evt) {
+        console.log('open:111111');
+        wsClient.send("hahahahahha");
+    };
+
+    wsClient.onmessage = function(evt){
+        console.log(evt);
+        console.log("message");
+    };
+
+    wsClient.onclose = function (evt) {
+        console.log("close");
+    };
+
+</script>
+</html>
