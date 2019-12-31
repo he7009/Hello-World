@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <h2>wsHttp/index.html_6</h2>
+    <h2>wsHttp/index.html_7</h2>
 </head>
 <body>
 
 </body>
 <script>
-    var wsClient = new WebSocket("ws://192.168.33.10:9511");
+    var wsClient = new WebSocket("ws://swoole.helilan.cn:9511");
 
     wsClient.onopen = function (evt) {
-        console.log('open:111111');
-        wsClient.send("hahahahahha");
+        console.log('客户端连接成功');
+        wsClient.send("我是客户端发来的消息！");
     };
 
     wsClient.onmessage = function(evt){
-        console.log(evt);
-        console.log("message");
+        console.log("客户端Message");
+        console.log("收到服务端消息：" + evt.data);
     };
 
     wsClient.onclose = function (evt) {
