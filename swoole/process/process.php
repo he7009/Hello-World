@@ -39,6 +39,6 @@ echo $endTime - $startTime,PHP_EOL;
 
 //模拟处理
 function moCurl($url){
-    sleep(1);
+    sleep(1000);
     return $url . " SUCCESS " . PHP_EOL;
 }
