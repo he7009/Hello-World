@@ -14,7 +14,7 @@ class IndexController extends Controller
 {
     public function actionIndex()
     {
-
+        return 2222;
         $indexModel = new \app\models\IndexModel();
         $indexModel->ad();
 
