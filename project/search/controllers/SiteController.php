@@ -69,7 +69,7 @@ class SiteController extends Controller
 
     public function actionSms()
     {
-        $cred = new Credential("1400305080", "2bf992ce2261b141fe567975c4077d8b");
+        $cred = new Credential("*******", "*******");
 
         // 实例化要请求产品(以sms为例)的client对象,clientProfile是可选的
         $client = new SmsClient($cred, "ap-shanghai");
@@ -84,15 +84,15 @@ class SiteController extends Controller
         $req->ExtendCode = "0";
         /* 下发手机号码，采用 e.164 标准，+[国家或地区码][手机号]
          * 示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号，最多不要超过200个手机号*/
-        $req->PhoneNumberSet = array("+8613711112222");
+        $req->PhoneNumberSet = array("+8613965017402");
         /* 国际/港澳台短信 senderid: 国内短信填空，默认未开通，如需开通请联系 [sms helper] */
-        $req->SenderId = "xxx";
+        $req->SenderId = "";
         /* 用户的 session 内容: 可以携带用户侧 ID 等上下文信息，server 会原样返回 */
-        $req->SessionContext = "xxx";
+        $req->SessionContext = "99889";
         /* 模板 ID: 必须填写已审核通过的模板 ID。模板ID可登录 [短信控制台] 查看 */
-        $req->TemplateID = "449739";
+        $req->TemplateID = "521574";
         /* 模板参数: 若无模板参数，则设置为空*/
-        $req->TemplateParamSet = array("0");
+        $req->TemplateParamSet = array("953687","5");
 
 
         // 通过client对象调用DescribeInstances方法发起请求。注意请求方法名与请求对象是对应的
@@ -104,7 +104,7 @@ class SiteController extends Controller
 
         // 也可以取出单个值。
         // 你可以通过官网接口文档或跳转到response对象的定义处查看返回字段的定义
-        print_r($resp->TotalCount);
+//        print_r($resp->TotalCount);
     }
 
     /**
