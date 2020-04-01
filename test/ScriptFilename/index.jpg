@@ -1,0 +1,8 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: duanyude
+ * Date: 2020/3/31 21:00
+ */
+
+print_r($_SERVER);

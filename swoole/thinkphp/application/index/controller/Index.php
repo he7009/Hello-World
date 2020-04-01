@@ -12,4 +12,8 @@ class Index
     {
         return 'hello,' . $name;
     }
+
+    public function test(){
+        var_dump($_SERVER);
+    }
 }

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="https://js.wotucdn.com/framework/vendor/jquery/jquery-1.9.1.min.js?v=1"></script>
+<script type="application/javascript">
+    //函数当做参数传递，同步执行
+    // var fun1 = function(callback) {
+    //     console.log("before callback");
+    //     (callback && typeof(callback) === 'function') && callback();
+    //     console.log("after callback");
+    // };
+    // var fun2 = function(param) {
+    //     var start = new Date();
+    //     while((new Date() - start) < 3000) { //delay 3s
+    //     }
+    //     console.log("I'm func2 callback");
+    // };
+    // fun1(fun2);
+
+    //异步回调
+    // setTimeout(function() {
+    //     console.log('taskA, asynchronous');
+    // }, 0);
+    // console.log('taskB, synchronize');
+
+    /******************异步回调******************/
+    // function request(url, param, successFun, errorFun) {
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: url,
+    //         param: param,
+    //         async: true,    //默认为true,即异步请求；false为同步请求
+    //         success: successFun,
+    //         error: errorFun
+    //     });
+    // }
+    // request('http://test.helilan.cn/javascript/test.html', '', function(data) {
+    //     //请求成功后的回调函数，通常是对请求回来的数据进行处理
+    //     console.log('请求成功啦, 这是返回的数据:', data);
+    // },function(error) {
+    //     console.log('sorry, 请求失败了, 这是失败信息:', error);
+    // });
+
+    // function sendRequest(url, param) {
+    //     return new Promise(function (resolve, reject) {
+    //         request(url, param, resolve, reject);
+    //     });
+    // }
+    //
+    // sendRequest("http://test.helilan.cn/javascript/test.html").then(function(data) {
+    //     //异步操作成功后的回调
+    //     console.log('请求成功啦, 这是返回的数据:', data);
+    // }, function(error) {
+    //     //异步操作失败后的回调
+    //     console.log('sorry, 请求失败了, 这是失败信息:', error);
+    // });
+
+    // $promise = new Promise(function (resolve,reject) {
+    //     console.log("立即执行Promise");
+    //     // resolve();
+    //     // reject();
+    //     // resolve();
+    //     return 111;
+    // });
+    //
+    // $promise.then(function (data) {
+    //     console.log("This Is First" + data);
+    //     return " first";
+    // }).then(function (data) {
+    //     console.log("second " + data);
+    //     return "second " + data;
+    // }).then(function (data) {
+    //     console.log("three " + data);
+    // }).catch(function (error) {
+    //     console.log("promise catch reject");
+    // });
+    //
+    // console.log("我已经运行结束了");
+
+    var json = {"addr":"上海市 浦东新区"};
+    json.name = "duanyude";
+    json.age = 23;
+    console.log(json);
+
+
+</script>
+</html>
