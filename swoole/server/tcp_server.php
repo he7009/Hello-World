@@ -17,7 +17,7 @@ $serv->on('Connect', function ($serv, $fd, $actur_id) {
 });
 
 //监听数据接收事件
-$serv->on('Receive', function ($serv, $fd, $actur_id, $data) {
+$serv->on('Receive', function (Swoole\Server $serv, $fd, $actur_id, $data) {
     echo "Receive data: {$actur_id} - {$fd} - {$data} \n";
     $serv->send($fd, "Server: " . $data);
 });
