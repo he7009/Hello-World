@@ -9,6 +9,8 @@ class tcpServer
 {
     private $server = null;
 
+    private $test = 10;
+
     public function __construct()
     {
         $this->server = new Swoole\Server("127.0.0.1",9501);
@@ -16,7 +18,7 @@ class tcpServer
             'reactor_num' => 2,
             'worker_num' => 2,
             'max_request' => 1000,
-            'max_connection' => 10000,
+            'max_connection' => 1000,
             'task_worker_num' => 10,
             'task_max_request' => 1000,
             'log_file' => __DIR__ . "/../log/log.txt"
@@ -50,7 +52,13 @@ class tcpServer
     public function receive(Swoole\Server $server, int $fd, int $reactorId,$data)
     {
         echo "Receive" . $fd . PHP_EOL;
-        sleep(1000);
+        $taskData = [
+          'taskId' => "task_1",
+          'name' => "段育德",
+            'fd' => $fd
+        ];
+        $taskStr = "TTTTssss";
+        $server->task($taskData,-1);
         $server->send($fd,"Server: ".$data);
     }
 
@@ -59,11 +67,17 @@ class tcpServer
      * @param \Swoole\Server $server
      * @param int $taskId
      * @param int $srcWorkerId
-     * @param mixed $data
+     * @param $data
      */
-    public function task(Swoole\Server $server, int $taskId, int $srcWorkerId, mixed $data)
+    public function task(Swoole\Server $server, int $taskId, int $srcWorkerId, $data)
     {
-
+        echo "\nTask------start\n";
+        var_dump($taskId);
+        var_dump($srcWorkerId);
+        var_dump($data);
+        var_dump($this->test);
+        echo "Task------end\n";
+        $server->finish($data['fd']);
     }
 
     /**
@@ -74,7 +88,13 @@ class tcpServer
      */
     public function finish(Swoole\Server $server, int $taskId, string $data)
     {
-
+        echo "Finish------start\n";
+        var_dump($taskId);
+        var_dump($data);
+        var_dump($this->test);
+        echo "Finish------end\n";
+        $data += 1;
+        $server->send($data,"task success");
     }
 
     /**

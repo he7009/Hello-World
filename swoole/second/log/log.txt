@@ -1,0 +1,32 @@
+[2020-04-29 22:44:10 ^5107.2]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught TypeError: Argument 4 passed to tcpServer::task() must be an instance of mixed, string given in /vagrant/Hello-World/swoole/second/server/tcpServer.php:70
+Stack trace:
+#0 [internal function]: tcpServer->task(Object(Swoole\Server), 0, 1, '{"taskId":"task...')
+#1 /vagrant/Hello-World/swoole/second/server/tcpServer.php(31): Swoole\Server->start()
+#2 /vagrant/Hello-World/swoole/second/server/tcpServer.php(108): tcpServer->__construct()
+#3 {main}
+  thrown in /vagrant/Hello-World/swoole/second/server/tcpServer.php on line 70
+[2020-04-29 22:44:10 $5104.0]	WARNING	swManager_check_exit_status: worker#2[pid=5107] abnormal exit, status=255, signal=0
+[2020-04-29 22:46:43 ^5127.2]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught TypeError: Argument 4 passed to tcpServer::task() must be an instance of mixed, array given in /vagrant/Hello-World/swoole/second/server/tcpServer.php:70
+Stack trace:
+#0 [internal function]: tcpServer->task(Object(Swoole\Server), 0, 1, Array)
+#1 /vagrant/Hello-World/swoole/second/server/tcpServer.php(31): Swoole\Server->start()
+#2 /vagrant/Hello-World/swoole/second/server/tcpServer.php(108): tcpServer->__construct()
+#3 {main}
+  thrown in /vagrant/Hello-World/swoole/second/server/tcpServer.php on line 70
+[2020-04-29 22:46:43 $5124.0]	WARNING	swManager_check_exit_status: worker#2[pid=5127] abnormal exit, status=255, signal=0
+[2020-04-29 22:47:37 ^5147.2]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught TypeError: Argument 4 passed to tcpServer::task() must be an instance of mixed, string given in /vagrant/Hello-World/swoole/second/server/tcpServer.php:70
+Stack trace:
+#0 [internal function]: tcpServer->task(Object(Swoole\Server), 0, 1, 'a:2:{s:6:"taskI...')
+#1 /vagrant/Hello-World/swoole/second/server/tcpServer.php(31): Swoole\Server->start()
+#2 /vagrant/Hello-World/swoole/second/server/tcpServer.php(108): tcpServer->__construct()
+#3 {main}
+  thrown in /vagrant/Hello-World/swoole/second/server/tcpServer.php on line 70
+[2020-04-29 22:47:37 $5144.0]	WARNING	swManager_check_exit_status: worker#2[pid=5147] abnormal exit, status=255, signal=0
+[2020-04-29 22:52:00 ^5165.2]	ERROR	php_swoole_server_rshutdown (ERRNO 503): Fatal error: Uncaught TypeError: Argument 4 passed to tcpServer::task() must be an instance of mixed, string given in /vagrant/Hello-World/swoole/second/server/tcpServer.php:71
+Stack trace:
+#0 [internal function]: tcpServer->task(Object(Swoole\Server), 0, 1, 'TTTTssss')
+#1 /vagrant/Hello-World/swoole/second/server/tcpServer.php(31): Swoole\Server->start()
+#2 /vagrant/Hello-World/swoole/second/server/tcpServer.php(109): tcpServer->__construct()
+#3 {main}
+  thrown in /vagrant/Hello-World/swoole/second/server/tcpServer.php on line 71
+[2020-04-29 22:52:00 $5162.0]	WARNING	swManager_check_exit_status: worker#2[pid=5165] abnormal exit, status=255, signal=0
