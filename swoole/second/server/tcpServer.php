@@ -77,24 +77,24 @@ class tcpServer
         var_dump($data);
         var_dump($this->test);
         echo "Task------end\n";
-        $server->finish($data['fd']);
+        $server->finish($data);
     }
 
     /**
      * @finish
      * @param \Swoole\Server $server
      * @param int $taskId
-     * @param string $data
+     * @param $data
      */
-    public function finish(Swoole\Server $server, int $taskId, string $data)
+    public function finish(Swoole\Server $server, int $taskId, $data)
     {
         echo "Finish------start\n";
         var_dump($taskId);
         var_dump($data);
         var_dump($this->test);
         echo "Finish------end\n";
-        $data += 1;
-        $server->send($data,"task success");
+//        $data += 1;
+//        $server->send($data,"task success");
     }
 
     /**
