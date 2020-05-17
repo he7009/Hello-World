@@ -24,6 +24,11 @@ class index
         }
 
     }
+
+    public static function pStudy()
+    {
+
+    }
 }
 
-index::study();
+index::pStudy();
