@@ -1,2 +1,0 @@
-rewrite ^/(\w+)/(\w+)[/]?$ /index.php?r=$1/$2 last;
-rewrite ^/(\w+)[/]?$ /index.php?r=$1 last;
